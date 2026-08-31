@@ -1,0 +1,84 @@
+% preamble
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,
+            top=2cm,
+            bottom=2cm,
+            left=3cm,
+            right=3cm,
+            marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage[norsk]{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[hyphens]{url}
+\usepackage{lipsum} 
+\usepackage{siunitx}
+\sisetup{
+  output-complex-root = \ensuremath{\mathit{j}},
+  complex-root-position = before-number,
+  exponent-product = \cdot,
+  output-decimal-marker = {,}
+}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\setlength{\parindent}{0pt}
+
+% metadata
+\title{Rapportskriving i ELI1300 - Redusert mal}
+\author{Odin Heggvold Bekkelund\\For Gruppe ADK57}
+\date{31.08.2026} 
+
+% definer en url til senere?
+\urldef{\myoverleafurl}\url{https://tinyurl.com/2yfbtdez}
+
+% selve dokumentet starter
+\begin{document}
+\maketitle % Setter sammen \title og \author og \date
+
+\begin{abstract}
+Sammendrag
+\end{abstract}
+
+% Innholdsfortegnelse automatisk generert:
+%\tableofcontents
+
+\section{Innledning}
+Innledning
+\subsection{Hensikt}
+\lipsum[5]
+
+\subsection{Utstyrsliste}
+
+1 2 3
+
+\section{Teoretisk del}
+
+\subsection{Oppgave X}
+
+\section{Praktisk arbeid}
+
+\section{Resultater}
+
+\subsection{Et plott}
+
+\section{Diskusjon}
+
+blah blah
+
+\section{Konklusjon}
+
+smrt smrt
+
+referansebruk \cite{technical_name}
+
+\begin{thebibliography}{9}
+\bibitem{technical_name}
+vet ikke hvordan dette funker
+\end{thebibliography}
+
+\end{document}
