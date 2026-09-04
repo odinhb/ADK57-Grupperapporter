@@ -15,6 +15,11 @@
 \usepackage[hyphens]{url}
 \usepackage{lipsum} 
 \usepackage{siunitx}
+
+\usepackage{xcolor}
+\usepackage{soul}
+\sethlcolor{yellow}
+
 \sisetup{
   output-complex-root = \ensuremath{\mathit{j}},
   complex-root-position = before-number,
@@ -41,7 +46,11 @@
 \maketitle % Setter sammen \title og \author og \date
 
 \begin{abstract}
-Sammendrag
+Sammendrag gjseoigesrjig
+
+\hl{gseroigjseroigjse}
+sergsijrgoseijgsig
+sergoijsegoisjer
 \end{abstract}
 
 % Innholdsfortegnelse automatisk generert:
@@ -54,7 +63,20 @@ Innledning
 
 \subsection{Utstyrsliste}
 
-1 2 3
+\begin{table}[ht] %[h] for å plassere den så nær "her" som mulig.
+    \centering
+    \caption{Utstyrsliste}
+    \label{tab:utstyr} % for \cref{tab:utstyr}
+    % {|l|l|l|} er tre kolonner med tekst venstrejustert
+    % og med vertikale streker for å skille kolonner
+    \begin{tabular}{|l|l|l|}\hline %\hline = horisontal strek
+        Utstyr      & Type           & Fabrikat   \\\hline\hline
+        Diode 		& LED			 & -			 \\
+        Multimeter  & Digitalt       &FLUKE \\
+        Batteri     & \qty{9}{\volt} & IKEA \\
+        Motstand    & \qty{200}{\ohm}&- \\\hline 
+    \end{tabular}
+\end{table}
 
 \section{Teoretisk del}
 
