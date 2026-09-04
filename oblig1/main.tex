@@ -59,7 +59,38 @@ sergoijsegoisjer
 %\tableofcontents
 
 \section{Innledning}
-Innledning
+
+\subsection{Fig O-1.3}
+
+\begin{circuitikz}[european]
+	\ctikzset{full diodes}
+	
+	% Øvre del
+	\draw
+	(0,0) node[circ]{}
+	-- (0,3)
+	-- (4,3)
+	to[R, l_={$R_2 = 200\,\Omega$}] (4,1.5)
+	to[leD, l_=$D_1$] (4,0)
+	node[circ]{};
+	
+	% Nedre del
+	\draw
+	(0,0)
+	to[american voltage source, l_=$9V$] (0,-3)
+	-- (4,-3)
+	to[R, l_={$R_3 = 200\,\Omega$}] (4,0);
+	
+	% Bryteren mellom nodene
+	\draw
+	(0,0)
+	to[normal open switch] (4,0);
+	
+\end{circuitikz}
+
+
+
+
 \subsection{Hensikt}
 \lipsum[5]
 
