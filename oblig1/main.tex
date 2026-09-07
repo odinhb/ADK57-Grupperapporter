@@ -60,38 +60,6 @@ sergoijsegoisjer
 
 \section{Innledning}
 
-\begin{figure}[ht]
-	\centering
-	\begin{circuitikz}[european]
-		\ctikzset{full diodes}
-		
-		% Øvre del
-		\draw
-		(0,0) node[circ]{}
-		-- (0,3)
-		-- (4,3)
-		to[R, l_={$R_2 = 200\,\Omega$}] (4,1.5)
-		to[leD, l_=$D_1$] (4,0)
-		node[circ]{};
-		
-		% Nedre del
-		\draw
-		(0,0)
-		to[american voltage source, l_=$9V$] (0,-3)
-		-- (4,-3)
-		to[R, l_={$R_3 = 200\,\Omega$}] (4,0);
-		
-		% Bryteren mellom nodene
-		\draw
-		(0,0)
-		to[normal open switch] (4,0);
-		
-	\end{circuitikz}
-	\caption{tegning av noe}
-	\label{kretstegning1}
-\end{figure}
-
-
 \subsection{Hensikt}
 \lipsum[5]
 
@@ -118,9 +86,24 @@ sergoijsegoisjer
 \section{Teoretisk del}
 
 \subsection{Undersøkelse av trykknapp-funksjonsmåte}
-\subsection{Enkel lysdiodekrets}
-\subsection{?? Dobbelkrets}
-\subsection{Kombinasjonskrets}
+
+For å teste funksjonen på bryteren i dette eksperimentet så vil det bli brukt et multimeter. Multimeteret har en funksjon som gir fra seg en pipelyd når det er kortslutning mellom to punkter som måles. På denne måten kan bryteren testes i åpen og lukket posisjon for å finne funksjonen.
+
+
+\subsection{Enkel lysdiodekrets, \Cref{fig:krets1}}
+
+Kobler opp kretsen som vist på "Figur" (Sett inn \cref{fig:krets1}) for å sjekke om funksjonen til bryteren stemmer med første test. Ohm's lov som er vist i \cref{eq:ohm} kan brukes til å beregne estimert strøm i kretsen.
+\begin{equation}
+	v=Ri
+	\label{eq:ohm}
+\end{equation}
+Ved utregning med motstand $R_1$ på \qty{200}{\ohm} og $D_1$ med en lav indre motstand, gir det en estimert strøm $i$ på \qty{45}{\milli\ampere}.
+Dette er
+
+\subsection{Lysdiodekrets, \Cref{fig:krets2}}
+
+I denne kretsen er $R_2$ og $D_2$ koblet parallellt med med bryteren. Og parallellkoblingen er videre koblet i serie med $R_3$. Med bryteren i åpen posisjon vil kretsen være en ren seriekrets med strøm $i$ på \qty{22,5}{\milli\ampere} beregnet ved hjelp av \cref{eq:ohm}.
+\subsection{Kombinasjonskrets, \Cref{fig:krets3}}
 
 \section{Praktisk arbeid}
 
@@ -130,13 +113,47 @@ sergoijsegoisjer
 	\caption{Bryter.}
 	\label{fig:bryter}
 \end{figure}
+
+% Gjort kretsen om til figur for å kunne referere med \Cref{fig:krets2}
+\begin{figure}[ht]
+	\begin{circuitikz}[european]
+		\ctikzset{full diodes}
+
+		% Øvre del
+		\draw
+		(0,0) node[circ]{}
+		-- (0,3)
+		-- (4,3)
+		to[R, l_={$R_2 = 200\,\Omega$}] (4,1.5)
+		to[leD, l_=$D_2$] (4,0)
+		node[circ]{};
+
+		% Nedre del
+		\draw
+		(0,0)
+		to[american voltage source, l_=$9V$] (0,-3)
+		-- (4,-3)
+		to[R, l_={$R_3 = 200\,\Omega$}] (4,0);
+
+		% Bryteren mellom nodene
+		\draw
+		(0,0)
+		to[normal open switch] (4,0);
+
+	\end{circuitikz}
+	\caption{Krets 2.}
+	\label{fig:krets2}
+\end{figure}
+
 \section{Resultater}
+
+Var utregnede verdier like som faktiske verdier målt i eksperimentene?
 
 \subsection{Et plott}
 
 \section{Diskusjon}
 
-blah blah blah
+blah blah blah. Kan veriene for en lysdiode beregnes, eller trengs det datablad?
 
 \section{Konklusjon}
 
