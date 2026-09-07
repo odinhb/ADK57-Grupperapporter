@@ -36,8 +36,8 @@
 \setlength{\parindent}{0pt}
 
 % metadata
-\title{Rapportskriving i ELI1300 - Redusert mal}
-\author{Odin Heggvold Bekkelund\\For Gruppe ADK57}
+\title{Oblig 1. }
+\author{Gruppe ADK57\\\\Odin Heggvold Bekkelund\\Caritha Lorenza Furnes\\Geir Ove Venstad\\Markus Øfjord }
 \date{31.08.2026} 
 
 % definer en url til senere?
@@ -48,21 +48,79 @@
 \maketitle % Setter sammen \title og \author og \date
 
 \begin{abstract}
-Sammendrag gjseoigesrjig
-
-\hl{gseroigjseroigjse}
-sergsijrgoseijgsig
-sergoijsegoisjer
+I første del av øvelsen ble det analysert hvordan elektriske kretser kan fungere med bryter ved å undersøke hvordan en bryter fungerer. Deretter ble det laget ulike kretser der målet var analysere hvordan motstand, dioler, bryter og strøm påvirker hverandre.
 \end{abstract}
 
 % Innholdsfortegnelse automatisk generert:
 %\tableofcontents
 
-\section{Innledning}
+\section{Nomenclature}
+\begin{table}[ht]
+	\caption{Liste over notasjon benyttet for denne øvelsen.}
+	\label{tab:notasjon}
+	\noindent
+	\begin{tabular}{@{}lll@{}}
+		\hline
+		Størrelse & Symbol & Enhet \\
+		\hline
+		Spenning & $v$ & V \\
+		Strøm & $i$ & A \\
+		Motstand & $R$ & $\Omega$ \\
+		\hline
+	\end{tabular}
+\end{table}
 
+\section{Innledning}
+Formål med øvelsen var å undersøke hvordan ulike komponenter i ulike elektriske kretser påvikrer hverandre. Utstyr som ble benyttet i øvelsen er listet i tabell 2.
+
+\begin{table}[ht] %[h] for å plassere den så nær "her" som mulig.
+    \centering
+    \caption{Utstyrsliste}
+    \label{tab:utstyr} % for \cref{tab:utstyr}
+    % {|l|l|l|} er tre kolonner med tekst venstrejustert
+    % og med vertikale streker for å skille kolonner
+    \begin{tabular}{|l|l|l|l|}\hline %\hline = horisontal strek
+        Utstyr      & Type           & Fabrikat   \\\hline\hline
+        Breadboard     & -                              & -            \\
+        Ledninger   & -                                 & -    \\
+        Diode          & Light Emitting                         & -                     \\
+        Knapp          & Trykk                  & -            \\
+        Multimeter  & Digitalt       & Elma Instruments \\
+        Batteri     & \qty{9}{\volt} & Kjell\&Company \\
+        Motstand    & \qty{200}{\ohm}&- \\\hline
+    \end{tabular}
+\end{table}
+
+
+\section{Teoretisk del}
+\subsection{Trykknappens funksjonsmåte}
+
+\subsection{Enkel krets med bryter}
 \begin{figure}[ht]
 	\centering
 	\begin{circuitikz}[european]
+		\ctikzset{full diodes}
+		\draw
+		(0,0)
+		to[american voltage source, l=$9V$] (0,3)
+		to[normal open switch] (4,3)
+		to[R, l_={$R_1 = 200\,\Omega$}] (4,1.5)
+		to[leD, l_=$D_1$] (4,0)
+		-- (0,0);
+		
+	\end{circuitikz} 
+    \caption{Første krets}
+	\label{fig:Kretstegning 1.}
+\end{figure}
+
+
+
+\subsection{Krets med alternativ strømvei}
+
+\begin{figure}[ht]
+	\centering
+	\hspace{0.4cm}
+	\begin{circuitikz}[european, xshift=0.8cm]
 		\ctikzset{full diodes}
 		
 		% Øvre del
@@ -71,7 +129,7 @@ sergoijsegoisjer
 		-- (0,3)
 		-- (4,3)
 		to[R, l_={$R_2 = 200\,\Omega$}] (4,1.5)
-		to[leD, l_=$D_1$] (4,0)
+		to[leD, l_=$D_2$] (4,0)
 		node[circ]{};
 		
 		% Nedre del
@@ -87,40 +145,16 @@ sergoijsegoisjer
 		to[normal open switch] (4,0);
 		
 	\end{circuitikz}
-	\caption{tegning av noe}
-	\label{kretstegning1}
+
+	\caption{Andre krets}
+	\label{fig:kretstegning2}
 \end{figure}
 
 
-\subsection{Hensikt}
-\lipsum[5]
 
-\subsection{Utstyrsliste}
+\subsection{Kombinert lysdiodekrets(LED krets)}
 
-\begin{table}[ht] %[h] for å plassere den så nær "her" som mulig.
-    \centering
-    \caption{Utstyrsliste}
-    \label{tab:utstyr} % for \cref{tab:utstyr}
-    % {|l|l|l|} er tre kolonner med tekst venstrejustert
-    % og med vertikale streker for å skille kolonner
-    \begin{tabular}{|l|l|l|l|}\hline %\hline = horisontal strek
-        Utstyr      & Type           & Fabrikat   \\\hline\hline
-        Breadboard 	& -				 & -		\\
-        Ledninger   & -				 & -    \\
-        Diode 		& Light Emitting			 & -			 \\
-        Knapp 		& Trykk 		 & -		\\
-        Multimeter  & Digitalt       & Elma Instruments \\
-        Batteri     & \qty{9}{\volt} & Kjell\&Company \\
-        Motstand    & \qty{200}{\ohm}&- \\\hline
-    \end{tabular}
-\end{table}
 
-\section{Teoretisk del}
-
-\subsection{Undersøkelse av trykknapp-funksjonsmåte}
-\subsection{Enkel lysdiodekrets}
-\subsection{?? Dobbelkrets}
-\subsection{Kombinasjonskrets}
 
 \section{Praktisk arbeid}
 
@@ -132,7 +166,6 @@ sergoijsegoisjer
 \end{figure}
 \section{Resultater}
 
-\subsection{Et plott}
 
 \section{Diskusjon}
 
@@ -150,3 +183,4 @@ vet ikke hvordan dette funker
 \end{thebibliography}
 
 \end{document}
+
