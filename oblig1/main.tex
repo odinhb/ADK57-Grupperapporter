@@ -57,27 +57,7 @@ Denne rapporten beskriver den første obligatoriske øvingen i ELI1300 ved OsloM
 \section{Innledning}
 Formålet med øvelsen var å undersøke hvordan ulike komponenter påvirker egenskapene til elektriske kretser.
 
-Utstyr som ble benyttet i øvelsen er listet i \cref{tab:utstyr}. Notasjon som brukes i rapporten vises i \cref{tab:notasjon}.
-
-\begin{table}[h] %[h] for å plassere den så nær "her" som mulig.
-    \centering
-	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
-    \caption{Utstyrsliste}
-    \label{tab:utstyr} % for \cref{tab:utstyr}
-    \begin{tabular}{@{}lll@{}}
-    	\hline %\hline = horisontal strek
-        Utstyr      & Type           & Fabrikat   \\\hline
-        Breadboard     & -                              & -            \\
-        Ledninger   & -                                 & -    \\
-        Diode          & LED                         & -                     \\
-        Knapp          & Trykk                  & -            \\
-        Multimeter  & Digitalt       & Elma Instruments \\
-        Batteri     & \qty{9}{\volt} & Kjell\&Company \\
-        Motstand    & \qty{200}{\ohm}&- \\
-        Motstand    & \qty{1000}{\ohm}&- \\
-        \hline
-    \end{tabular}
-\end{table}
+Utstyr som ble benyttet i øvelsen er listet i \cref{tab:utstyr}. 
 
 \section{Teoretisk del}
 I denne delen vil teoretisk bakgrunn og analyse for å kunne utføre den praktiske delen av øvelsen være presentert. Notasjon som brukes i rapporten vises i \cref{tab:notasjon}.
@@ -212,7 +192,29 @@ I denne kretsen er $R_2$ og $D_2$ koblet parallellt med med bryteren. Og paralle
 	\label{fig:kretstegning3}
 \end{figure}
 
+
 \section{Praktisk arbeid}
+Denne delen beskriver den praktiske gjennomføringen av øvelsen, herunder undersøkelse av trykknappens funksjon og oppkobling av kretsene.
+
+\begin{table}[h] %[h] for å plassere den så nær "her" som mulig.
+	\centering
+	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
+	\caption{Utstyrsliste}
+	\label{tab:utstyr} % for \cref{tab:utstyr}
+	\begin{tabular}{@{}lll@{}}
+		\hline %\hline = horisontal strek
+		Utstyr      & Type           & Fabrikat   \\\hline
+		Breadboard     & -                              & -            \\
+		Ledninger   & -                                 & -    \\
+		Diode          & LED                         & -                     \\
+		Knapp          & Trykk                  & -            \\
+		Multimeter  & Digitalt       & Elma Instruments \\
+		Batteri     & \qty{9}{\volt} & Kjell\&Company \\
+		Motstand    & \qty{200}{\ohm}&- \\
+		Motstand    & \qty{1000}{\ohm}&- \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \subsection{Undersøkelse av trykknapp-funksjonsmåte}
 For å teste funksjonen på bryteren i dette eksperimentet ble det brukt et multimeter. Multimeteret hadde en funksjon som ga fra seg en pipelyd ved kortslutning mellom de to punktene som ble målt. På denne måten kunne bryteren bli testet i åpen og lukket posisjon for å finne ut hvordan bryteren fungerte. Multimeteret viste ``O.L'' på skjermen når kretsen ikke var sluttet, dette ble tolket som uendelig motstand ($\infty$ \unit{\ohm}).
