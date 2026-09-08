@@ -95,7 +95,7 @@ Formål med øvelsen var å undersøke hvordan ulike komponenter i ulike elektri
 \section{Teoretisk del}
 \subsection{Undersøkelse av trykknapp-funksjonsmåte}
 
-For å teste funksjonen på bryteren i dette eksperimentet så vil det bli brukt et multimeter. Multimeteret har en funksjon som gir fra seg en pipelyd når det er kortslutning mellom to punkter som måles. På denne måten kan bryteren testes i åpen og lukket posisjon for å finne funksjonen.
+Vi vet i en bryter går $R \to \infty$ når den er åpen og $R \to 0$ når den er lukket. Ved hjelp av dette kan man undersøke hvilke bein på trykknapp-bryteren som er kortsluttet eller ikke.
 
 \subsection{Enkel krets med bryter}
 Målet ved å sette opp strømkrets som er vist i \cref{fig:Kretstegning 1.} var å sjekke at kretsen fungerte slik at lysdioden lyste når bryteren ble trykket ned.
@@ -181,6 +181,10 @@ I denne kretsen er $R_2$ og $D_2$ koblet parallellt med med bryteren. Og paralle
 
 \section{Praktisk arbeid}
 
+\subsection{Undersøkelse av trykknapp-funksjonsmåte}
+
+For å teste funksjonen på bryteren i dette eksperimentet så vil det bli brukt et multimeter. Multimeteret har en funksjon som gir fra seg en pipelyd når det er kortslutning mellom to punkter som måles. På denne måten kan bryteren testes i åpen og lukket posisjon for å finne funksjonen. Multimeteret viser "O.L" på skjermen når kretsen ikke er sluttet. Vi tolker dette som uendelig motstand ($\infty$ \unit{\ohm}).
+
 \begin{figure}[ht]
 	\centering 
 	\includegraphics[width=0.5\linewidth]{Bryterposisjon.png}
@@ -232,14 +236,35 @@ Var utregnede verdier like som faktiske verdier målt i eksperimentene?
 
 \subsection{Undersøkelse av trykknapp-funksjonsmåte} 
 
-\begin{table}[ht]
+\begin{table}[h]
 	\centering
 	\caption{Resultat av målinger på trykknapp}
 	\label{tab:beinmaalinger}
 	\noindent
-	\begin{tabular}{@{}lcc@{}}
+	\begin{tabular}{@{}ccc@{}}
 		\hline
-		Beinnr. & Bryter på & Bryter av \\
+		Beinnr. & Ikke trykket & Trykket \\
+		\hline
+		1-2 & O.L ($\infty$ \unit{\ohm}) & \qty{0}{\ohm} \\
+		1-3 & \qty{0}{\ohm} & \qty{0}{\ohm} \\
+		1-4 & O.L ($\infty$ \unit{\ohm}) & \qty{0}{\ohm} \\
+		2-3 & O.L ($\infty$ \unit{\ohm}) & \qty{0}{\ohm} \\
+		2-4 & \qty{0}{\ohm} & \qty{0}{\ohm} \\
+		3-4 & O.L ($\infty$ \unit{\ohm}) & \qty{0}{\ohm} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\Cref{tab:beinmaalinger} viser hva multimeteret måler mellom hvert par bein når knappen er trykket ned eller ikke. Bein er nummerert i \cref{fig:bryter}. Denne kan forenkles til neste oversikt (\Cref{tab:beinoversikt}).
+
+\begin{table}[h]
+	\centering
+	\caption{Oversikt over kortslutninger mellom bein}
+	\label{tab:beinoversikt}
+	\noindent
+	\begin{tabular}{@{}ccc@{}}
+		\hline
+		Beinnr. & Ikke trykket & Trykket \\
 		\hline
 		1 & 3 & 2,3,4\\
 		2 & 4 & 1,3,4\\
@@ -249,7 +274,7 @@ Var utregnede verdier like som faktiske verdier målt i eksperimentene?
 	\end{tabular}
 \end{table}
 
-\Cref{tab:beinmaalinger} viser hvilke bein som har kortslutning avhenging av om knappen er trykket ned eller ikke.
+\Cref{tab:beinoversikt} viser hvilke bein som er kortsluttet avhenging av om knappen er trykket ned eller ikke.
 
 \section{Diskusjon}
 
