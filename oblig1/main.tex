@@ -105,6 +105,18 @@ Vi vet i en bryter går $R \to \infty$ når den er åpen og $R \to 0$ når den e
 \subsection{Enkel krets med bryter}
 Målet ved å sette opp strømkrets som er vist i \cref{fig:Kretstegning 1.} var å sjekke at kretsen fungerte slik at lysdioden lyste når bryteren ble trykket ned.
 
+Ohms lov er gitt i \cref{eq:ohm}. Ved å omforme ligningen med hensyn på strømmen $i$ fås uttrykket i \cref{eq:ohm_i}, som brukes til å beregne strømmen.
+
+\begin{equation}
+	v=Ri
+	\label{eq:ohm}
+\end{equation}
+
+\begin{equation}
+	i = \frac{v}{R}
+	\label{eq:ohm_i}
+\end{equation}
+
 \begin{figure}[ht]
 	\centering
 	\begin{circuitikz}[european]
@@ -112,8 +124,8 @@ Målet ved å sette opp strømkrets som er vist i \cref{fig:Kretstegning 1.} var
 		\draw
 		(0,0)
 		to[american voltage source, invert, l=\qty{9}{\volt}] (0,3)
-		to[normal open switch] (4,3)
-		to[R, l_={$R_1 = \qty{200}{\mega\ohm}$}] (4,1.5)
+		to[normal open switch, i>^=$i_{1}$] (4,3)
+		to[R, l_={$R_1 = \qty{200}{\ohm}$}] (4,1.5)
 		to[leD, l_=$D_1$] (4,0)
 		-- (0,0);
 
@@ -122,13 +134,21 @@ Målet ved å sette opp strømkrets som er vist i \cref{fig:Kretstegning 1.} var
 	\label{fig:Kretstegning 1.}
 \end{figure}
 
+Når bryteren er lukket, kan strømmen $i_1$ i \cref{fig:Kretstegning 1.} beregnes ved hjelp av \cref{eq:ohm_i}:
+
+$$
+i_{1} = \frac{\qty{9}{\volt}}{\qty{200}{\ohm}} = \qty{45}{\milli\ampere}
+$$
+
+Når bryteren er åpen, modelleres den som en uendelig stor motstand. Strømmen $i_1$ blir da:
+
+$$
+i_{1} = \frac{\qty{9}{\volt}}{\infty\unit{\ohm}} = \qty{0}{\ampere}
+$$
+
 \subsection{Krets med alternativ strømvei}
 
-Kobler opp kretsen som vist på \cref{fig:kretstegning2} for å sjekke hvordan kretsen oppfører seg når bryteren trykkes. Ohm's lov som er vist i \cref{eq:ohm} kan brukes til å beregne estimert strøm i kretsen.
-\begin{equation}
-	v=Ri
-	\label{eq:ohm}
-\end{equation}
+Kobler opp kretsen som vist på \cref{fig:kretstegning2} for å sjekke hvordan kretsen oppfører seg når bryteren trykkes. Ohms lov på formen i \cref{eq:ohm_i} kan brukes til å beregne estimert strøm i kretsen.
 Ved utregning med motstand $R_2$ på \qty{200}{\ohm} og $D_2$ med en lav indre motstand, gir det en estimert strøm $i$ på \qty{45}{\milli\ampere}.
 Strømmen vil trolig være mindre siden dioden vil ha en ukjent spenning over seg. Når bryteren trykkes, så vil kretsen bare bestå av spenningskilden og $R_3$. Strømmen i denne kresten beregnes også til \qty{45}{\milli\ampere} som trolig er mer nøyaktig.
 
