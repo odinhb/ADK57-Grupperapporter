@@ -57,26 +57,10 @@ I første del av øvelsen ble det analysert hvordan elektriske kretser kan funge
 % Innholdsfortegnelse automatisk generert:
 %\tableofcontents
 
-\section{Nomenclature}
-\begin{table}[ht]
-	\caption{Notasjon benyttet i denne øvelsen.}
-	\label{tab:notasjon}
-	\noindent
-	\begin{tabular}{@{}lll@{}}
-		\hline
-		Størrelse & Symbol & Enhet \\
-		\hline
-		Spenning & $v$ & \unit{\volt} \\
-		Strøm & $i$ & \unit{\ampere} \\
-		Motstand & $R$ & \unit{\ohm} \\
-		\hline
-	\end{tabular}
-\end{table}
-
 \section{Innledning}
-Formål med øvelsen var å undersøke hvordan ulike komponenter i ulike elektriske kretser påvikrer hverandre. Utstyr som ble benyttet i øvelsen er listet i tabell 2.
+Formål med øvelsen var å undersøke hvordan ulike komponenter i ulike elektriske kretser påvikrer hverandre. Utstyr som ble benyttet i øvelsen er listet i \cref{tab:utstyr}. Notasjon som brukes i rapported vises i \cref{tab:notasjon}.
 
-\begin{table}[ht] %[h] for å plassere den så nær "her" som mulig.
+\begin{table}[h] %[h] for å plassere den så nær "her" som mulig.
     \centering
     \caption{Utstyrsliste}
     \label{tab:utstyr} % for \cref{tab:utstyr}
@@ -95,7 +79,23 @@ Formål med øvelsen var å undersøke hvordan ulike komponenter i ulike elektri
     \end{tabular}
 \end{table}
 
+\begin{table}[h]
+	\caption{Notasjon benyttet i denne øvelsen.}
+	\label{tab:notasjon}
+	\noindent
+	\begin{tabular}{@{}lll@{}}
+		\hline
+		Størrelse & Symbol & Enhet \\
+		\hline
+		Spenning & $v$ & \unit{\volt} \\
+		Strøm & $i$ & \unit{\ampere} \\
+		Motstand & $R$ & \unit{\ohm} \\
+		\hline
+	\end{tabular}
+\end{table}
+
 \section{Teoretisk del}
+
 \subsection{Undersøkelse av trykknapp-funksjonsmåte}
 
 Vi vet i en bryter går $R \to \infty$ når den er åpen og $R \to 0$ når den er lukket. Ved hjelp av dette kan man undersøke hvilke bein på trykknapp-bryteren som er kortsluttet eller ikke.
