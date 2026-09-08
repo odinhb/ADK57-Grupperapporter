@@ -109,9 +109,9 @@ Målet ved å sette opp strømkrets som er vist i \cref{fig:Kretstegning 1.} var
 		\ctikzset{full diodes}
 		\draw
 		(0,0)
-		to[american voltage source, invert, l=$9V$] (0,3)
+		to[american voltage source, invert, l=\qty{9}{\volt}] (0,3)
 		to[normal open switch] (4,3)
-		to[R, l_={$R_1 = 200\,\Omega$}] (4,1.5)
+		to[R, l_={$R_1 = \qty{200}{\mega\ohm}$}] (4,1.5)
 		to[leD, l_=$D_1$] (4,0)
 		-- (0,0);
 
@@ -141,7 +141,7 @@ Strømmen vil trolig være mindre siden dioden vil ha en ukjent spenning over se
 		(0,0) node[circ]{}
 		-- (0,3)
 		-- (4,3)
-		to[R, l_={$R_2 = 200\,\Omega$}] (4,1.5)
+		to[R, l_={$R_2 = \qty{200}{\ohm}$}] (4,1.5)
 		to[leD, l_=$D_2$] (4,0)
 		node[circ]{};
 		
@@ -150,7 +150,7 @@ Strømmen vil trolig være mindre siden dioden vil ha en ukjent spenning over se
 		(0,0)
 		to[american voltage source, l_=$9V$] (0,-3)
 		-- (4,-3)
-		to[R, l_={$R_3 = 200\,\Omega$}] (4,0);
+		to[R, l={$R_3 = \qty{200}{\ohm}$}] (4,0);
 		
 		% Bryteren mellom nodene
 		\draw
@@ -167,20 +167,26 @@ Strømmen vil trolig være mindre siden dioden vil ha en ukjent spenning over se
 
 I denne kretsen er $R_2$ og $D_2$ koblet parallellt med med bryteren. Og parallellkoblingen er videre koblet i serie med $R_3$. Med bryteren i åpen posisjon vil kretsen være en ren seriekrets med strøm $i$ på \qty{22,5}{\milli\ampere} beregnet ved hjelp av \cref{eq:ohm}.
 
-\begin{circuitikz}[european]
-	\ctikzset{full diodes}
-	\draw node[circ]{}(0,0)--(0,3)
-	to[R,l={$R_1 = 2k\,\Omega$}](4,3)
-	to[R,l_={$R_2 = 200\,\Omega$}](4,1.5)
-	to [leD, l_=$D_1$] (4,0) (0,0)
-	%Den andre kretsen
-	(0,0)
-	to [leD, l_=$D_2$](2,0)
-	to [normal open switch] (4,0)node[circ]{}
-	to[R,l_={$R_3 = 200\,\Omega$}](4,-3)--(0,-3)
-	to[american voltage source, invert, l=$9V$](0,0.40)--(0,0);
-\end{circuitikz}
+\begin{figure}[ht]
+	\centering
+	
+	\begin{circuitikz}[european]
+		\ctikzset{full diodes}
+		\draw node[circ]{}(0,0)--(0,3)
+		to[R,l={$R_1 = \qty{2}{\kilo\ohm}$}](4,3)
+		to[R,l_={$R_2 = \qty{200}{\ohm}$}](4,1.5)
+		to [leD, l_=$D_1$] (4,0) (0,0)
+		%Den andre kretsen
+		(0,0)
+		to [leD, l_=$D_2$](2,0)
+		to [normal open switch] (4,0)node[circ]{}
+		to[R,l_={$R_3 = \qty{200}{\ohm}$}](4,-3)--(0,-3)
+		to[american voltage source, invert, l=$9V$](0,0.40)--(0,0);
+	\end{circuitikz}
 
+	\caption{Tredje krets}
+	\label{fig:kretstegning3}
+\end{figure}
 
 \section{Praktisk arbeid}
 
