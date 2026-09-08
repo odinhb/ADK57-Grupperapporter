@@ -98,13 +98,15 @@ Formål med øvelsen var å undersøke hvordan ulike komponenter i ulike elektri
 For å teste funksjonen på bryteren i dette eksperimentet så vil det bli brukt et multimeter. Multimeteret har en funksjon som gir fra seg en pipelyd når det er kortslutning mellom to punkter som måles. På denne måten kan bryteren testes i åpen og lukket posisjon for å finne funksjonen.
 
 \subsection{Enkel krets med bryter}
+Målet ved å sette opp strømkrets som er vist i \cref{fig:Kretstegning 1.} var å sjekke at kretsen fungerte slik at lysdioden lyste når bryteren ble trykket ned.
+
 \begin{figure}[ht]
 	\centering
 	\begin{circuitikz}[european]
 		\ctikzset{full diodes}
 		\draw
 		(0,0)
-		to[american voltage source, l=$9V$] (0,3)
+		to[american voltage source, invert, l=$9V$] (0,3)
 		to[normal open switch] (4,3)
 		to[R, l_={$R_1 = 200\,\Omega$}] (4,1.5)
 		to[leD, l_=$D_1$] (4,0)
@@ -173,7 +175,7 @@ I denne kretsen er $R_2$ og $D_2$ koblet parallellt med med bryteren. Og paralle
 	to [leD, l_=$D_2$](2,0)
 	to [normal open switch] (4,0)node[circ]{}
 	to[R,l_={$R_3 = 200\,\Omega$}](4,-3)--(0,-3)
-	to[american voltage source, l=$9V$](0,0.40)--(0,0);
+	to[american voltage source, invert, l=$9V$](0,0.40)--(0,0);
 \end{circuitikz}
 
 
