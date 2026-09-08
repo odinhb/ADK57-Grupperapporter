@@ -162,6 +162,21 @@ Dette er
 
 I denne kretsen er $R_2$ og $D_2$ koblet parallellt med med bryteren. Og parallellkoblingen er videre koblet i serie med $R_3$. Med bryteren i åpen posisjon vil kretsen være en ren seriekrets med strøm $i$ på \qty{22,5}{\milli\ampere} beregnet ved hjelp av \cref{eq:ohm}.
 
+\begin{circuitikz}[european]
+	\ctikzset{full diodes}
+	\draw node[circ]{}(0,0)--(0,3)
+	to[R,l={$R_1 = 2k\,\Omega$}](4,3)
+	to[R,l_={$R_2 = 200\,\Omega$}](4,1.5)
+	to [leD, l_=$D_1$] (4,0) (0,0)
+	%Den andre kretsen
+	(0,0)
+	to [leD, l_=$D_2$](2,0)
+	to [normal open switch] (4,0)node[circ]{}
+	to[R,l_={$R_3 = 200\,\Omega$}](4,-3)--(0,-3)
+	to[american voltage source, l=$9V$](0,0.40)--(0,0);
+\end{circuitikz}
+
+
 \section{Praktisk arbeid}
 
 \begin{figure}[ht]
