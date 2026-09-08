@@ -1,0 +1,21 @@
+% ikke et gyldig latex-dokument, men en kopierbar tabell, for å komme
+% i gang med det uten å tenke så mye.
+% i oblig 1 bestemte vi oss for å levere en annerledes tabellstil enn
+% ola ga oss i malen.
+
+
+\begin{table}[h]
+	\centering % sentrer
+	\setlength{\belowcaptionskip}{6pt} % % margin mellom caption og tabellen
+	\caption{Eksempel caption}
+	\label{tab:referansenavn}
+	\noindent
+	\begin{tabular}{@{}lll@{}} % left left left
+		\hline
+		Kolonne A & Kolonne B & Kolonne C \\
+		\hline
+		Ting & Tang & Sjallabang \\
+		1 & 2 & 3 \\
+		\hline
+	\end{tabular}
+\end{table}
