@@ -195,6 +195,8 @@ For å teste funksjonen på bryteren i dette eksperimentet så vil det bli brukt
 	\label{fig:bryter}
 \end{figure}
 
+\subsection{Enkel krets med bryter}
+
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=1\linewidth]{krets1.png}
@@ -202,36 +204,9 @@ For å teste funksjonen på bryteren i dette eksperimentet så vil det bli brukt
 	\label{fig:praktisk_krets1}
 \end{figure}
 
-% Gjort kretsen om til figur for å kunne referere med \Cref{fig:krets2}
-\begin{figure}[ht]
-	\begin{circuitikz}[european]
-		\ctikzset{full diodes}
+\subsection{Krets med alternativ strømvei}
 
-		% Øvre del
-		\draw
-		(0,0) node[circ]{}
-		-- (0,3)
-		-- (4,3)
-		to[R, l_={$R_2 = 200\,\Omega$}] (4,1.5)
-		to[leD, l_=$D_2$] (4,0)
-		node[circ]{};
-
-		% Nedre del
-		\draw
-		(0,0)
-		to[american voltage source, l_=$9V$] (0,-3)
-		-- (4,-3)
-		to[R, l_={$R_3 = 200\,\Omega$}] (4,0);
-
-		% Bryteren mellom nodene
-		\draw
-		(0,0)
-		to[normal open switch] (4,0);
-
-	\end{circuitikz}
-	\caption{Krets 2.}
-	\label{fig:krets2}
-\end{figure}
+\subsection{Kombinert lysdiodekrets(LED krets)}
 
 \section{Resultater}
 
@@ -278,6 +253,12 @@ Var utregnede verdier like som faktiske verdier målt i eksperimentene?
 \end{table}
 
 \Cref{tab:beinoversikt} viser hvilke bein som er kortsluttet avhenging av om knappen er trykket ned eller ikke.
+
+\subsection{Enkel krets med bryter}
+
+\subsection{Krets med alternativ strømvei}
+
+\subsection{Kombinert lysdiodekrets(LED krets)}
 
 \section{Diskusjon}
 
