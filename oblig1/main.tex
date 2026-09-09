@@ -130,9 +130,9 @@ $$
 
 Kobler opp kretsen som vist på \cref{fig:kretstegning2} for å sjekke hvordan kretsen oppfører seg når bryteren trykkes.(Kommentar: praktisk arbeid, ikke teori)
 
-Ohms lov på formen i \cref{eq:ohm_i} kan brukes til å beregne estimert strøm i kretsen.
-Ved utregning med motstand $R_2$ på \qty{200}{\ohm} og $D_2$ med en lav indre motstand, gir det en estimert strøm $i$ på \qty{45}{\milli\ampere}.
-Når bryteren trykkes, så vil kretsen bare bestå av spenningskilden og $R_3$. Strømmen i denne kresten beregnes også til \qty{45}{\milli\ampere} som trolig er mer nøyaktig. (Kommentar: dette er ikke korrekt, den vil jo dele strømmen, det er bare at dioden ikke vil lyse fordi strømmen blir så lav)
+Ohms lov på formen i \cref{eq:ohm_i} kan brukes til å beregne strøm i kretsen.
+Ved utregning med motstand $R_2$ på \qty{200}{\ohm} og $D_2$ med en lav indre motstand, gir det en estimert strøm $i_1$ på \qty{45}{\milli\ampere}. (Kommentar: dette er feil, $R_3$ er også med i kretsen når bryteren er åpen)
+Når bryteren trykkes, så vil kretsen bare bestå av spenningskilden og $R_3$. Strømmen $i_2$ i denne kresten beregnes også til \qty{45}{\milli\ampere}. (Kommentar: dette er ikke korrekt, den vil jo dele strømmen, det er bare at dioden ikke vil lyse fordi strømmen blir så lav)
 
 \begin{figure}[ht]
 	\centering
@@ -149,6 +149,11 @@ Når bryteren trykkes, så vil kretsen bare bestå av spenningskilden og $R_3$. 
 		to[leD, l_=$D_2$] (4,0)
 		node[circ]{};
 		
+		% Referansestrøm i den øvre lederen
+		\draw[->, thick]
+		(0.5,2.7) -- (1.2,2.7) % fri plassering av pil
+		node[midway, below] {$i_1$};
+
 		% Nedre del
 		\draw
 		(0,0)
@@ -159,7 +164,7 @@ Når bryteren trykkes, så vil kretsen bare bestå av spenningskilden og $R_3$. 
 		% Bryteren mellom nodene
 		\draw
 		(0,0)
-		to[normal open switch] (4,0);
+		to[normal open switch, i>^=$i_2$] (4,0);
 		
 	\end{circuitikz}
 
@@ -169,7 +174,7 @@ Når bryteren trykkes, så vil kretsen bare bestå av spenningskilden og $R_3$. 
 
 \subsection{Kombinert lysdiodekrets(LED krets)}
 
-I denne kretsen er $R_2$ og $D_2$ koblet parallellt med med bryteren. Og parallellkoblingen er videre koblet i serie med $R_3$. Med bryteren i åpen posisjon vil kretsen være en ren seriekrets med strøm $i$ på \qty{22,5}{\milli\ampere} beregnet ved hjelp av \cref{eq:ohm_i}.
+I denne kretsen er $R_2$ og $D_2$ koblet parallellt med med bryteren. Og parallellkoblingen er videre koblet i serie med $R_3$. Med bryteren i åpen posisjon vil kretsen være en ren seriekrets med strøm $i_2$ på \qty{22,5}{\milli\ampere} beregnet ved hjelp av \cref{eq:ohm_i}.
 
 \begin{figure}[ht]
 	\centering
@@ -177,12 +182,12 @@ I denne kretsen er $R_2$ og $D_2$ koblet parallellt med med bryteren. Og paralle
 	\begin{circuitikz}[european]
 		\ctikzset{full diodes}
 		\draw node[circ]{}(0,0)--(0,3)
-		to[R,l={$R_1 = \qty{2}{\kilo\ohm}$}](4,3)
+		to[R,l={$R_1 = \qty{2}{\kilo\ohm}$}, i>_=$i_1$](4,3)
 		to[R,l_={$R_2 = \qty{200}{\ohm}$}](4,1.5)
 		to [leD, l_=$D_1$] (4,0) (0,0)
 		%Den andre kretsen
 		(0,0)
-		to [leD, l_=$D_2$](2,0)
+		to [leD, l_=$D_2$, i>_=$i_2$](3,0)
 		to [normal open switch] (4,0)node[circ]{}
 		to[R,l_={$R_3 = \qty{200}{\ohm}$}](4,-3)--(0,-3)
 		to[american voltage source, invert, l=$9V$](0,0.40)--(0,0);
