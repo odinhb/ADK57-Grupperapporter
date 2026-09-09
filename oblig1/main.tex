@@ -337,9 +337,50 @@ Strømmen ($i$) går gjennom lysdioden $D_2$ slik at dioden lyser. Når trykk-kn
 
 Målinger gjort i kretsen som vist på \cref{fig:praktisk_krets2} viste en strøm ($i$) på \qty{14}{\milli\ampere} når bryteren står i åpen posisjon. Spenning ($v$) ble målt til \qty{3,3}{\volt} over $R_2$, \qty{2,5}{\volt} over $D_2$ og \qty{3,3}{\volt} over $R_3$. Derimot når bryteren står i lukket posisjon, så ble det målt en strøm ($i$) på \qty{34}{\milli\ampere}. Denne strømmen går bare gjennom bryteren og $R_3$. Det ble målt \qty{0}{\ampere} gjennom $R_2$ og $D_2$. Det samme gjelder for spenningen som viste \qty{0}{\volt} ved måling over $R_2$ og $D_2$. Målt spenning over $R_3$ viste \qty{8,8}{\volt}.
 
+\begin{table}[h]
+	\centering
+	\setlength{\belowcaptionskip}{6pt}
+	\caption{Utført måling, Krets 2}
+	\label{tab:krets2_resultater}
+	\noindent
+	\begin{tabular}{@{}ccc@{}}
+		\hline
+		Komponent & Bryter åpen & Bryter lukket \\
+		\hline
+		$R_2$ & \qty{3,3}{\volt} & \qty{0}{\volt}\\
+		$D_2$ & \qty{2,5}{\volt} & \qty{0}{\volt}\\
+		$R_3$ & \qty{3,3}{\volt} & \qty{8,8}{\volt}\\
+		$i_1$ & \qty{14}{\milli\ampere} & \qty{0}{\ampere}\\
+		$i_2$ & \qty{0}{\ampere} & \qty{34}{\milli\ampere}\\
+		\hline
+	\end{tabular}
+\end{table}
+
 \subsection{Kombinert lysdiodekrets(LED krets)}
 
 I denne kretsen som vist på \cref{fig:praktisk_krets3} ble det etter testing av funksjon, utført målinger av spenning ($v$) over alle komponenter, samt måling av strøm ($i$) både i åpen og lukket bryterposisjon. I åpen posisjon ble spenningen målt til \qty{5,9}{\volt} over $R_1$, \qty{0,6}{\volt} over $R_2$, \qty{2,0}{\volt} over $D_1$, \qty{0,6}{\volt} over $R_3$ og \qty{0}{\volt} over $D_2$. Strømmen ($i$) ble i åpen bryterposisjon målt til \qty{3,0}{\milli\ampere} gjennom $D_1$ og \qty{0}{\ampere} gjennom $D_2$. Med bryteren i lukket posisjon ble det målt \qty{0,4}{\volt} over $R_1$, \qty{60}{\milli\volt} over $R_2$, \qty{1,7}{\volt} over $D_1$, \qty{6,7}{\volt} over $R_3$ og \qty{2,0}{\volt} over $D_2$. Strømmen ($i$) ble i lukket bryterposisjon målt til \qty{29,5}{\milli\ampere} gjennom $D_2$ og \qty{0,2}{\milli\ampere} gjennom $D_1$. 
+
+\begin{table}[h]
+	\centering
+	\setlength{\belowcaptionskip}{6pt}
+	\caption{Utført måling, Krets 3}
+	\label{tab:krets3_resultater}
+	\noindent
+	\begin{tabular}{@{}ccc@{}}
+		\hline
+		Komponent & Bryter åpen & Bryter lukket \\
+		\hline
+		$R_1$ & \qty{5,9}{\volt} & \qty{0,4}{\volt}\\
+		$R_2$ & \qty{0,6}{\volt} & \qty{60}{\milli\volt}\\
+		$D_1$ & \qty{2,0}{\volt} & \qty{1,7}{\volt}\\
+		$R_3$ & \qty{0,6}{\volt} & \qty{6,7}{\volt}\\
+		$D_2$ & \qty{0}{\volt} & \qty{2,0}{\volt}\\
+		$i_1$ & \qty{3,0}{\milli\ampere} & \qty{0,2}{\milli\ampere}\\
+		$i_2$ & \qty{0}{\ampere} & \qty{29,5}{\milli\ampere}\\
+		\hline
+	\end{tabular}
+\end{table}
+
 
 \section{Diskusjon og Konklusjon}
 
