@@ -347,8 +347,6 @@ Deretter ble det utført målinger av spenning ($v$) og ($i$) som vist i \cref{f
 
 \section{Resultater}
 
-Resultatene viser at estimert strøm ($i$) ikke var korrekte fra beregning til faktisk verdi. Dette skyldes til dels at diodene $D_1$ og $D_2$ har spenningsfall over seg som var ukjente før selve målingene av kretsene ble utført.
-
 \subsection{Undersøkelse av trykknapp-funksjonsmåte} 
 
 \begin{table}[h]
@@ -474,13 +472,23 @@ Hvis man hadde fjernet $R_3$ ville strømmen ødelagt batteriet når man trykker
 
 \subsection{Avvik mellom målt og teoretisk strøm} 
 
-I de tre oppkoblede kretsene vil strømmen måles til å være lavere enn utregnet fordi vi ikke har tatt høyde for fremoverspenningen over dioden. Ved å bruke estimerte verdier fra \cite{analogtech} har vi en fremoverspenning $v_f ~= 2V$ for rød lysdiode. Da regner vi ut f.eks. strømmen $i1$ fra \cref{fig:Kretstegning 1.} ved:
+De målte strømverdiene var lavere enn de teoretiske verdiene som ble
+beregnet for de tre kretsene. Avviket skyldes blant annet at det ikke
+ble tatt hensyn til fremoverspenningen over lysdiodene i de opprinnelige
+beregningene. Denne spenningen var ikke kjent før målingene ble
+gjennomført.
+
+For en rød lysdiode kan fremoverspenningen anslås til omtrent
+$\qty{2}{\volt}$ \cite{analogtech}. Dersom fremoverspenningen tas med i
+beregningen, blir strømmen i kretsen i \cref{fig:Kretstegning 1.}:
 
 $$
-i = \frac{v - v_f}{R} = \frac{\qty{9}{\volt} - \qty{2}{\volt}}{\qty{200}{\ohm}} = \qty{35}{\milli\ampere}
+i_1 = \frac{v - v_f}{R} = \frac{\qty{9}{\volt} - \qty{2}{\volt}}{\qty{200}{\ohm}} = \qty{35}{\milli\ampere}
 $$
 
-Som er nærmere de målte verdiene.
+Denne beregnede verdien ligger nærmere den målte strømverdien enn
+beregningen uten hensyn til lysdiodens fremoverspenning.
+
 
 \bigskip
 
