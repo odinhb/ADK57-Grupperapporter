@@ -82,12 +82,12 @@ I denne delen vil teoretisk bakgrunn og analyse for å kunne utføre den praktis
 
 Formålet med undersøkelsen er å bli kjent med trykknappens virkemåte og å øve på bruk av multimeter. Undersøkelsen danner også grunnlag for bruk av trykknappen i de påfølgende kretsene.
 
-Vi vet i en bryter går $R \to \infty$ når den er åpen og $R \to 0$ når den er lukket. Ved hjelp av dette kan man undersøke hvilke bein på trykknapp-bryteren som er kortsluttet eller ikke.
+Vi vet i en bryter går motstanden $R \to \infty$ når den er åpen og $R \to 0$ når den er lukket. Ved å utnytte dette kan man undersøke hvilke bein på trykknapp-bryteren som er kortsluttet eller ikke når knappen er trykket eller ikke.
 
 \subsection{Enkel krets med bryter}
-Formålet med denne delen er å undersøke en enkel krets der en bryter styrer en lysdiode. Når bryteren trykkes inn, skal kretsen sluttes og lysdioden lyse.
+Formålet med denne delen er å undersøke en enkel krets der en bryter styrer en lysdiode.
 
-Ohms lov, som er hentet fra læreboka \cite{laerebok}, er gitt i \cref{eq:ohm}. Ved å omforme ligningen med hensyn på strømmen $i$ fås uttrykket i \cref{eq:ohm_i}, som brukes til å beregne strømmen.
+Ohms lov, som er hentet fra læreboka \cite{laerebok}, er gitt i \cref{eq:ohm}. Ved å omforme ligningen med hensyn på strømmen $i$ fås uttrykket i \cref{eq:ohm_i}, som brukes til å beregne strømmen i en krets.
 
 \begin{equation}
 	v=iR
@@ -116,7 +116,7 @@ Ohms lov, som er hentet fra læreboka \cite{laerebok}, er gitt i \cref{eq:ohm}. 
 	\label{fig:Kretstegning 1.}
 \end{figure}
 
-Når bryteren er lukket, kan strømmen $i_1$ i \cref{fig:Kretstegning 1.} beregnes ved hjelp av \cref{eq:ohm_i}:
+Når bryteren er lukket, modelleres den som en ideell leder. Strømmen $i_1$ i \cref{fig:Kretstegning 1.} beregnes ved hjelp av \cref{eq:ohm_i}:
 
 $$
 i_{1} = \frac{\qty{9}{\volt}}{\qty{200}{\ohm}} = \qty{45}{\milli\ampere}
@@ -128,9 +128,11 @@ $$
 i_{1} = \frac{\qty{9}{\volt}}{\infty\unit{\ohm}} \approx \qty{0}{\ampere}
 $$
 
+Ifølge Kirchoffs strømlov er strømmen gjennom dioden $D_1$ lik $i_1$. Dioden vil derfor lyse når knappen er trykket ned.
+
 \subsection{Krets med alternativ strømvei}
 
-Formålet med denne delen er å undersøke hvordan en alternativ strømvei påvirker lysdioden i kretsen. Når bryteren trykkes inn, skal strømmen gå utenom lysdioden, slik at den slutter å lyse.
+Formålet med denne delen er å undersøke hvordan en alternativ strømvei påvirker lysdioden i kretsen.
 
 \begin{figure}[h]
 	\centering
@@ -238,7 +240,7 @@ strømlov er strømmen gjennom dioden lik $i_1$. Dioden vil derfor ikke lyse.
 
 \subsection{Kombinert lysdiodekrets(LED krets)}
 
-Formålet med denne delen er å kombinere prinsippene fra de toforegående kretsene i én krets med to lysdioder. Kretsen skal væreutformet slik at bare én lysdiode lyser om gangen: Den ene skal lysenår bryteren er trykket inn, og den andre når bryteren ikke er trykketinn.
+Formålet med denne delen er å kombinere prinsippene fra de to foregående kretsene i én krets med to lysdioder. Kretsen skal være utformet slik at bare én lysdiode lyser om gangen: Den ene skal lyse når bryteren er trykket inn, og den andre når bryteren ikke er trykket inn.
 
 I denne kretsen er $R_2$ og $D_2$ koblet parallelt med med bryteren. Og parallelkoblingen er videre koblet i serie med $R_3$. Med bryteren i åpen posisjon vil kretsen være en ren seriekrets med strøm $i_2$ på \qty{22,5}{\milli\ampere} beregnet ved hjelp av \cref{eq:ohm_i}.
 
