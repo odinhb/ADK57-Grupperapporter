@@ -242,21 +242,20 @@ strømlov er strømmen gjennom dioden lik $i_1$. Dioden vil derfor ikke lyse.
 
 Formålet med denne delen er å kombinere prinsippene fra de to foregående kretsene i én krets med to lysdioder. Kretsen skal være utformet slik at bare én lysdiode lyser om gangen: Den ene skal lyse når bryteren er trykket inn, og den andre når bryteren ikke er trykket inn.
 
-I denne kretsen er $R_2$ og $D_2$ koblet parallelt med med bryteren. Og parallelkoblingen er videre koblet i serie med $R_3$. Med bryteren i åpen posisjon vil kretsen være en ren seriekrets med strøm $i_2$ på \qty{22,5}{\milli\ampere} beregnet ved hjelp av \cref{eq:ohm_i}.
-
 \begin{figure}[ht]
 	\centering
 
 	\begin{circuitikz}[european]
 		\ctikzset{full diodes}
 		\draw node[circ]{}(0,0)--(0,3)
-		to[R,l={$R_1 = \qty{2}{\kilo\ohm}$}, i>_=$i_1$](4,3)
+		to[R,l={$R_1$}, i>_=$i_1$](4,3)
 		to[R,l_={$R_2 = \qty{200}{\ohm}$}](4,1.5)
-		to [leD, l_=$D_1$] (4,0) (0,0)
+		to [leD, l_=$D_2$] (4,0) (0,0)
 		%Den andre kretsen
 		(0,0)
-		to [leD, l_=$D_2$, i>_=$i_2$](3,0)
-		to [normal open switch] (4,0)node[circ]{}
+		to [leD, l_=$D_1$, i>_=$i_2$](3,0)
+		to [normal open switch]
+		(4,0)node[circ]{}
 		to[R,l_={$R_3 = \qty{200}{\ohm}$}](4,-3)--(0,-3)
 		to[american voltage source, invert, l=$9V$](0,0.40)--(0,0);
 	\end{circuitikz}
@@ -265,8 +264,11 @@ I denne kretsen er $R_2$ og $D_2$ koblet parallelt med med bryteren. Og parallel
 	\label{fig:kretstegning3}
 \end{figure}
 
+Denne kretsen er i stor grad lik som kretsen i \cref{fig:kretstegning2}. Vi har valgt å sette inn en diode slik at også strømmen $i_2$ kan utnyttes til å produsere lys. Deretter må motstandsverdien i ytre sløyfe justeres ved hjelp av $R_1$ slik at strømmen $i_1$ ikke blir høy nok til at $D_2$ lyser når man lukker bryteren.
 
-\section{Praktisk arbeid}
+I stedet for å regne ut passende motstandsverdier, valgte vi en praktisk tilnærming som er nærmere beskrevet i \cref{sect:krets3_praktisk}.
+
+\section{Praktisk arbeid} \label{sect:practice}
 Denne delen beskriver den praktiske gjennomføringen av øvelsen, herunder undersøkelse av trykknappens funksjon og oppkobling av kretsene.
 Utstyr som ble benyttet i øvelsen er listet i \cref{tab:utstyr}. 
 
@@ -322,7 +324,7 @@ Kretsen ble koblet opp på et breadboard som vist på \cref{fig:praktisk_krets2}
 	\label{fig:praktisk_krets2}
 \end{figure}
 
-\subsection{Kombinert lysdiodekrets(LED krets)}
+\subsection{Kombinert lysdiodekrets(LED krets)} \label{sect:krets3_praktisk}
 
 Denne kretsen ble koblet opp som vist på \cref{fig:praktisk_krets3} og er en kombinasjon av kretsene som vist på \cref{fig:praktisk_krets1} og \cref{fig:praktisk_krets2}. Det ble brukt et potensiometer for å finne en optimal verdi for $R_1$ ved å ha den koblet inn i kretsen med spenningskilden tilkoblet. Deretter ble det gjort målinger av spenning ($v$) og ($i$) som vist i \cref{fig:kretstegning3}. For begge bryter posisjoner ble spenning ($v$) målt over $R_1$, $R_2$, $D_1$, $R_3$ og $D_2$, så ble strøm $i_1$ og $i_2$ målt.
 
@@ -425,6 +427,8 @@ Målinger gjort i kretsen som vist på \cref{fig:praktisk_krets2} viste en strø
 \end{table}
 
 \subsection{Kombinert lysdiodekrets(LED krets)}
+
+Resultat av praktisk eksperiment: $R_1 = \qty{2}{\kilo\ohm}$ som motstandsverdi for \cref{fig:kretstegning3}.
 
 I denne kretsen som vist på \cref{fig:praktisk_krets3} ble det etter testing av funksjon, utført målinger av spenning ($v$) over alle komponenter, samt måling av strøm ($i$) både i åpen og lukket bryterposisjon. I åpen posisjon ble spenningen målt til \qty{5,9}{\volt} over $R_1$, \qty{0,6}{\volt} over $R_2$, \qty{2,0}{\volt} over $D_1$, \qty{0,6}{\volt} over $R_3$ og \qty{0}{\volt} over $D_2$. Strømmen ($i$) ble i åpen bryterposisjon målt til \qty{3,0}{\milli\ampere} gjennom $D_1$ og \qty{0}{\ampere} gjennom $D_2$. Med bryteren i lukket posisjon ble det målt \qty{0,4}{\volt} over $R_1$, \qty{60}{\milli\volt} over $R_2$, \qty{1,7}{\volt} over $D_1$, \qty{6,7}{\volt} over $R_3$ og \qty{2,0}{\volt} over $D_2$. Strømmen ($i$) ble i lukket bryterposisjon målt til \qty{29,5}{\milli\ampere} gjennom $D_2$ og \qty{0,2}{\milli\ampere} gjennom $D_1$. 
 
