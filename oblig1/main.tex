@@ -132,6 +132,10 @@ Ohms lov på formen i \cref{eq:ohm_i} kan brukes til å beregne strøm i kretsen
 Ved utregning med motstand $R_2$ på \qty{200}{\ohm} og $D_2$ med en lav indre motstand, gir det en estimert strøm $i_1$ på \qty{45}{\milli\ampere}. (Kommentar: dette er feil, $R_3$ er også med i kretsen når bryteren er åpen)
 Når bryteren trykkes, så vil kretsen bare bestå av spenningskilden og $R_3$. Strømmen $i_2$ i denne kresten beregnes også til \qty{45}{\milli\ampere}. (Kommentar: dette er ikke korrekt, den vil jo dele strømmen, det er bare at dioden ikke vil lyse fordi strømmen blir så lav)
 
+-------(potensiell endring, eller tillegg?)-----------
+Når bryteren er åpen,vil strømmen $i_1$ gå gjennom øvre gren og gi strøm til lysdioden $D_2$. Når bryteren lukkes, vil strømmen fordele seg i forgrenings-punktet og gi både strøm i øvre ($i_1$) og midterste gren ($i_2$).  {Kirchhoffs 1.lov} sier at strømmen $i_{inn}$ i et forgrenings-punkt = $i_{ut}$ av forgrenings-punktet. $i = i_1 + i_2 = i_3$. Det betyr: når bryteren er lukket, vil det gå mindre strøm i øvre gren (strømmen fordeler seg), videre gjennom $R_2$ og til $D_2$. $D_2$ mottar ikke lenger nok strøm til å produsere lys, og vil derfor ikke lyse når bryteren er lukket.
+
+
 \begin{figure}[ht]
 	\centering
 	\hspace{0.4cm}
@@ -333,7 +337,8 @@ Når spenningskilden er koblet til, så er det ikke lys i $D_1$ som illustrert i
 \end{table}
 
 \subsection{Krets med alternativ strømvei}
-Strømmen ($i$) går gjennom lysdioden $D_2$ slik at dioden lyser. Når trykk-knappen trykkes inn, så deler strømmen ($i$) seg. Kirchhoffs.1.lov sier at $i_{inn}$ i et forgrenings punkt  er $=$  strømmen $i_{ut}$ av forgrenings-punktet. strømmen ($i$) fordeler seg i forgrenings-punktet og strømmen ($i$) gjennom lysdioden $D_2$ er ikke høy nok til at lysdioden lenger $D_2$ lyser. 
+
+
 
 Målinger gjort i kretsen som vist på \cref{fig:praktisk_krets2} viste en strøm ($i$) på \qty{14}{\milli\ampere} når bryteren står i åpen posisjon. Spenning ($v$) ble målt til \qty{3,3}{\volt} over $R_2$, \qty{2,5}{\volt} over $D_2$ og \qty{3,3}{\volt} over $R_3$. Derimot når bryteren står i lukket posisjon, så ble det målt en strøm ($i$) på \qty{34}{\milli\ampere}. Denne strømmen går bare gjennom bryteren og $R_3$. Det ble målt \qty{0}{\ampere} gjennom $R_2$ og $D_2$. Det samme gjelder for spenningen som viste \qty{0}{\volt} ved måling over $R_2$ og $D_2$. Målt spenning over $R_3$ viste \qty{8,8}{\volt}.
 
