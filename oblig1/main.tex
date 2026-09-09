@@ -80,10 +80,12 @@ I denne delen vil teoretisk bakgrunn og analyse for å kunne utføre den praktis
  
 \subsection{Undersøkelse av trykknapp-funksjonsmåte}
 
+Formålet med undersøkelsen er å bli kjent med trykknappens virkemåte og å øve på bruk av multimeter. Undersøkelsen danner også grunnlag for bruk av trykknappen i de påfølgende kretsene.
+
 Vi vet i en bryter går $R \to \infty$ når den er åpen og $R \to 0$ når den er lukket. Ved hjelp av dette kan man undersøke hvilke bein på trykknapp-bryteren som er kortsluttet eller ikke.
 
 \subsection{Enkel krets med bryter}
-Målet ved å sette opp strømkrets som er vist i \cref{fig:Kretstegning 1.} var å sjekke at kretsen fungerte slik at lysdioden lyste når bryteren ble trykket ned.
+Formålet med denne delen er å undersøke en enkel krets der en bryter styrer en lysdiode. Når bryteren trykkes inn, skal kretsen sluttes og lysdioden lyse.
 
 Ohms lov, som er hentet fra læreboka \cite{laerebok}, er gitt i \cref{eq:ohm}. Ved å omforme ligningen med hensyn på strømmen $i$ fås uttrykket i \cref{eq:ohm_i}, som brukes til å beregne strømmen.
 
@@ -123,16 +125,14 @@ $$
 Når bryteren er åpen, modelleres den som en uendelig stor motstand. Strømmen $i_1$ blir da:
 
 $$
-i_{1} = \frac{\qty{9}{\volt}}{\infty\unit{\ohm}} = \qty{0}{\ampere}
+i_{1} = \frac{\qty{9}{\volt}}{\infty\unit{\ohm}} \approx \qty{0}{\ampere}
 $$
 
 \subsection{Krets med alternativ strømvei}
 
-Ohms lov på formen i \cref{eq:ohm_i} kan brukes til å beregne strøm i kretsen.
-Ved utregning med motstand $R_2$ på \qty{200}{\ohm} og $D_2$ med en lav indre motstand, gir det en estimert strøm $i_1$ på \qty{45}{\milli\ampere}. (Kommentar: dette er feil, $R_3$ er også med i kretsen når bryteren er åpen)
-Når bryteren trykkes, så vil kretsen bare bestå av spenningskilden og $R_3$. Strømmen $i_2$ i denne kresten beregnes også til \qty{45}{\milli\ampere}. (Kommentar: dette er ikke korrekt, den vil jo dele strømmen, det er bare at dioden ikke vil lyse fordi strømmen blir så lav)
+Formålet med denne delen er å undersøke hvordan en alternativ strømvei påvirker lysdioden i kretsen. Når bryteren trykkes inn, skal strømmen gå utenom lysdioden, slik at den slutter å lyse.
 
-\begin{figure}[ht]
+\begin{figure}[h]
 	\centering
 	\hspace{0.4cm}
 	\begin{circuitikz}[european, xshift=0.8cm]
@@ -155,7 +155,7 @@ Når bryteren trykkes, så vil kretsen bare bestå av spenningskilden og $R_3$. 
 		% Nedre del
 		\draw
 		(0,0)
-		to[american voltage source, l_=$9V$] (0,-3)
+		to[american voltage source, l_=$9V$, i<^=$i_{tot}$] (0,-3)
 		-- (4,-3)
 		to[R, l={$R_3 = \qty{200}{\ohm}$}] (4,0);
 		
@@ -170,9 +170,77 @@ Når bryteren trykkes, så vil kretsen bare bestå av spenningskilden og $R_3$. 
 	\label{fig:kretstegning2}
 \end{figure}
 
+Kretsen har to mulige strømveier, med strømmene $i_1$ og $i_2$ i de
+respektive grenene. Når bryteren er åpen, er motstanden i bryteren
+tilnærmet lik $\infty\,\unit{\ohm}$. Dermed blir strømmen $i_2
+\approx 0$, og den tas ikke med videre i beregningene.
+
+Strømmen $i_1$ kan beregnes ved hjelp av \cref{eq:ohm_i}. Motstandene
+$R_2$ og $R_3$ er seriekoblet og kan derfor erstattes av én ekvivalent
+motstand, $R_{23}$. Dioden $D_2$ antas å ha en motstand på
+$\qty{0}{\ohm}$ og kan derfor fjernes fra modellen i denne beregningen.
+
+
+%I denne kretsen er det to veier for strømmen å gå. Strømmene er gitt ved $i_1$ og $i_2$. Mens bryteren er åpen er motstanden i bryteren er tilnærmet lik $\infty$\unit{\ohm}. Dermed er strømmen $i_2 \approx 0$, og trengs ikke tas høyde for videre i beregningen. Videre kan strømmen $i_1$ regnes ut ved hjelp av \cref{eq:ohm_i}. De to motstandene $R_2$ og $R_3$ står i serie og slås derfor sammen til en motstand $R_{23}$. (Dioden $D_2$ antas å ha $\qty{0}{\ohm}$ motstand, og kan fjernes fra modellen for denne utregningen).
+
+$$
+\begin{gathered}
+R_{23} = R_2 + R_3 = \qty{200}{\ohm} + \qty{200}{\ohm} = \qty{400}{\ohm} \\
+i_1 = \frac{v}{R_{23}} = \frac{\qty{9}{\volt}}{\qty{400}{\ohm}} \approx \qty{23}{\milli\ampere}
+\end{gathered}
+$$
+
+Dette viser at det går strøm gjennom ytre sløyfe i kretsen når bryteren er åpen. Ifølge Kirchhoffs
+strømlov går den samme strømmen også gjennom $D_2$. Dioden vil derfor lyse.
+
+\medskip
+
+Når bryteren er lukket, er den parallellkoblet med $R_2$. 
+
+\begin{equation}
+	R_{eq} = \frac{R_1R_2}{R_1+R_2}
+	\label{eq:2parares}
+\end{equation}
+
+Ekvivalent motstand for to parallellkoblede motstander kan beregnes ved hjelp av \cref{eq:2parares}. Ligningen er hentet fra læreboka\cite{laerebok}.
+
+Totalmotstanden $R_{tot}$ og totalstrømmen $i_{tot}$ i kretsen er regnet ut:
+
+$$
+\begin{gathered}
+R_{b2} = R_{bryter} \parallel R_{2} = \frac{R_{bryter}R_2}{R_{bryter}+R_2} \\
+R_{b2} = \frac{\qty{0}{\ohm} \times \qty{200}{\ohm}}{\qty{0}{\ohm}+\qty{200}{\ohm}} = \frac{\qty{0}{\ohm}}{\qty{200}{\ohm}} = \qty{0}{\ohm} \\
+R_{tot} = R_{b2} + R_3 = \qty{0}{\ohm} + \qty{200}{\ohm} = \qty{200}{\ohm} \\
+i_{tot} = \frac{v}{R_{tot}} = \frac{\qty{9}{\volt}}{\qty{200}{\ohm}} = \qty{45}{\milli\ampere}
+\end{gathered}
+$$
+
+Strømdelingsformelen er gitt i \cref{eq:currentdivquick}.
+
+\begin{equation}
+	i_o = i_s \frac{R_1}{R_1+R_2}
+	\label{eq:currentdivquick}
+\end{equation}
+
+Ved å bruke denne formelen beregnes strømmene $i_1$ og $i_2$ når bryteren er lukket:
+
+$$
+\begin{gathered}
+i_1 = i_{tot} \frac{R_{bryter}}{R_{bryter} + R_2} \\
+i_1 = \qty{45}{\milli\ampere}\frac{\qty{0}{\ohm}}{\qty{0}{\ohm} + \qty{200}{\ohm}} = \qty{0}{\ampere} \\
+i_2 = i_{tot} \frac{R_2}{R_2 + R_{bryter}} \\
+i_2 = \qty{45}{\milli\ampere}\frac{\qty{200}{\ohm}}{\qty{200}{\ohm} + \qty{0}{\ohm}} = 45mA
+\end{gathered}
+$$
+
+Dette viser at tilnærmet all strøm går forbi dioden. Ifølge Kirchhoffs
+strømlov er strømmen gjennom dioden lik $i_1$. Dioden vil derfor ikke lyse.
+
 \subsection{Kombinert lysdiodekrets(LED krets)}
 
-I denne kretsen er $R_2$ og $D_2$ koblet parallellt med med bryteren. Og parallellkoblingen er videre koblet i serie med $R_3$. Med bryteren i åpen posisjon vil kretsen være en ren seriekrets med strøm $i_2$ på \qty{22,5}{\milli\ampere} beregnet ved hjelp av \cref{eq:ohm_i}.
+Formålet med denne delen er å kombinere prinsippene fra de toforegående kretsene i én krets med to lysdioder. Kretsen skal væreutformet slik at bare én lysdiode lyser om gangen: Den ene skal lysenår bryteren er trykket inn, og den andre når bryteren ikke er trykketinn.
+
+I denne kretsen er $R_2$ og $D_2$ koblet parallelt med med bryteren. Og parallelkoblingen er videre koblet i serie med $R_3$. Med bryteren i åpen posisjon vil kretsen være en ren seriekrets med strøm $i_2$ på \qty{22,5}{\milli\ampere} beregnet ved hjelp av \cref{eq:ohm_i}.
 
 \begin{figure}[ht]
 	\centering
