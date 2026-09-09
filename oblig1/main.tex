@@ -314,8 +314,23 @@ Bryteren som ble benyttet, hadde fire tilkoblingsbein, nummerert som vist i \cre
 
 
 \subsection{Enkel krets med bryter}
-Lysdioden lyser når trykk-knappen trykkes inn.
-Når knappen trykkes inn, så  går strømmen $i$ videre i kretsen og gjennom lysdioden $D_1$, som illustert.
+Når spenningskilden er koblet til, så er det ikke lys i $D_1$ som illustrert i \cref{fig:kretstegning 1.} fordi selve kretsen er brutt. Men når trykknappen trykkes så lukkes kretsen og $D_1$ lyser. Utførte målinger på kretsen ga resultater som vist på \cref{tab:krets1_resultater}.
+\begin{table}[h]
+	\centering
+	\setlength{\belowcaptionskip}{6pt}
+	\caption{Utført måling, Krets 1}
+	\label{tab:krets1_resultater}
+	\noindent
+	\begin{tabular}{@{}ccc@{}}
+		\hline
+		Komponent & Bryter åpen & Bryter lukket \\
+		\hline
+		$R_1$ & \qty{0}{\volt} & \qty{5,9}{\volt}\\
+		$D_1$ & \qty{0}{\volt} & \qty{2,9}{\volt}\\
+		$i$ & \qty{0}{\ampere} & \qty{27}{\milli\ampere}\\
+		\hline
+	\end{tabular}
+\end{table}
 
 \subsection{Krets med alternativ strømvei}
 Strømmen ($i$) går gjennom lysdioden $D_2$ slik at dioden lyser. Når trykk-knappen trykkes inn, så deler strømmen ($i$) seg. Kirchhoffs.1.lov sier at $i_{inn}$ i et forgrenings punkt  er $=$  strømmen $i_{ut}$ av forgrenings-punktet. strømmen ($i$) fordeler seg i forgrenings-punktet og strømmen ($i$) gjennom lysdioden $D_2$ er ikke høy nok til at lysdioden lenger $D_2$ lyser. 
