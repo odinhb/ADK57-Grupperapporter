@@ -55,6 +55,72 @@ Denne øvelsen vil omhandle å konvertere digitale signaler til en analog spenni
 1 2 3
 
 \section{Teoretisk del}
+I denne delen presenteres teori og sammenhenger som er viktige for å teste ulike DA kretser.
+
+\subsection{Binærtall og antall digitale nivåer}
+
+For et digitalt system med \(N\) bits er antall mulige binære kombinasjoner gitt ved:
+
+\[
+2^N.
+\]
+
+Tre bits skrives på følgende måte:
+
+\[
+2^3 = 8,
+\]
+
+Likning (REF ) viser at tre bits gir åtte mulige digitale kombinasjoner.
+
+\subsection{Fra digital verdi til analog utgang}
+
+Sammenhengen mellom de sentrale delene i kretsen kan illustreres som:
+\[
+\begin{aligned}
+	&\text{digitale spenningsnivåer} \\
+	&\downarrow \\
+	&\text{R--2R-nettverk} \\
+	&\downarrow \\
+	&\text{nodeanalyse} \\
+	&\downarrow \\
+	&v_{\mathrm{ut}}(v_2,v_1,v_0) \\
+	&\downarrow \\
+	&\text{DAC-karakteristikk} \\
+	&\downarrow \\
+	&\text{praktisk krets} \\
+	&\downarrow \\
+	&\text{belastning med LED}
+\end{aligned}
+\]
+
+Utgangsspenningen kan dermed beskrives som en funksjon av de tre digitale inngangene:
+
+\[
+v_{\mathrm{ut}} = f(v_2,v_1,v_0).
+\]
+
+\subsection{Ohms lov og Kirchhoffs strømlov}
+
+Ohms lov beskriver sammenhengen mellom spenning, strøm og motstand:
+
+\[
+I = \frac{V}{R}.
+\]
+
+Ved analyse av nodene i R--2R-nettverket benyttes Kirchhoffs strømlov (KCL). 
+Summen av strømmene inn og ut av en node er lik null. For en node med spenning
+\(V_x\) kan dette eksempelvis skrives som
+
+\[
+\frac{V_x-V_a}{R_1}
++
+\frac{V_x-V_b}{R_2}
++
+\frac{V_x-V_c}{R_3}
+= 0.
+\]
+
 
 \subsection{Første ting}
 hensikt
