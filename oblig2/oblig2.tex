@@ -116,14 +116,60 @@ Summen av strømmene inn og ut av en node er lik null. For en node med spenning
 \]
 
 
-\subsection{Første ting}
-hensikt
+\subsection{Nodespenningsmetoden i R-2R-nettverket}
+\begin{equation}
+\begin{gathered}
+I: \frac{v_a-v_0}{2R}+\frac{v_a-v_b}{R}+\frac{v_a}{2R} = 0 \\
+II: \frac{v_b-v_a}{R} + \frac{v_b-v_1}{2R}+\frac{v_b-v_c}{R} = 0 \\
+III: \frac{v_c-v_b}{R} + \frac{v_c-v_2}{2R} + \frac{v_c-v_{ut}}{R} = 0 \\
+IV: \frac{v_{ut}-v_c}{R} + \frac{v_{ut}}{R_L} = 0 \\
+\end{gathered}
+\label{eqs:kcl}
+\end{equation}
 
-innhold
-\subsection{Andre ting}
-hensikt
+\Cref{eqs:kcl} viser oppsett av nodespenningsmetoden i kretsen i \cref{fig:r2r-krets}. Ligningssettet gir oss to utrykk for $v_{ut}$:
 
-innhold
+\[
+\begin{gathered}
+III': v_{ut} = 2v_c - \frac{v_0}{8} - \frac{v_1}{4} - \frac{v_2}{2} \\
+\text{og}\\
+IV': v_{ut} = \frac{R_L}{R + R_L}v_c.\\
+\end{gathered}
+\]
+
+Satt sammen blir dette:
+\[
+\frac{R_L}{R + R_L}v_c = 2v_c - \frac{v_0}{8} - \frac{v_1}{4} - \frac{v_2}{2}\\.
+\]
+
+Som blir:
+\begin{equation}
+v_{ut} = \frac{R_L}{2R + R_L}(\frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2})\\
+\label{eq:vutfromvin_full}
+\end{equation}
+
+\Cref{eq:vutfromvin_full} kan videre forenkles til \cref{eq:vutfromvin_short} når $R_L \to \infty$. Da går $\frac{R_L}{2R + R_L} \to 1$.
+
+\begin{equation}
+v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
+\label{eq:vutfromvin_short}
+\end{equation}
+
+\subsection{Utledning av formel for bitsekvenser}
+Fra formelene i \cref{eq:vutfromvin_full} og \cref{eq:vutfromvin_short} kan en formel for $v_{ut}$ med $b_0, b_1, b_2$ som ukjente utledes ved hjelp av faktorisering.
+
+\begin{equation}
+v_{ut} = \frac{R_LV_H}{2R + R_L}(\frac{b_0}{8} + \frac{b_1}{4} + \frac{b_2}{2})\\
+\label{eq:vutfrombin_full}
+\end{equation}
+
+\begin{equation}
+v_{ut} = V_H(\frac{b_0}{8} + \frac{b_1}{4} + \frac{b_2}{2})\\
+\label{eq:vutfrombin_short}
+\end{equation}
+
+\Cref{eq:vutfrombin_full} er utledet fra \cref{eq:vutfromvin_full} og \cref{eq:vutfrombin_short} er utledet fra \cref{eq:vutfromvin_short}.
+
 \subsection{Tredje ting}
 hensikt
 
