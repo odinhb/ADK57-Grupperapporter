@@ -163,6 +163,41 @@ v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
 \label{eq:vutfromvin_short}
 \end{equation}
 
+\begin{figure}
+	\begin{center}
+		\begin{circuitikz}[scale=0.70]
+			\draw
+			(0,0) 	node[ground]{} 							
+			(0,0)	to [R, l_=$2R$, -* , european] 			(0,3) 
+			to [R, l_=$R$, -* , european] 			(3,3)
+			to [R, l_=$R$, -* , european] 			(6,3)
+			
+			(0,3) 	to [R, l_=$2R$, -o , european] 			(0,6)
+			(3,3) 	to [R, l_=$2R$, -o , european] 			(3,6)
+			(6,3) 	to [R, l_=$2R$, -o , european] 			(6,6)
+			(0,3) 	[R, l=$R$, european] 					(3,3)
+			(9,0) 	node[ground, ]{} 							
+			(9,0)	node[ocirc]{}						
+			(9,3)	to [R, l=$R$, o- , european] 			(6,3)
+			(11,3)  
+			% Merking
+			(0.3,6) node[above] {$v_0$}
+			(3.3,6) node[above] {$v_1$}
+			(6.3,6) node[above] {$v_2$}
+			(9,2.8) node[below] {$+$}
+			(9,0.2) node[above] {$-$}
+			(9.5,1.5) node	    {$v_ut$}
+			;
+			
+			% \node	[above] at (0.3,6) {$v_0$};
+			
+			
+		\end{circuitikz}
+		\caption{3-Bit R-2R krets.}
+		\label{fig:R-2R_krets_}
+	\end{center}
+\end{figure}
+
 \subsection{Utledning av formel for bitsekvenser}
 Fra formelene i \cref{eq:vutfromvin_full} og \cref{eq:vutfromvin_short} kan en formel for $v_{ut}$ med $b_0, b_1, b_2$ som ukjente utledes ved hjelp av faktorisering.
 
