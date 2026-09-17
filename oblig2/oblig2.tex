@@ -28,13 +28,17 @@
 \pgfplotsset{compat=1.18}
 \setlength{\parindent}{0pt}
 
+% fix cleverref for ligningssett
+\crefname{equationset}{likningssett}{likningssett}
+\Crefname{equationset}{Likningssett}{Likningssett}
+
+\crefformat{equationset}{likningssett~#2(#1)#3}
+\Crefformat{equationset}{Likningssett~#2(#1)#3}
+
 % metadata
 \title{Rapportskriving i ELI1300 - Redusert mal}
 \author{Odin Heggvold Bekkelund\\For Gruppe ADK57}
 \date{31.08.2026} 
-
-% definer en url til senere?
-\urldef{\myoverleafurl}\url{https://tinyurl.com/2yfbtdez}
 
 % selve dokumentet starter
 \begin{document}
@@ -117,25 +121,29 @@ Summen av strømmene inn og ut av en node er lik null. For en node med spenning
 
 
 \subsection{Nodespenningsmetoden i R-2R-nettverket}
-\begin{equation}
-\begin{gathered}
-I: \frac{v_a-v_0}{2R}+\frac{v_a-v_b}{R}+\frac{v_a}{2R} = 0 \\
-II: \frac{v_b-v_a}{R} + \frac{v_b-v_1}{2R}+\frac{v_b-v_c}{R} = 0 \\
-III: \frac{v_c-v_b}{R} + \frac{v_c-v_2}{2R} + \frac{v_c-v_{ut}}{R} = 0 \\
-IV: \frac{v_{ut}-v_c}{R} + \frac{v_{ut}}{R_L} = 0 \\
-\end{gathered}
-\label{eqs:kcl}
-\end{equation}
+
+\begin{subequations}
+\label[equationset]{eqs:kcl}
+
+\begin{align}
+\frac{v_a-v_0}{2R}+\frac{v_a-v_b}{R}+\frac{v_a}{2R} = 0 \label{eqs:kcl:1} \\
+\frac{v_b-v_a}{R} + \frac{v_b-v_1}{2R}+\frac{v_b-v_c}{R} = 0 \label{eqs:kcl:2} \\
+\frac{v_c-v_b}{R} + \frac{v_c-v_2}{2R} + \frac{v_c-v_{ut}}{R} = 0 \label{eqs:kcl:3} \\
+\frac{v_{ut}-v_c}{R} + \frac{v_{ut}}{R_L} = 0 \label{eqs:kcl:4}
+\end{align}
+\end{subequations}
 
 \Cref{eqs:kcl} viser oppsett av nodespenningsmetoden i kretsen i \cref{fig:r2r-krets}. Ligningssettet gir oss to utrykk for $v_{ut}$:
 
-\[
-\begin{gathered}
-III': v_{ut} = 2v_c - \frac{v_0}{8} - \frac{v_1}{4} - \frac{v_2}{2} \\
-\text{og}\\
-IV': v_{ut} = \frac{R_L}{R + R_L}v_c.\\
-\end{gathered}
-\]
+\begin{equation}
+\label{eq:derivedfrom3}
+v_{ut} = 2v_c - \frac{v_0}{8} - \frac{v_1}{4} - \frac{v_2}{2} \\
+\end{equation}
+$$\text{og}$$
+\begin{equation}
+\label{eq:derivedfrom4}
+v_{ut} = \frac{R_L}{R + R_L}v_c.\\
+\end{equation}
 
 Satt sammen blir dette:
 \[
@@ -170,10 +178,49 @@ v_{ut} = V_H(\frac{b_0}{8} + \frac{b_1}{4} + \frac{b_2}{2})\\
 
 \Cref{eq:vutfrombin_full} er utledet fra \cref{eq:vutfromvin_full} og \cref{eq:vutfrombin_short} er utledet fra \cref{eq:vutfromvin_short}.
 
-\subsection{Tredje ting}
-hensikt
+\subsection{Valg av $V_H$, $V_L$ og $R$}
+Valg av $V_H$ gjøres på bakgrunn av tilgjengelig utstyr, som tilbyr en spenningsforsyning på $V_H = 5V$ og en jord $V_L = 0V$.
 
-innhold
+\medskip
+
+For valg av $R$ byttes lasten $R_L$ i \cref{fig:r2r-krets} ut med en forenklet modell for en lysdiode. Denne lysdioden har fremoverspenning $V_f = 2V$ basert på vanlige verdier \cite{analogtech} for rød lysdiode. Da denne ideelle lysdioden heller ikke har motstand er også $V_f = v_{ut}$. En femte ligning \cref{eq:ledatend} erstatter \cref{eqs:kcl:4} i \cref{eqs:kcl}:
+
+\begin{equation}
+\label{eq:ledatend}
+\frac{V_f - v_c}{R} + i_{LED} = 0\\
+\end{equation}
+
+Dette gir ligninger for $i_{LED}$ og $R$:
+
+\begin{equation}
+\label{eq:forledR}
+R = \frac{V_H(\frac{b_0 + 2b_1 + 4b_2}{16}) - \frac{V_f}{2}}{i_{LED}} \\
+\end{equation}
+
+\begin{equation}
+\label{eq:forledi}
+i_{LED} = \frac{V_H(\frac{b_0 + 2b_1 + 4b_2}{16}) - \frac{V_f}{2}}{R} \\
+\end{equation}
+
+For å unngå å ødelegge lysdioden, gjøres disse utregningene med alle inngangene i \cref{fig:r2r-krets} satt til $V_H$. Dette gir maksimal utgangsspenning $v_{ut}$ og dermed maksimal strøm $i_{LED}$ gjennom både dioden og motstanden på utgangen.
+
+\medskip
+
+\qty{20}{\milli\ampere} antas som maksimalverdi for lysdioden. \qty{10}{\milli\ampere} antas å gi godt synlig lys, og brukes som minimumsverdi. Utregninger for disse verdiene ved hjelp av \cref{eq:forledR} gir verdier for $R$:
+
+$$
+\begin{aligned}
+R_{min} = \frac{5V(\frac{1 + 2 + 4}{16}) - \frac{2V}{2}}{20mA} = \qty{59.375}{\ohm} \\
+R_{max} = \frac{5V(\frac{1 + 2 + 4}{16}) - \frac{2V}{2}}{10mA} = \qty{118.75}{\ohm} \\
+\end{aligned}
+$$
+
+Strømmen gjennom lysdioden regnes ut for den valgte motstanden ved hjelp av \cref{eq:forledi}:
+$$
+i_{LED} = \frac{\qty{5}{\volt}(\frac{1 + 2 + 4}{16}) - \frac{ \qty{2}{\volt} }{2} }{ \qty{999}{\ohm} } = \qty{12}{\milli\ampere}? \\
+$$
+
+(Kommentar: kunne vært kult å gå for en 68 ohms motstand eller noe, for å få sterkere lys?)
 
 \section{Praktisk arbeid}
 
