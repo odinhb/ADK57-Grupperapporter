@@ -215,6 +215,48 @@ v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
 	\end{center}
 \end{figure}
 
+\begin{figure}
+	\begin{center}
+		\begin{circuitikz}[scale=1]
+			\draw
+			(4,0) 		node[ground]{}
+			(4,0)		node[ocirc]{}
+			(4,0)		to [R, l=$R_{Last}$, -o , european] 			(4,3) 
+			to [R, l_=$R$, o- , european] 					(0,3)
+			
+			% Merking
+			(4.5,2.8) 	node[below] {$+$}
+			(4.5,0.2) 	node[above] {$-$}
+			(5,1.5) 	node	    {$v_ut$}
+			;
+			
+		\end{circuitikz}
+		\caption{R-2R krets med last}
+		\label{fig:R-2R_krets_last}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\begin{circuitikz}[scale=1]
+			\draw
+			(4,0) 		node[ground]{}
+			(4,0)		node[ocirc]{}
+			(4,0)		to [led, l=$LED$, invert, mirror, european] 	(4,3) 
+			to [R, l_=$R$, o- , european] 					(0,3)
+			
+			% Merking
+			(4.5,2.8) 	node[below] {$+$}
+			(4.5,0.2) 	node[above] {$-$}
+			(5.3,1.5) 	node	    {$v_ut$}
+			;
+			
+		\end{circuitikz}
+		\caption{R-2R krets med LED}
+		\label{fig:R-2R_led}
+	\end{center}
+\end{figure}
+
 \subsection{Utledning av formel for bitsekvenser}
 Fra formelene i \cref{eq:vutfromvin_full} og \cref{eq:vutfromvin_short} kan en formel for $v_{ut}$ med $b_0, b_1, b_2$ som ukjente utledes ved hjelp av faktorisering.
 
