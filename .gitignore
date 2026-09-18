@@ -1,6 +1,7 @@
 *.pdf
 *.log
 *.synctex
+*.synctex(busy)
 *.aux
 *.swp
 *.synctex.gz
