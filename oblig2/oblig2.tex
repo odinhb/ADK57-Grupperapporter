@@ -1,0 +1,318 @@
+% preamble
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,
+            top=2cm,
+            bottom=2cm,
+            left=3cm,
+            right=3cm,
+            marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage[norsk]{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[hyphens]{url}
+\usepackage{lipsum} 
+\usepackage{siunitx}
+\sisetup{
+  output-complex-root = \ensuremath{\mathit{j}},
+  complex-root-position = before-number,
+  exponent-product = \cdot,
+  output-decimal-marker = {,}
+}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\setlength{\parindent}{0pt}
+
+% fix cleverref for ligningssett
+\crefname{equationset}{likningssett}{likningssett}
+\Crefname{equationset}{Likningssett}{Likningssett}
+
+\crefformat{equationset}{likningssett~#2(#1)#3}
+\Crefformat{equationset}{Likningssett~#2(#1)#3}
+
+% metadata
+\title{Rapportskriving i ELI1300 - Redusert mal}
+\author{Odin Heggvold Bekkelund\\For Gruppe ADK57}
+\date{31.08.2026} 
+
+% selve dokumentet starter
+\begin{document}
+\maketitle % Setter sammen \title og \author og \date
+
+\begin{abstract}
+Sammendrag
+\end{abstract}
+
+% Innholdsfortegnelse automatisk generert:
+%\tableofcontents
+
+\section{Innledning}
+Denne øvelsen vil omhandle å konvertere digitale signaler til en analog spenning såkalt digital til analog omformer (DA-omformer). Kretsen som skal praktisk bygges opp skal inneholde en DA omformer som bruker 3 bit. 
+
+\subsection{Utstyrsliste}
+
+1 2 3
+
+\section{Teoretisk del}
+I denne delen presenteres teori og sammenhenger som er viktige for å teste ulike DA kretser.
+
+\subsection{Binærtall og antall digitale nivåer}
+
+For et digitalt system med \(N\) bits er antall mulige binære kombinasjoner gitt ved:
+
+\[
+2^N.
+\]
+
+3 bit gir derfor \(2^3 = 8\) binære kombinasjoner.
+
+\subsection{Fra digital verdi til analog utgang}
+
+Sammenhengen mellom de sentrale delene i kretsen kan illustreres som:
+\[
+\begin{aligned}
+	&\text{digitale spenningsnivåer} \\
+	&\downarrow \\
+	&\text{R--2R-nettverk} \\
+	&\downarrow \\
+	&\text{nodeanalyse} \\
+	&\downarrow \\
+	&v_{\mathrm{ut}}(v_2,v_1,v_0) \\
+	&\downarrow \\
+	&\text{DAC-karakteristikk} \\
+	&\downarrow \\
+	&\text{praktisk krets} \\
+	&\downarrow \\
+	&\text{belastning med LED}
+\end{aligned}
+\]
+
+Utgangsspenningen kan dermed beskrives som en funksjon av de tre digitale inngangene:
+
+\[
+v_{\mathrm{ut}} = f(v_2,v_1,v_0).
+\]
+
+\subsection{Ohms lov og Kirchhoffs strømlov}
+
+Ohms lov beskriver sammenhengen mellom spenning, strøm og motstand:
+
+\[
+i = \frac{v}{R}.
+\]
+
+Ved analyse av nodene i R--2R-nettverket benyttes Kirchhoffs strømlov (KCL). 
+Summen av strømmene inn og ut av en node er lik null. For en node med spenning
+\(v_x\) kan dette eksempelvis skrives som
+
+\[
+\frac{v_x-v_a}{R_1}
++
+\frac{v_x-v_b}{R_2}
++
+\frac{v_x-v_c}{R_3}
+= 0.
+\]
+
+
+\subsection{Nodespenningsmetoden i R-2R-nettverket}
+
+\begin{subequations}
+\label[equationset]{eqs:kcl}
+
+\begin{align}
+\frac{v_a-v_0}{2R}+\frac{v_a-v_b}{R}+\frac{v_a}{2R} = 0 \label{eqs:kcl:1} \\
+\frac{v_b-v_a}{R} + \frac{v_b-v_1}{2R}+\frac{v_b-v_c}{R} = 0 \label{eqs:kcl:2} \\
+\frac{v_c-v_b}{R} + \frac{v_c-v_2}{2R} + \frac{v_c-v_{ut}}{R} = 0 \label{eqs:kcl:3} \\
+\frac{v_{ut}-v_c}{R} + \frac{v_{ut}}{R_L} = 0 \label{eqs:kcl:4}
+\end{align}
+\end{subequations}
+
+\Cref{eqs:kcl} viser oppsett av nodespenningsmetoden i kretsen i \cref{fig:r2r-krets}. Ligningssettet gir oss to utrykk for $v_{ut}$:
+
+\begin{equation}
+\label{eq:derivedfrom3}
+v_{ut} = 2v_c - \frac{v_0}{8} - \frac{v_1}{4} - \frac{v_2}{2} \\
+\end{equation}
+$$\text{og}$$
+\begin{equation}
+\label{eq:derivedfrom4}
+v_{ut} = \frac{R_L}{R + R_L}v_c.\\
+\end{equation}
+
+Satt sammen blir dette:
+\[
+\frac{R_L}{R + R_L}v_c = 2v_c - \frac{v_0}{8} - \frac{v_1}{4} - \frac{v_2}{2}\\.
+\]
+
+Som blir:
+\begin{equation}
+v_{ut} = \frac{R_L}{2R + R_L}(\frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2})\\
+\label{eq:vutfromvin_full}
+\end{equation}
+
+\Cref{eq:vutfromvin_full} kan videre forenkles til \cref{eq:vutfromvin_short} når $R_L \to \infty$. Da går $\frac{R_L}{2R + R_L} \to 1$.
+
+\begin{equation}
+v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
+\label{eq:vutfromvin_short}
+\end{equation}
+
+\begin{figure}
+	\begin{center}
+		\begin{circuitikz}[scale=0.70]
+			\draw
+			(0,0) 	node[ground]{} 							
+			(0,0)	to [R, l_=$2R$, -* , european] 			(0,3) 
+			to [R, l_=$R$, -* , european] 			(3,3)
+			to [R, l_=$R$, -* , european] 			(6,3)
+			
+			(0,3) 	to [R, l_=$2R$, -o , european] 			(0,6)
+			(3,3) 	to [R, l_=$2R$, -o , european] 			(3,6)
+			(6,3) 	to [R, l_=$2R$, -o , european] 			(6,6)
+			(0,3) 	to [R, l=$R$, european] 					(3,3)
+			(9,0) 	node[ground, ]{} 							
+			(9,0)	node[ocirc]{}						
+			(9,3)	to [R, l=$R$, o- , european] 			(6,3)
+			(11,3)  
+			% Merking
+			(0.3,6) node[above] {$v_0$}
+			(3.3,6) node[above] {$v_1$}
+			(6.3,6) node[above] {$v_2$}
+			(9,2.8) node[below] {$+$}
+			(9,0.2) node[above] {$-$}
+			(9.5,1.5) node	    {$v_ut$}
+			;
+			
+			% \node	[above] at (0.3,6) {$v_0$};
+			
+			
+		\end{circuitikz}
+		\caption{3-Bit R-2R krets.}
+		\label{fig:R-2R_krets_}
+	\end{center}
+\end{figure}
+
+\subsection{Utledning av formel for bitsekvenser}
+Fra formelene i \cref{eq:vutfromvin_full} og \cref{eq:vutfromvin_short} kan en formel for $v_{ut}$ med $b_0, b_1, b_2$ som ukjente utledes ved hjelp av faktorisering.
+
+\begin{equation}
+v_{ut} = \frac{R_LV_H}{2R + R_L}(\frac{b_0}{8} + \frac{b_1}{4} + \frac{b_2}{2})\\
+\label{eq:vutfrombin_full}
+\end{equation}
+
+\begin{equation}
+v_{ut} = V_H(\frac{b_0}{8} + \frac{b_1}{4} + \frac{b_2}{2})\\
+\label{eq:vutfrombin_short}
+\end{equation}
+
+\Cref{eq:vutfrombin_full} er utledet fra \cref{eq:vutfromvin_full} og \cref{eq:vutfrombin_short} er utledet fra \cref{eq:vutfromvin_short}.
+
+\subsection{Valg av $V_H$, $V_L$ og $R$}
+Valg av $V_H$ gjøres på bakgrunn av tilgjengelig utstyr, som tilbyr en spenningsforsyning på $V_H = 5V$ og en jord $V_L = 0V$.
+
+\medskip
+
+For valg av $R$ byttes lasten $R_L$ i \cref{fig:r2r-krets} ut med en forenklet modell for en lysdiode. Denne lysdioden har fremoverspenning $V_f = 2V$ basert på vanlige verdier \cite{analogtech} for rød lysdiode. Da denne ideelle lysdioden heller ikke har motstand er også $V_f = v_{ut}$. En femte ligning \cref{eq:ledatend} erstatter \cref{eqs:kcl:4} i \cref{eqs:kcl}:
+
+\begin{equation}
+\label{eq:ledatend}
+\frac{V_f - v_c}{R} + i_{LED} = 0\\
+\end{equation}
+
+Dette gir ligninger for $i_{LED}$ og $R$:
+
+\begin{equation}
+\label{eq:forledR}
+R = \frac{V_H(\frac{b_0 + 2b_1 + 4b_2}{16}) - \frac{V_f}{2}}{i_{LED}} \\
+\end{equation}
+
+\begin{equation}
+\label{eq:forledi}
+i_{LED} = \frac{V_H(\frac{b_0 + 2b_1 + 4b_2}{16}) - \frac{V_f}{2}}{R} \\
+\end{equation}
+
+For å unngå å ødelegge lysdioden, gjøres disse utregningene med alle inngangene i \cref{fig:r2r-krets} satt til $V_H$. Dette gir maksimal utgangsspenning $v_{ut}$ og dermed maksimal strøm $i_{LED}$ gjennom både dioden og motstanden på utgangen.
+
+\medskip
+
+\qty{20}{\milli\ampere} antas som maksimalverdi for lysdioden. \qty{10}{\milli\ampere} antas å gi godt synlig lys, og brukes som minimumsverdi. Utregninger for disse verdiene ved hjelp av \cref{eq:forledR} gir verdier for $R$:
+
+$$
+\begin{aligned}
+R_{min} = \frac{5V(\frac{1 + 2 + 4}{16}) - \frac{2V}{2}}{20mA} = \qty{59.375}{\ohm} \\
+R_{max} = \frac{5V(\frac{1 + 2 + 4}{16}) - \frac{2V}{2}}{10mA} = \qty{118.75}{\ohm} \\
+\end{aligned}
+$$
+
+Strømmen gjennom lysdioden regnes ut for den valgte motstanden ved hjelp av \cref{eq:forledi}:
+$$
+i_{LED} = \frac{\qty{5}{\volt}(\frac{1 + 2 + 4}{16}) - \frac{ \qty{2}{\volt} }{2} }{ \qty{999}{\ohm} } = \qty{12}{\milli\ampere}? \\
+$$
+
+(Kommentar: kunne vært kult å gå for en 68 ohms motstand eller noe, for å få sterkere lys?)
+
+\section{Praktisk arbeid}
+
+\subsection{Første ting}
+\subsection{Andre ting}
+\subsection{Tredje ting}
+
+\section{Resultater}
+
+\begin{center}
+	\begin{tabular}{c|ccc|c}
+		Digitalt & \multicolumn{3}{c|}{Digitale } & Analog \\ [-0.2cm]
+		signal & \multicolumn{3}{c|}{spenningsnivåer} & spenning \\
+		$b_2b_1b_0$ & $v_0$ & $v_1$ & $v_2$ & $v_{ut}$ \\
+		\hline
+		$000$ & $V_L$ & $V_L$ & $V_L$ & - \\
+		$001$ & $V_L$ & $V_L$ & $V_H$ & - \\
+		$010$ & $V_L$ & $V_H$ & $V_L$ & - \\
+		$011$ & $V_L$ & $V_H$ & $V_H$ & - \\
+		$100$ & $V_H$ & $V_L$ & $V_L$ & - \\
+		$101$ & $V_H$ & $V_L$ & $V_H$ & - \\
+		$110$ & $V_H$ & $V_H$ & $V_L$ & - \\
+		$111$ & $V_H$ & $V_H$ & $V_H$ & - \\
+	\end{tabular}
+\end{center}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c|c|c}
+{$b_2$$b_1$$b_0$}  & $v_{ut}$ & $v_{LED}$ & $i_{LED}$ & Lys \\
+\hline
+000 & \SI{0}{\volt}    & \SI{0}{\volt}    & \SI{0}{\milli\ampere}     & Av \\
+001 & \SI{0.64}{\volt} & \SI{0.63}{\volt} & \SI{0}{\milli\ampere}     & Av \\
+010 & \SI{1.27}{\volt} & \SI{1.26}{\volt} & \SI{0}{\milli\ampere}     & Av \\
+011 & \SI{1.91}{\volt} & \SI{1.69}{\volt} & \SI{1.49}{\milli\ampere}  & På \\
+100 & \SI{2.51}{\volt} & \SI{1.78}{\volt} & \SI{4.96}{\milli\ampere}  & På \\
+101 & \SI{3.15}{\volt} & \SI{1.86}{\volt} & \SI{8.83}{\milli\ampere}  & På \\
+110 & \SI{3.78}{\volt} & \SI{1.91}{\volt} & \SI{12.75}{\milli\ampere} & På \\
+111 & \SI{4.42}{\volt} & \SI{1.98}{\volt} & \SI{16.77}{\milli\ampere} & På \\
+\end{tabular}
+\caption{Målte verdier for DAC-kretsen med LED}
+\end{table}
+\section{Diskusjon}
+
+blah blah
+
+\section{Konklusjon}
+
+smrt smrt
+
+referansebruk: noe står i læreboka \cite{laerebok}
+
+\begin{thebibliography}{9}
+\bibitem{laerebok}
+Nilsson og Riedel \textit{Electric Circuits}, 11. Utgave, Pearson.
+\bibitem{analogtech}
+\url{https://www.analogtechnologies.com/document/white_paper/AWPLED-04-LED-Forward-Voltage.pdf}
+\end{thebibliography}
+
+\end{document}
