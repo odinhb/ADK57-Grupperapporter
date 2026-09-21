@@ -96,52 +96,46 @@ For et digitalt system med \(N\) bits er antall mulige binære kombinasjoner git
 
 \subsection{Fra digital verdi til analog utgang}
 
-Sammenhengen mellom de sentrale delene i kretsen kan illustreres som:
-\[
-\begin{aligned}
-	&\text{digitale spenningsnivåer} \\
-	&\downarrow \\
-	&\text{R--2R-nettverk} \\
-	&\downarrow \\
-	&\text{nodeanalyse} \\
-	&\downarrow \\
-	&v_{\mathrm{ut}}(v_2,v_1,v_0) \\
-	&\downarrow \\
-	&\text{DAC-karakteristikk} \\
-	&\downarrow \\
-	&\text{praktisk krets} \\
-	&\downarrow \\
-	&\text{belastning med LED}
-\end{aligned}
-\]
-
-Utgangsspenningen kan dermed beskrives som en funksjon av de tre digitale inngangene:
+Et R-2R-nettverk brukes til å konvertere digitale signaler til analoge signaler. En bitsekvens bestående av 3 binære siffer $\{b_2, b_1, b_0\}$ eller tilhørende 3 spenningsverdier $\{v_2, v_1, v_0\}$ konverteres passivt av nettverket til en utgangsspenning $v_{ut}$. Dermed er det nyttig med et uttrykk for $v_{ut}$ med $\{v_2, v_1, v_0\}$ og/eller $\{b_2, b_1, b_0\}$ som ukjente:
 
 \[
 v_{\mathrm{ut}} = f(v_2,v_1,v_0).
 \]
 
-\subsection{Ohms lov og Kirchhoffs strømlov}
+\subsection{Nodespenningsmetoden}
 
-Ohms lov beskriver sammenhengen mellom spenning, strøm og motstand:
+Ohms lov, hentet fra læreboka \cite{laerebok} og gitt i \cref{eq:ohm}, beskriver sammenhengen mellom spenning, strøm og motstand. Denne kan omformes til et uttrykk for $i$, gitt i \cref{eq:ohmi}.
 
-\[
-i = \frac{v}{R}.
-\]
+\begin{equation}
+\label{eq:ohm}
+v = Ri
+\end{equation}
 
-Ved analyse av nodene i R--2R-nettverket benyttes Kirchhoffs strømlov (KCL). 
-Summen av strømmene inn og ut av en node er lik null. For en node med spenning
-\(v_x\) kan dette eksempelvis skrives som
+\begin{equation}
+\label{eq:ohmi}
+i = \frac{v}{R}
+\end{equation}
 
-\[
+Ved nodespenningsmetoden settes alle strømmene ut fra en hovednodene opp som følger Kirchoffs strømlov. Dette er gjort for et eksempel i en fiktiv node i \cref{eq:kcl1}.
+
+\begin{equation}
+\label{eq:kcl1}
+i_1 + i_2 + i_3 = 0
+\end{equation}
+
+Deretter brukes \cref{eq:ohmi} slik at man får strømmene uttrykt som spenniger over motstander, gitt i \cref{eq:kclvr}.
+
+\begin{equation}
+\label{eq:kclvr}
 \frac{v_x-v_a}{R_1}
 +
 \frac{v_x-v_b}{R_2}
 +
 \frac{v_x-v_c}{R_3}
 = 0.
-\]
+\end{equation}
 
+Repetisjon av denne prosessen i alle hovednoder produserer et ligningssett som kan brukes til utledning av et passende utrykk for $v_{ut}$.
 
 \subsection{Nodespenningsmetoden i R-2R-nettverket}
 
@@ -156,7 +150,7 @@ Summen av strømmene inn og ut av en node er lik null. For en node med spenning
 \end{align}
 \end{subequations}
 
-\Cref{eqs:kcl} viser oppsett av nodespenningsmetoden i kretsen i \cref{fig:r2r-krets}. Ligningssettet gir oss to utrykk for $v_{ut}$:
+\Cref{eqs:kcl} viser oppsett av nodespenningsmetoden for kretsen i \cref{fig:r2r-nettverk}. Ligningssettet gir oss to utrykk for $v_{ut}$:
 
 \begin{equation}
 \label{eq:derivedfrom3}
@@ -217,7 +211,7 @@ v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
 			
 		\end{circuitikz}
 		\caption{3-Bit R-2R krets.}
-		\label{fig:R-2R_krets_}
+		\label{fig:r2r-nettverk}
 	\end{center}
 \end{figure}
 
@@ -238,7 +232,7 @@ v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
 			
 		\end{circuitikz}
 		\caption{R-2R krets med last}
-		\label{fig:R-2R_krets_last}
+		\label{fig:r2r-nettverk-rlast}
 	\end{center}
 \end{figure}
 
@@ -259,12 +253,12 @@ v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
 			
 		\end{circuitikz}
 		\caption{R-2R krets med LED}
-		\label{fig:R-2R_led}
+		\label{fig:r2r-nettverk-led}
 	\end{center}
 \end{figure}
 
 \subsection{Utledning av formel for bitsekvenser}
-Fra formelene i \cref{eq:vutfromvin_full} og \cref{eq:vutfromvin_short} kan en formel for $v_{ut}$ med $b_0, b_1, b_2$ som ukjente utledes ved hjelp av faktorisering.
+Fra formelene i \cref{eq:vutfromvin_full} og \cref{eq:vutfromvin_short} kan en formel for $v_{ut}$ med $\{b_0, b_1, b_2\}$ som ukjente utledes ved hjelp av faktorisering.
 
 \begin{equation}
 v_{ut} = \frac{R_LV_H}{2R + R_L}(\frac{b_0}{8} + \frac{b_1}{4} + \frac{b_2}{2})\\
@@ -283,7 +277,7 @@ Valg av $V_H$ gjøres på bakgrunn av tilgjengelig utstyr, som tilbyr en spennin
 
 \medskip
 
-For valg av $R$ byttes lasten $R_L$ i \cref{fig:r2r-krets} ut med en forenklet modell for en lysdiode. Denne lysdioden har fremoverspenning $V_f = 2V$ basert på vanlige verdier \cite{analogtech} for rød lysdiode. Da denne ideelle lysdioden heller ikke har motstand er også $V_f = v_{ut}$. En femte ligning \cref{eq:ledatend} erstatter \cref{eqs:kcl:4} i \cref{eqs:kcl}:
+For valg av $R$ byttes lasten $R_L$ i \cref{fig:r2r-nettverk} ut med en forenklet modell for en lysdiode, som vist i \cref{fig:r2r-nettverk-led}. Denne lysdioden har fremoverspenning $V_f = 2V$ basert på vanlige verdier \cite{analogtech} for rød lysdiode. Da denne ideelle lysdioden heller ikke har motstand er også $V_f = v_{ut}$. Strømmen gjennom lysdioden $i_{LED} = i_{11}$. En femte likning \cref{eq:ledatend} erstatter \cref{eqs:kcl:4} i \cref{eqs:kcl}:
 
 \begin{equation}
 \label{eq:ledatend}
