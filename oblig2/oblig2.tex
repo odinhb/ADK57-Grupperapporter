@@ -108,7 +108,7 @@ Ohms lov, hentet fra læreboka \cite{laerebok} og gitt i \cref{eq:ohm}, beskrive
 
 \begin{equation}
 \label{eq:ohm}
-v = Ri
+v = iR
 \end{equation}
 
 \begin{equation}
@@ -150,7 +150,7 @@ Repetisjon av denne prosessen i alle hovednoder produserer et ligningssett som k
 \end{align}
 \end{subequations}
 
-\Cref{eqs:kcl} viser oppsett av nodespenningsmetoden for kretsen i \cref{fig:r2r-nettverk}. Ligningssettet gir oss to utrykk for $v_{ut}$:
+\Cref{eqs:kcl} viser oppsett av nodespenningsmetoden for kretsen i \cref{fig:r2r-nettverk}. \Cref{eqs:kcl:4} er gitt fordi $v_{ut}$ er et brudd, og dermed kan modelleres som en uendelig stor motstand $R_{Last}$, som illustrert i \cref{fig:r2r-nettverk-rlast}. Ligningssettet gir to utrykk for $v_{ut}$:
 
 \begin{equation}
 \label{eq:derivedfrom3}
@@ -298,7 +298,7 @@ R = \frac{V_H(\frac{b_0 + 2b_1 + 4b_2}{16}) - \frac{V_f}{2}}{i_{LED}} \\
 i_{LED} = \frac{V_H(\frac{b_0 + 2b_1 + 4b_2}{16}) - \frac{V_f}{2}}{R} \\
 \end{equation}
 
-For å unngå å ødelegge lysdioden, gjøres disse utregningene med alle inngangene i \cref{fig:r2r-krets} satt til $V_H$. Dette gir maksimal utgangsspenning $v_{ut}$ og dermed maksimal strøm $i_{LED}$ gjennom både dioden og motstanden på utgangen.
+For å unngå å ødelegge lysdioden, gjøres disse utregningene med alle inngangene i \cref{fig:r2r-nettverk} satt til $V_H$. Dette gir maksimal utgangsspenning $v_{ut}$ og dermed maksimal strøm $i_{LED}$ gjennom både dioden og motstanden på utgangen.
 
 \medskip
 
