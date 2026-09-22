@@ -96,46 +96,52 @@ For et digitalt system med \(N\) bits er antall mulige binære kombinasjoner git
 
 \subsection{Fra digital verdi til analog utgang}
 
-Et R-2R-nettverk brukes til å konvertere digitale signaler til analoge signaler. En bitsekvens bestående av 3 binære siffer $\{b_2, b_1, b_0\}$ eller tilhørende 3 spenningsverdier $\{v_2, v_1, v_0\}$ konverteres passivt av nettverket til en utgangsspenning $v_{ut}$. Dermed er det nyttig med et uttrykk for $v_{ut}$ med $\{v_2, v_1, v_0\}$ og/eller $\{b_2, b_1, b_0\}$ som ukjente:
+Sammenhengen mellom de sentrale delene i kretsen kan illustreres som:
+\[
+\begin{aligned}
+	&\text{digitale spenningsnivåer} \\
+	&\downarrow \\
+	&\text{R--2R-nettverk} \\
+	&\downarrow \\
+	&\text{nodeanalyse} \\
+	&\downarrow \\
+	&v_{\mathrm{ut}}(v_2,v_1,v_0) \\
+	&\downarrow \\
+	&\text{DAC-karakteristikk} \\
+	&\downarrow \\
+	&\text{praktisk krets} \\
+	&\downarrow \\
+	&\text{belastning med LED}
+\end{aligned}
+\]
+
+Utgangsspenningen kan dermed beskrives som en funksjon av de tre digitale inngangene:
 
 \[
 v_{\mathrm{ut}} = f(v_2,v_1,v_0).
 \]
 
-\subsection{Nodespenningsmetoden}
+\subsection{Ohms lov og Kirchhoffs strømlov}
 
-Ohms lov, hentet fra læreboka \cite{laerebok} og gitt i \cref{eq:ohm}, beskriver sammenhengen mellom spenning, strøm og motstand. Denne kan omformes til et uttrykk for $i$, gitt i \cref{eq:ohmi}.
+Ohms lov beskriver sammenhengen mellom spenning, strøm og motstand:
 
-\begin{equation}
-\label{eq:ohm}
-v = Ri
-\end{equation}
+\[
+i = \frac{v}{R}.
+\]
 
-\begin{equation}
-\label{eq:ohmi}
-i = \frac{v}{R}
-\end{equation}
+Ved analyse av nodene i R--2R-nettverket benyttes Kirchhoffs strømlov (KCL). 
+Summen av strømmene inn og ut av en node er lik null. For en node med spenning
+\(v_x\) kan dette eksempelvis skrives som
 
-Ved nodespenningsmetoden settes alle strømmene ut fra en hovednodene opp som følger Kirchoffs strømlov. Dette er gjort for et eksempel i en fiktiv node i \cref{eq:kcl1}.
-
-\begin{equation}
-\label{eq:kcl1}
-i_1 + i_2 + i_3 = 0
-\end{equation}
-
-Deretter brukes \cref{eq:ohmi} slik at man får strømmene uttrykt som spenniger over motstander, gitt i \cref{eq:kclvr}.
-
-\begin{equation}
-\label{eq:kclvr}
+\[
 \frac{v_x-v_a}{R_1}
 +
 \frac{v_x-v_b}{R_2}
 +
 \frac{v_x-v_c}{R_3}
 = 0.
-\end{equation}
+\]
 
-Repetisjon av denne prosessen i alle hovednoder produserer et ligningssett som kan brukes til utledning av et passende utrykk for $v_{ut}$.
 
 \subsection{Nodespenningsmetoden i R-2R-nettverket}
 
@@ -150,7 +156,7 @@ Repetisjon av denne prosessen i alle hovednoder produserer et ligningssett som k
 \end{align}
 \end{subequations}
 
-\Cref{eqs:kcl} viser oppsett av nodespenningsmetoden for kretsen i \cref{fig:r2r-nettverk}. Ligningssettet gir oss to utrykk for $v_{ut}$:
+\Cref{eqs:kcl} viser oppsett av nodespenningsmetoden i kretsen i \cref{fig:r2r-krets}. Ligningssettet gir oss to utrykk for $v_{ut}$:
 
 \begin{equation}
 \label{eq:derivedfrom3}
@@ -211,7 +217,7 @@ v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
 			
 		\end{circuitikz}
 		\caption{3-Bit R-2R krets.}
-		\label{fig:r2r-nettverk}
+		\label{fig:R-2R_krets_}
 	\end{center}
 \end{figure}
 
@@ -232,7 +238,7 @@ v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
 			
 		\end{circuitikz}
 		\caption{R-2R krets med last}
-		\label{fig:r2r-nettverk-rlast}
+		\label{fig:R-2R_krets_last}
 	\end{center}
 \end{figure}
 
@@ -253,12 +259,12 @@ v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
 			
 		\end{circuitikz}
 		\caption{R-2R krets med LED}
-		\label{fig:r2r-nettverk-led}
+		\label{fig:R-2R_led}
 	\end{center}
 \end{figure}
 
 \subsection{Utledning av formel for bitsekvenser}
-Fra formelene i \cref{eq:vutfromvin_full} og \cref{eq:vutfromvin_short} kan en formel for $v_{ut}$ med $\{b_0, b_1, b_2\}$ som ukjente utledes ved hjelp av faktorisering.
+Fra formelene i \cref{eq:vutfromvin_full} og \cref{eq:vutfromvin_short} kan en formel for $v_{ut}$ med $b_0, b_1, b_2$ som ukjente utledes ved hjelp av faktorisering.
 
 \begin{equation}
 v_{ut} = \frac{R_LV_H}{2R + R_L}(\frac{b_0}{8} + \frac{b_1}{4} + \frac{b_2}{2})\\
@@ -277,7 +283,7 @@ Valg av $V_H$ gjøres på bakgrunn av tilgjengelig utstyr, som tilbyr en spennin
 
 \medskip
 
-For valg av $R$ byttes lasten $R_L$ i \cref{fig:r2r-nettverk} ut med en forenklet modell for en lysdiode, som vist i \cref{fig:r2r-nettverk-led}. Denne lysdioden har fremoverspenning $V_f = 2V$ basert på vanlige verdier \cite{analogtech} for rød lysdiode. Da denne ideelle lysdioden heller ikke har motstand er også $V_f = v_{ut}$. Strømmen gjennom lysdioden $i_{LED} = i_{11}$. En femte likning \cref{eq:ledatend} erstatter \cref{eqs:kcl:4} i \cref{eqs:kcl}:
+For valg av $R$ byttes lasten $R_L$ i \cref{fig:r2r-krets} ut med en forenklet modell for en lysdiode. Denne lysdioden har fremoverspenning $V_f = 2V$ basert på vanlige verdier \cite{analogtech} for rød lysdiode. Da denne ideelle lysdioden heller ikke har motstand er også $V_f = v_{ut}$. En femte ligning \cref{eq:ledatend} erstatter \cref{eqs:kcl:4} i \cref{eqs:kcl}:
 
 \begin{equation}
 \label{eq:ledatend}
@@ -315,14 +321,9 @@ i_{LED} = \frac{\qty{5}{\volt}(\frac{1 + 2 + 4}{16}) - \frac{ \qty{2}{\volt} }{2
 $$
 
 \section{Praktisk arbeid}
-I denne delen gis det en kort beskrivelse av det praktiske som ble gjort for å gjennomføre målinger for utgangsspenningen \(v_{\mathrm{ut}}\) med og uten LED.\\
 
-\subsection{Koblinger på treningsbrettet}
-Treningsbrettet ble sjekket for om strøm kunne slås av og på, før 3-Bit R-2R kretsen ble koblet opp. Deretter ble kretsen bygget opp slik figur REF viser.
-
-\subsection{Målinger}
-For å måle utgangsspenningen ble multimeteret koblet parallelt mellom \(v_{\mathrm{ut}}\) og jord. Ved strømmåling ble multimeteret koblet i serie med lasten ved utgangen av kretsen. For hver bitkombinasjon som ble koblet på treningsbrettet, ble spenning og strøm målt. LED-ens lysstyrke ble i tillegg observert kvalitativt for å undersøke hvordan de ulike bitkombinasjonene påvirket belastningen ved utgangen.
-
+\subsection{Første ting}
+\subsection{Andre ting}
 \subsection{Tredje ting}
 
 \section{Resultater}
@@ -344,9 +345,45 @@ For å måle utgangsspenningen ble multimeteret koblet parallelt mellom \(v_{\ma
 	\end{tabular}
 \end{center}
 
-\section{Diskusjon}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+        $b_2b_1b_0$ & $v_{ut}$ & $v_{LED}$ & $i_{LED}$ & Lys \\
+        \hline
+        000 & \qty{0}{\volt}    & \qty{0}{\volt}    & \qty{0}{\milli\ampere}     & Av \\
+        001 & \qty{0.64}{\volt} & \qty{0.63}{\volt} & \qty{0}{\milli\ampere}     & Av \\
+        010 & \qty{1.27}{\volt} & \qty{1.26}{\volt} & \qty{0}{\milli\ampere}     & Av \\
+        011 & \qty{1.91}{\volt} & \qty{1.69}{\volt} & \qty{1.49}{\milli\ampere}  & På \\
+        100 & \qty{2.51}{\volt} & \qty{1.78}{\volt} & \qty{4.96}{\milli\ampere}  & På \\
+        101 & \qty{3.15}{\volt} & \qty{1.86}{\volt} & \qty{8.83}{\milli\ampere}  & På \\
+        110 & \qty{3.78}{\volt} & \qty{1.91}{\volt} & \qty{12.75}{\milli\ampere} & På \\
+        111 & \qty{4.42}{\volt} & \qty{1.98}{\volt} & \qty{16.77}{\milli\ampere} & På \\
+    \end{tabular}
+    \caption{Målte verdier for DAC-kretsen med LED}
+    \label{tab:dac-led}
+\end{table}
 
-blah blah
+\section{Diskusjon}
+Resultatene fra forsøket stemte godt med teorien for R-2R-nettverket. 
+Teoretisk skal en 3-bits DAC med $V_H=\qty{5}{\volt}$ gi en økning på 
+\qty{0.625}{\volt} per binære trinn. I forsøket målte vi en økning på 
+omtrent \qty{0.63}{\volt} per trinn. Ved inngangsverdien 111 målte vi 
+$v_{ut}=\qty{4.42}{\volt}$, sammenlignet med den teoretiske verdien på 
+\qty{4.375}{\volt}. Dette viser at den praktiske kretsen stemte godt 
+overens med den teoretiske modellen.
+
+LED-en var av ved de tre laveste spenningsnivåene, men begynte å lyse 
+ved 011, hvor $v_{LED}=\qty{1.69}{\volt}$ og 
+$i_{LED}=\qty{1.49}{\milli\ampere}$. Deretter økte strømmen betydelig 
+med økende utgangsspenning, mens spenningen over LED-en økte mindre. 
+Dette viser at LED-en ikke oppfører seg som en lineær motstand, og at 
+antagelsen $V_f=\qty{2}{\volt}$ i teoridelen kun er en forenkling.
+
+De små forskjellene mellom teori og målinger kan blant annet skyldes 
+toleranser i motstandene, måleusikkerhet og at virkelige komponenter 
+ikke er ideelle.
+
+
 
 \section{Konklusjon}
 
