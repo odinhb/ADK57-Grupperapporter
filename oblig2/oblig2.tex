@@ -344,9 +344,45 @@ For å måle utgangsspenningen ble multimeteret koblet parallelt mellom \(v_{\ma
 	\end{tabular}
 \end{center}
 
-\section{Diskusjon}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+        $b_2b_1b_0$ & $v_{ut}$ & $v_{LED}$ & $i_{LED}$ & Lys \\
+        \hline
+        000 & \qty{0}{\volt}    & \qty{0}{\volt}    & \qty{0}{\milli\ampere}     & Av \\
+        001 & \qty{0.64}{\volt} & \qty{0.63}{\volt} & \qty{0}{\milli\ampere}     & Av \\
+        010 & \qty{1.27}{\volt} & \qty{1.26}{\volt} & \qty{0}{\milli\ampere}     & Av \\
+        011 & \qty{1.91}{\volt} & \qty{1.69}{\volt} & \qty{1.49}{\milli\ampere}  & På \\
+        100 & \qty{2.51}{\volt} & \qty{1.78}{\volt} & \qty{4.96}{\milli\ampere}  & På \\
+        101 & \qty{3.15}{\volt} & \qty{1.86}{\volt} & \qty{8.83}{\milli\ampere}  & På \\
+        110 & \qty{3.78}{\volt} & \qty{1.91}{\volt} & \qty{12.75}{\milli\ampere} & På \\
+        111 & \qty{4.42}{\volt} & \qty{1.98}{\volt} & \qty{16.77}{\milli\ampere} & På \\
+    \end{tabular}
+    \caption{Målte verdier for DAC-kretsen med LED}
+    \label{tab:dac-led}
+\end{table}
 
-blah blah
+\section{Diskusjon}
+Resultatene fra forsøket stemte godt med teorien for R-2R-nettverket. 
+Teoretisk skal en 3-bits DAC med $V_H=\qty{5}{\volt}$ gi en økning på 
+\qty{0.625}{\volt} per binære trinn. I forsøket målte vi en økning på 
+omtrent \qty{0.63}{\volt} per trinn. Ved inngangsverdien 111 målte vi 
+$v_{ut}=\qty{4.42}{\volt}$, sammenlignet med den teoretiske verdien på 
+\qty{4.375}{\volt}. Dette viser at den praktiske kretsen stemte godt 
+overens med den teoretiske modellen.
+
+LED-en var av ved de tre laveste spenningsnivåene, men begynte å lyse 
+ved 011, hvor $v_{LED}=\qty{1.69}{\volt}$ og 
+$i_{LED}=\qty{1.49}{\milli\ampere}$. Deretter økte strømmen betydelig 
+med økende utgangsspenning, mens spenningen over LED-en økte mindre. 
+Dette viser at LED-en ikke oppfører seg som en lineær motstand, og at 
+antagelsen $V_f=\qty{2}{\volt}$ i teoridelen kun er en forenkling.
+
+De små forskjellene mellom teori og målinger kan blant annet skyldes 
+toleranser i motstandene, måleusikkerhet og at virkelige komponenter 
+ikke er ideelle.
+
+
 
 \section{Konklusjon}
 
