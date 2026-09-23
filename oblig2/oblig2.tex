@@ -82,7 +82,7 @@ Denne øvelsen vil omhandle å konvertere digitale signaler til en analog spenni
 Utstyr brukt i denne øvelsen er gitt i \cref{equipment}.
 
 \section{Teoretisk del}
-I denne delen presenteres teori og sammenhenger som er viktige for å teste ulike DA kretser.
+I denne delen presenteres teorietiske utregninger for R-2R nettverket.
 
 \subsection{Binærtall og antall digitale nivåer}
 
@@ -137,50 +137,7 @@ Deretter brukes \cref{eq:ohmi} slik at man får strømmene uttrykt som spenniger
 
 Repetisjon av denne prosessen i alle hovednoder produserer et ligningssett som kan brukes til utledning av et passende utrykk for $v_{ut}$.
 
-\subsection{Nodespenningsmetoden i R-2R-nettverket}
-
-\begin{subequations}
-\label[equationset]{eqs:kcl}
-
-\begin{align}
-\frac{v_a-v_0}{2R}+\frac{v_a-v_b}{R}+\frac{v_a}{2R} = 0 \label{eqs:kcl:1} \\
-\frac{v_b-v_a}{R} + \frac{v_b-v_1}{2R}+\frac{v_b-v_c}{R} = 0 \label{eqs:kcl:2} \\
-\frac{v_c-v_b}{R} + \frac{v_c-v_2}{2R} + \frac{v_c-v_{ut}}{R} = 0 \label{eqs:kcl:3} \\
-\frac{v_{ut}-v_c}{R} + \frac{v_{ut}}{R_{Last}} = 0 \label{eqs:kcl:4}
-\end{align}
-\end{subequations}
-
-\Cref{eqs:kcl} viser oppsett av nodespenningsmetoden for kretsen i \cref{fig:r2r-nettverk}. \Cref{eqs:kcl:4} er gitt fordi $v_{ut}$ er et brudd, og dermed kan modelleres som en uendelig stor motstand $R_{Last}$, som illustrert i \cref{fig:r2r-nettverk-rlast}. Ligningssettet gir to utrykk for $v_{ut}$:
-
-\begin{equation}
-\label{eq:derivedfrom3}
-v_{ut} = 2v_c - \frac{v_0}{8} - \frac{v_1}{4} - \frac{v_2}{2} \\
-\end{equation}
-$$\text{og}$$
-\begin{equation}
-\label{eq:derivedfrom4}
-v_{ut} = \frac{R_{Last}}{R + R_{Last}}v_c.\\
-\end{equation}
-
-Satt sammen blir dette:
-\[
-\frac{R_{Last}}{R + R_{Last}}v_c = 2v_c - \frac{v_0}{8} - \frac{v_1}{4} - \frac{v_2}{2}\\.
-\]
-
-Som blir:
-\begin{equation}
-v_{ut} = \frac{R_{Last}}{2R + R_{Last}}(\frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2})\\
-\label{eq:vutfromvin_full}
-\end{equation}
-
-\Cref{eq:vutfromvin_full} kan videre forenkles til \cref{eq:vutfromvin_short} når $R_{Last} \to \infty$. Da går $\frac{R_{Last}}{2R + R_{Last}} \to 1$.
-
-\begin{equation}
-v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
-\label{eq:vutfromvin_short}
-\end{equation}
-
-\begin{figure}
+\begin{figure}[ht]
 	\begin{center}
 		\begin{circuitikz}[scale=0.70]
 			\draw
@@ -217,7 +174,7 @@ v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
 	\end{center}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[ht]
 	\begin{center}
 		\begin{circuitikz}[scale=1]
 			\draw
@@ -238,7 +195,7 @@ v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
 	\end{center}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[ht]
 	\begin{center}
 		\begin{circuitikz}[scale=1]
 			\draw
@@ -258,6 +215,47 @@ v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
 		\label{fig:r2r-nettverk-led}
 	\end{center}
 \end{figure}
+
+\subsection{Nodespenningsmetoden i R-2R-nettverket}
+
+\begin{subequations}
+\label[equationset]{eqs:kcl}
+
+\begin{align}
+\frac{v_a-v_0}{2R}+\frac{v_a-v_b}{R}+\frac{v_a}{2R} = 0 \label{eqs:kcl:1} \\
+\frac{v_b-v_a}{R} + \frac{v_b-v_1}{2R}+\frac{v_b-v_c}{R} = 0 \label{eqs:kcl:2} \\
+\frac{v_c-v_b}{R} + \frac{v_c-v_2}{2R} + \frac{v_c-v_{ut}}{R} = 0 \label{eqs:kcl:3} \\
+\frac{v_{ut}-v_c}{R} + \frac{v_{ut}}{R_{Last}} = 0 \label{eqs:kcl:4}
+\end{align}
+\end{subequations}
+
+\Cref{eqs:kcl} viser oppsett av nodespenningsmetoden for kretsen i \cref{fig:r2r-nettverk}. \Cref{eqs:kcl:4} er gitt fordi $v_{ut}$ er et brudd, og dermed kan modelleres som en uendelig stor motstand $R_{Last}$, som illustrert i \cref{fig:r2r-nettverk-rlast}. Ligningssettet gir to utrykk for $v_{ut}$:
+
+$$
+v_{ut} = 2v_c - \frac{v_0}{8} - \frac{v_1}{4} - \frac{v_2}{2} \\
+$$
+$$\text{og}$$
+$$
+v_{ut} = \frac{R_{Last}}{R + R_{Last}}v_c.\\
+$$
+
+Satt sammen blir dette:
+\[
+\frac{R_{Last}}{R + R_{Last}}v_c = 2v_c - \frac{v_0}{8} - \frac{v_1}{4} - \frac{v_2}{2}\\.
+\]
+
+Som blir:
+\begin{equation}
+v_{ut} = \frac{R_{Last}}{2R + R_{Last}}(\frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2})\\
+\label{eq:vutfromvin_full}
+\end{equation}
+
+\Cref{eq:vutfromvin_full} kan videre forenkles til \cref{eq:vutfromvin_short} når $R_{Last} \to \infty$ fordi $\frac{R_{Last}}{2R + R_{Last}} \to 1$.
+
+\begin{equation}
+v_{ut} = \frac{v_0}{8} + \frac{v_1}{4} + \frac{v_2}{2}\\
+\label{eq:vutfromvin_short}
+\end{equation}
 
 \subsection{Utledning av formel for bitsekvenser}
 Fra formelene i \cref{eq:vutfromvin_full} og \cref{eq:vutfromvin_short} kan en formel for $v_{ut}$ med $\{b_0, b_1, b_2\}$ som ukjente utledes ved hjelp av faktorisering.
@@ -319,35 +317,69 @@ $$
 \section{Praktisk arbeid}
 I denne delen gis det en kort beskrivelse av det praktiske som ble gjort for å gjennomføre målinger for utgangsspenningen \(v_{\mathrm{ut}}\) med og uten LED.\\
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\linewidth]{kretsen.png}
+\caption{Fotografi av R-2R-nettverket som ble koblet opp.}
+\label{fig:praktisk-krets}
+\end{figure}
+
 \subsection{Koblinger på treningsbrettet}
-Treningsbrettet ble sjekket for om strøm kunne slås av og på, før 3-Bit R-2R kretsen ble koblet opp. Deretter ble kretsen bygget opp slik figur 1 viser.
+Treningsbrettet ble sjekket for om strøm kunne slås av og på, før 3-Bit R-2R kretsen ble koblet opp. Deretter ble kretsen bygget opp slik \cref{fig:praktisk-krets} viser.
 
 \subsection{Målinger}
 For å måle utgangsspenningen ble multimeteret koblet parallelt mellom \(v_{\mathrm{ut}}\) og jord. Ved strømmåling ble multimeteret koblet i serie med lasten ved utgangen av kretsen. For hver bitkombinasjon som ble koblet på treningsbrettet, ble spenning målt. Strøm ble målt for hver bit kombinasjon med last altså LED siden dette laget en lukket strømvei. LED-ens lysstyrke ble i tillegg observert kvalitativt for å undersøke hvordan de ulike bitkombinasjonene påvirket belastningen ved utgangen.
 
 \section{Resultater}
-I denne delen gis en oversikt over resultat av både de teoretiske og praktiske målingene. 
+I denne delen presenteres resultatene av både de teoretiske utregningene og de praktiske målingene. 
 
-I tabell (Den som står under) er spenningsvariablene nummerert motsatt av bitindeksene, slik at \(b_2\) tilsvarer \(v_0\), \(b_1\) tilsvarer \(v_1\) og \(b_0\) tilsvarer \(v_2\).
+I \cref{tab:teoretiske-spenningsverdier} ...
 
+I \cref{tab:praktiske-verdier} ...
+
+Spenninger et eller annet .... i \cref{fig:vut-plot}...
+
+\begin{table}[h]
+\centering
 \begin{center}
-	\begin{tabular}{c|ccc|c}
+	\begin{tabular}{c|ccc|l}
 		Digitalt & \multicolumn{3}{c|}{Digitale } & Analog \\ [-0.2cm]
 		signal & \multicolumn{3}{c|}{spenningsnivåer} & spenning \\
-		$b_2b_1b_0$ & $v_0$ & $v_1$ & $v_2$ & $v_{ut}$ \\
+		$b_2b_1b_0$ & $v_2$ & $v_1$ & $v_0$ & $v_{ut}$ \\
 		\hline
-		$000$ & $V_L$ & $V_L$ & $V_L$ & - \\
-		$001$ & $V_L$ & $V_L$ & $V_H$ & - \\
-		$010$ & $V_L$ & $V_H$ & $V_L$ & - \\
-		$011$ & $V_L$ & $V_H$ & $V_H$ & - \\
-		$100$ & $V_H$ & $V_L$ & $V_L$ & - \\
-		$101$ & $V_H$ & $V_L$ & $V_H$ & - \\
-		$110$ & $V_H$ & $V_H$ & $V_L$ & - \\
-		$111$ & $V_H$ & $V_H$ & $V_H$ & - \\
+		$000$ & $V_L$ & $V_L$ & $V_L$ & \qty{0}{\volt} \\
+		$001$ & $V_L$ & $V_L$ & $V_H$ & \qty{0.625}{\volt} \\
+		$010$ & $V_L$ & $V_H$ & $V_L$ & \qty{1.25}{\volt} \\
+		$011$ & $V_L$ & $V_H$ & $V_H$ & \qty{1.875}{\volt} \\
+		$100$ & $V_H$ & $V_L$ & $V_L$ & \qty{2.5}{\volt} \\
+		$101$ & $V_H$ & $V_L$ & $V_H$ & \qty{3.125}{\volt} \\
+		$110$ & $V_H$ & $V_H$ & $V_L$ & \qty{3.75}{\volt} \\
+		$111$ & $V_H$ & $V_H$ & $V_H$ & \qty{4.375}{\volt} \\
 	\end{tabular}
 \end{center}
+\caption{Teoretiske spenningsverdier over $v_{ut}$ for R-2R-nettverket.}
+\label{tab:teoretiske-spenningsverdier}
+\end{table}
 
-\begin{figure}[ht]
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+        $b_2b_1b_0$ & $v_{ut}$ & $v_{LED}$ & $i_{LED}$ & Lys \\
+        \hline
+        000 & \qty{0}{\volt}    & \qty{0}{\volt}    & \qty{0}{\milli\ampere}     & Av \\
+        001 & \qty{0.64}{\volt} & \qty{0.63}{\volt} & \qty{0}{\milli\ampere}     & Av \\
+        010 & \qty{1.27}{\volt} & \qty{1.26}{\volt} & \qty{0}{\milli\ampere}     & Av \\
+        011 & \qty{1.91}{\volt} & \qty{1.69}{\volt} & \qty{1.49}{\milli\ampere}  & På \\
+        100 & \qty{2.51}{\volt} & \qty{1.78}{\volt} & \qty{4.96}{\milli\ampere}  & På \\
+        101 & \qty{3.15}{\volt} & \qty{1.86}{\volt} & \qty{8.83}{\milli\ampere}  & På \\
+        110 & \qty{3.78}{\volt} & \qty{1.91}{\volt} & \qty{12.75}{\milli\ampere} & På \\
+        111 & \qty{4.42}{\volt} & \qty{1.98}{\volt} & \qty{16.77}{\milli\ampere} & På \\
+    \end{tabular}
+    \caption{Målte verdier for R-2R-nettverket.}
+    \label{tab:praktiske-verdier}
+\end{table}
+
+\begin{figure}[h]
 	\centering
 	
 	\begin{tikzpicture}
@@ -441,28 +473,10 @@ I tabell (Den som står under) er spenningsvariablene nummerert motsatt av bitin
 		\end{axis}
 	\end{tikzpicture}
 	
-	\caption{Utgangsspenning for en 3-bits DA-omformer.}
-	\label{fig:dac-vut}
+	\caption{Målte og teoretiske spenningsverdier for R-2R-nettverket.}
+	\label{fig:vut-plot}
 	
 \end{figure}
-
-\begin{table}[h]
-    \centering
-    \begin{tabular}{c|c|c|c|c}
-        $b_2b_1b_0$ & $v_{ut}$ & $v_{LED}$ & $i_{LED}$ & Lys \\
-        \hline
-        000 & \qty{0}{\volt}    & \qty{0}{\volt}    & \qty{0}{\milli\ampere}     & Av \\
-        001 & \qty{0.64}{\volt} & \qty{0.63}{\volt} & \qty{0}{\milli\ampere}     & Av \\
-        010 & \qty{1.27}{\volt} & \qty{1.26}{\volt} & \qty{0}{\milli\ampere}     & Av \\
-        011 & \qty{1.91}{\volt} & \qty{1.69}{\volt} & \qty{1.49}{\milli\ampere}  & På \\
-        100 & \qty{2.51}{\volt} & \qty{1.78}{\volt} & \qty{4.96}{\milli\ampere}  & På \\
-        101 & \qty{3.15}{\volt} & \qty{1.86}{\volt} & \qty{8.83}{\milli\ampere}  & På \\
-        110 & \qty{3.78}{\volt} & \qty{1.91}{\volt} & \qty{12.75}{\milli\ampere} & På \\
-        111 & \qty{4.42}{\volt} & \qty{1.98}{\volt} & \qty{16.77}{\milli\ampere} & På \\
-    \end{tabular}
-    \caption{Målte verdier for DAC-kretsen med LED}
-    \label{tab:dac-led}
-\end{table}
 
 \section{Diskusjon}
 Resultatene fra forsøket stemte godt med teorien for R-2R-nettverket.
