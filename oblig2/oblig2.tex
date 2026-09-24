@@ -117,7 +117,7 @@ Ved nodespenningsmetoden settes alle strømmene ut fra en hovednodene opp som f�
 i_1 + i_2 + i_3 = 0
 \end{equation}
 
-Deretter brukes \cref{eq:ohmi} slik at man får strømmene uttrykt som spenniger over motstander, gitt i \cref{eq:kclvr}.
+Deretter brukes \cref{eq:ohmi} slik at man får strømmene uttrykt som spenninger over motstander, gitt i \cref{eq:kclvr}.
 
 \begin{equation}
 \label{eq:kclvr}
@@ -129,7 +129,7 @@ Deretter brukes \cref{eq:ohmi} slik at man får strømmene uttrykt som spenniger
 = 0.
 \end{equation}
 
-Repetisjon av denne prosessen i alle hovednoder produserer et ligningssett som kan brukes til utledning av et passende utrykk for $v_{ut}$.
+Repetisjon av denne prosessen i alle hovednoder produserer et ligningssett som brukes til utledning av et passende utrykk for $v_{ut}$.
 
 \begin{figure}[ht]
 	\begin{center}
@@ -267,11 +267,11 @@ v_{ut} = V_H(\frac{b_0}{8} + \frac{b_1}{4} + \frac{b_2}{2})\\
 \Cref{eq:vutfrombin_full} er utledet fra \cref{eq:vutfromvin_full} og \cref{eq:vutfrombin_short} er utledet fra \cref{eq:vutfromvin_short}.
 
 \subsection{Valg av $V_H$, $V_L$ og $R$}
-Valg av $V_H$ gjøres på bakgrunn av tilgjengelig utstyr, som tilbyr en spenningsforsyning på $V_H = 5V$ og en jord $V_L = 0V$.
+Valg av $V_H$ gjøres på bakgrunn av tilgjengelig utstyr, som tilbyr en spenningsforsyning på $V_H = \qty{5}{\volt}$ og en jord $V_L = \qty{0}{\volt}$.
 
 \medskip
 
-For valg av $R$ byttes lasten $R_{Last}$ i \cref{fig:r2r-nettverk} ut med en forenklet modell for en lysdiode, som vist i \cref{fig:r2r-nettverk-led}. Denne lysdioden har fremoverspenning $V_f = 2V$ basert på vanlige verdier \cite{analogtech} for rød lysdiode. Da denne ideelle lysdioden heller ikke har motstand er også $V_f = v_{ut}$. Strømmen gjennom lysdioden $i_{LED} = i_{11}$. En femte likning \cref{eq:ledatend} erstatter \cref{eqs:kcl:4} i \cref{eqs:kcl}:
+For valg av $R$ byttes bruddet mellom $v_{ut}$ i \cref{fig:r2r-nettverk} ut med en forenklet modell for en lysdiode, som vist i \cref{fig:r2r-nettverk-led}. Denne lysdioden har fremoverspenning $V_f = \qty{2}{\volt}$ basert på vanlige verdier \cite{analogtech} for rød lysdiode. Da denne ideelle lysdioden heller ikke har motstand er også $V_f = v_{ut}$. Strømmen gjennom lysdioden $i_{LED} = i_{11}$. En femte likning \cref{eq:ledatend} erstatter \cref{eqs:kcl:4} i \cref{eqs:kcl}:
 
 \begin{equation}
 \label{eq:ledatend}
@@ -298,15 +298,12 @@ For å unngå å ødelegge lysdioden, gjøres disse utregningene med alle inngan
 
 $$
 \begin{aligned}
-R_{min} = \frac{5V(\frac{1 + 2 + 4}{16}) - \frac{2V}{2}}{20mA} = \qty{59.375}{\ohm} \\
-R_{max} = \frac{5V(\frac{1 + 2 + 4}{16}) - \frac{2V}{2}}{10mA} = \qty{118.75}{\ohm} \\
+R_{min} = \frac{\qty{5}{\volt}(\frac{1 + 2 + 4}{16}) - \frac{\qty{2}{\volt}}{2}}{\qty{20}{\milli\ampere}} = \qty{59.375}{\ohm} \\
+R_{maks} = \frac{\qty{5}{\volt}(\frac{1 + 2 + 4}{16}) - \frac{\qty{2}{\volt}}{2}}{\qty{10}{\milli\ampere}} = \qty{118.75}{\ohm} \\
 \end{aligned}
 $$
 
-Strømmen gjennom lysdioden regnes ut for den valgte motstanden ved hjelp av \cref{eq:forledi}:
-$$
-i_{LED} = \frac{\qty{5}{\volt}(\frac{1 + 2 + 4}{16}) - \frac{ \qty{2}{\volt} }{2} }{ \qty{68}{\ohm} } \approx \qty{17.5}{\milli\ampere} \\
-$$
+$R$ velges derfor til en verdi mellom $R_{min}$ og $R_{maks}$.
 
 \section{Praktisk arbeid}
 I denne delen gis det en kort beskrivelse av det praktiske som ble gjort for å gjennomføre målinger for utgangsspenningen \(v_{\mathrm{ut}}\) med og uten LED.\\
@@ -321,6 +318,9 @@ I denne delen gis det en kort beskrivelse av det praktiske som ble gjort for å 
 \end{figure}
 
 Treningsbrettet ble sjekket for om strøm kunne slås av og på, før 3-Bit R-2R kretsen ble koblet opp. Deretter ble kretsen bygget opp slik \cref{fig:praktisk-krets} viser.
+
+\subsection{Valg av $R$}
+$R$ ble valgt til \qty{68}{\ohm} basert på de teoretiske utregningene, lett tilgjengelige motstander og litt ekstra margin.
 
 \subsection{Målinger}
 For å måle utgangsspenningen ble multimeteret koblet parallelt mellom \(v_{\mathrm{ut}}\) og jord. Ved strømmåling ble multimeteret koblet i serie med lasten ved utgangen av kretsen. For hver bitkombinasjon som ble koblet på treningsbrettet, ble spenning målt. Strøm ble målt for hver bit kombinasjon med last altså LED siden dette laget en lukket strømvei. LED-ens lysstyrke ble i tillegg observert kvalitativt for å undersøke hvordan de ulike bitkombinasjonene påvirket belastningen ved utgangen.
@@ -466,15 +466,6 @@ I denne delen presenteres resultatene fra de teoretiske utregningene og de prakt
 	\label{fig:vut-plot}
 	
 \end{figure}
-
-\bigskip
-\bigskip
-\bigskip
-\bigskip
-\bigskip
-\bigskip
-\bigskip
-\bigskip
 
 \section{Diskusjon \& Konklusjon}
 Resultatene fra forsøket stemte godt med teorien for R-2R-nettverket.
