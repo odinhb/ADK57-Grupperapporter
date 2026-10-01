@@ -6,11 +6,14 @@
 
 \begin{table}[h]
 	\centering % sentrer
-	\setlength{\belowcaptionskip}{6pt} % % margin mellom caption og tabellen
+	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
+	\setlength{\tabcolsep}{3pt} % gjør tabellen mindre bred hvis det trengs
+
 	\caption{Eksempel caption}
 	\label{tab:referansenavn}
+
 	\noindent
-	\begin{tabular}{@{}lll@{}} % left left left
+	\begin{tabular}{c|c|c} % center center center
 		\hline
 		Kolonne A & Kolonne B & Kolonne C \\
 		\hline
