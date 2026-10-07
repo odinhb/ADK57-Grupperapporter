@@ -62,34 +62,51 @@ innhold
 \section{Teoretisk del}
 innledning
 
-$x$, $y$ og $z$ brukes som innganger og $F$ som utgang for alle de forskjellige portene.
-
-\subsection{NAND}
-innhold
+Symbolene $x$, $y$ og $z$ brukes som opp til 3 innganger for alle de forskjellige portene. Kombinert sannhetstabell for alle portene med 2 innganger er gitt i \cref{tab:truth-theory-2-input}.
 
 \begin{table}[h]
 	\centering % sentrer
 	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
 	\setlength{\tabcolsep}{3pt} % gjør tabellen mindre bred hvis det trengs
 
-	\caption{Sannhetstabell for NAND}
-	\label{tab:truth-NAND}
+	\caption{Sannhetstabell for de logiske portene med 2 innganger}
+	\label{tab:truth-theory-2-input}
 
 	\noindent
-	\begin{tabular}{c|c|c} % center center center
+	\begin{tabular}{c|c|c|c|c|c|c|c|c} % center center center
 		\hline
-		$x$ & $y$ & $F$ \\
+		$x$ & $y$ & NAND & OR & AND & XOR & XNOR \\
 		\hline
-		0 & 0 & 1 \\
-		0 & 1 & 1 \\
-		1 & 0 & 1 \\
-		1 & 1 & 0 \\
+		0 & 0 & 1 & 0 & 0 & 0 & 1 \\
+		0 & 1 & 1 & 1 & 0 & 1 & 0 \\
+		1 & 0 & 1 & 1 & 0 & 1 & 0 \\
+		1 & 1 & 0 & 1 & 1 & 0 & 1 \\
 		\hline
 	\end{tabular}
 \end{table}
 
+\subsection{NAND}
+
+\begin{equation}
+\label{eq:nand}
+F = \overline{xy}
+\end{equation}
+
+Den boolske funksjonen for NAND-porten er gitt i \cref{eq:nand}.
+
 \subsection{NOT}
-innhold
+
+\begin{equation}
+\label{eq:not}
+F = \overline{x}
+\end{equation}
+
+Den boolske funksjonen for NOT er gitt i \cref{eq:not}. NOT konstrueres av NAND-porter ved å sende $x$ inn i begge inngangene i NAND-porten, som illustrert i \cref{fig:not-av-nand}. Dette gir utrykket i \cref{eq:not-av-nand}, som er ekvivalent med \cref{eq:not}. Sannhetstabellen for NOT er gitt i \cref{tab:truth-theory-NOT}.
+
+\begin{equation}
+\label{eq:not-av-nand}
+F = \overline{x \cdot x}
+\end{equation}
 
 \begin{table}[h]
 	\centering % sentrer
@@ -97,7 +114,7 @@ innhold
 	\setlength{\tabcolsep}{3pt} % gjør tabellen mindre bred hvis det trengs
 
 	\caption{Sannhetstabell for NOT}
-	\label{tab:truth-NOT}
+	\label{tab:truth-theory-NOT}
 
 	\noindent
 	\begin{tabular}{c|c} % center center center
@@ -111,79 +128,67 @@ innhold
 \end{table}
 
 \subsection{AND}
-innhold
+\begin{equation}
+\label{eq:and-av-nand}
+F = \overline{\overline{xy} \cdot \overline{xy}}
+\end{equation}
 
-\begin{table}[h]
-	\centering % sentrer
-	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
-	\setlength{\tabcolsep}{3pt} % gjør tabellen mindre bred hvis det trengs
+AND konstrueres av NAND-porter som illustrert i \cref{fig:and-av-nand}. Dette gir det algebraiske utrykket i \cref{eq:and-av-nand}. Utrykket kan forenkles slik:
 
-	\caption{Sannhetstabell for AND}
-	\label{tab:truth-AND}
+$$
+F = \overline{\overline{xy} \cdot \overline{xy}} = \overline{\overline{xy}} = xy
+$$
 
-	\noindent
-	\begin{tabular}{c|c|c} % center center center
-		\hline
-		$x$ & $y$ & $F$ \\
-		\hline
-		0 & 0 & 0 \\
-		0 & 1 & 0 \\
-		1 & 0 & 0 \\
-		1 & 1 & 1 \\
-		\hline
-	\end{tabular}
-\end{table}
+Hvilket er definisjonen av AND-porten.
 
 \subsection{OR}
-innhold
 
-\begin{table}[h]
-	\centering % sentrer
-	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
-	\setlength{\tabcolsep}{3pt} % gjør tabellen mindre bred hvis det trengs
+\begin{equation}
+\label{eq:or-av-nand}
+F = \overline{\overline{xx} \cdot \overline{yy}}
+\end{equation}
 
-	\caption{Sannhetstabell for OR}
-	\label{tab:truth-OR}
+OR konstrueres av NAND-porter som illustrert i \cref{fig:or-av-nand}. Dette gir det algebraiske utrykket i \cref{eq:or-av-nand}. Utrykket kan forenkles slik:
 
-	\noindent
-	\begin{tabular}{c|c|c} % center center center
-		\hline
-		$x$ & $y$ & $F$ \\
-		\hline
-		0 & 0 & 0 \\
-		0 & 1 & 1 \\
-		1 & 0 & 1 \\
-		1 & 1 & 1 \\
-		\hline
-	\end{tabular}
-\end{table}
+$$
+\begin{aligned}
+F &= \overline{\overline{xx} \cdot \overline{yy}} = \overline{\overline{x} \cdot \overline{y}} \\
+&= \overline{\overline{x}} + \overline{\overline{y}} \text{ (DeMorgan)} \\
+&= x + y \text{ (Dobbel invertering)}
+\end{aligned}
+$$
+
+Hvilket er definisjonen av OR-porten.
 
 \subsection{XOR}
-innhold
 
-\begin{table}[h]
-	\centering % sentrer
-	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
-	\setlength{\tabcolsep}{3pt} % gjør tabellen mindre bred hvis det trengs
+\begin{equation}
+\label{eq:xor-av-nand}
+F = \overline{\overline{\overline{xy} \cdot x} \cdot \overline{\overline{xy} \cdot y} }
+\end{equation}
 
-	\caption{Sannhetstabell for XOR}
-	\label{tab:truth-XOR}
+XOR konstrueres av NAND-porter som illustrert i \cref{fig:xor-av-nand}. Dette gir det algebraiske utrykket i \cref{eq:xor-av-nand}. Utrykket kan forenkles slik:
 
-	\noindent
-	\begin{tabular}{c|c|c} % center center center
-		\hline
-		$x$ & $y$ & $F$ \\
-		\hline
-		0 & 0 & 0 \\
-		0 & 1 & 1 \\
-		1 & 0 & 1 \\
-		1 & 1 & 0 \\
-		\hline
-	\end{tabular}
-\end{table}
+$$
+\begin{aligned}
+F &= \overline{\overline{\overline{xy} \cdot x} \cdot \overline{\overline{xy} \cdot y} } \\
+&= (\overline{\overline{\overline{xy} \cdot x}}) + (\overline{\overline{\overline{xy} \cdot y}}) \text{ (DeMorgan)} \\
+&= (\overline{xy} \cdot x) + (\overline{xy} \cdot y) \text{ (Dobbel invertering)} \\
+&= \overline{xy}(x + y) \text{ (Faktorisering)} \\
+&= (\overline{x} + \overline{y})(x + y) \text{ (DeMorgan)} \\
+&= \overline{x}x + \overline{y}x + \overline{x}y + \overline{y}y \text{ (Distribusjon)} \\
+&= x\overline{y} + \overline{x}y
+\end{aligned}
+$$
+
+Hvilket er definisjonen av XOR-porten:
+
+$$
+x\overline{y} + \overline{x}y = x \oplus y
+$$
 
 \subsection{3-inngangs NAND}
-innhold
+Sannhetstabellen for en 3-inngangs NAND-port er gitt i \cref{tab:truth-theory-triple-NAND}.
 
 \begin{table}[h]
 	\centering % sentrer
@@ -191,12 +196,12 @@ innhold
 	\setlength{\tabcolsep}{3pt} % gjør tabellen mindre bred hvis det trengs
 
 	\caption{Sannhetstabell for 3-inngangs NAND}
-	\label{tab:truth-triple-NAND}
+	\label{tab:truth-theory-triple-NAND}
 
 	\noindent
 	\begin{tabular}{c|c|c|c} % center center center
 		\hline
-		$x$ & $y$ & $z$ & $F$ \\
+		$x$ & $y$ & $z$ & Utgangsverdi \\
 		\hline
 		0 & 0 & 0 & 1 \\
 		0 & 0 & 1 & 1 \\
@@ -210,29 +215,46 @@ innhold
 	\end{tabular}
 \end{table}
 
+\begin{equation}
+\label{eq:3nand-av-nand}
+F = \overline{\overline{\overline{xy}} \cdot z}
+\end{equation}
+
+En 3-inngangs NAND konstrueres av NAND-porter som illustrert i \cref{fig:3nand-av-nand}. Dette gir det algebraiske utrykket i \cref{eq:3nand-av-nand}. Utrykket kan forenkles slik:
+
+$$
+\begin{aligned}
+F &= \overline{\overline{\overline{xy}} \cdot z} \\
+&= \overline{xyz} \text{ (Dobbel invertering)}
+\end{aligned}
+$$
+
+Hvilket er definisjonen av NAND for 3 innganger.
+
 \subsection{XNOR}
-innhold
 
-\begin{table}[h]
-	\centering % sentrer
-	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
-	\setlength{\tabcolsep}{3pt} % gjør tabellen mindre bred hvis det trengs
+\begin{equation}
+\label{eq:xnor-av-nand}
+F = \overline{\overline{\overline{xx} \cdot \overline{yy}} \cdot \overline{xy}}
+\end{equation}
 
-	\caption{Sannhetstabell for XNOR}
-	\label{tab:truth-XNOR}
+XOR konstrueres av NAND-porter som illustrert i \cref{fig:xnor-av-nand}. Dette gir det algebraiske utrykket i \cref{eq:xnor-av-nand}. Utrykket kan forenkles slik:
 
-	\noindent
-	\begin{tabular}{c|c|c} % center center center
-		\hline
-		$x$ & $y$ & $F$ \\
-		\hline
-		0 & 0 & 1 \\
-		0 & 1 & 0 \\
-		1 & 0 & 0 \\
-		1 & 1 & 1 \\
-		\hline
-	\end{tabular}
-\end{table}
+$$
+\begin{aligned}
+F &= \overline{\overline{\overline{xx} \cdot \overline{yy}} \cdot \overline{xy}} \\
+&= \overline{\overline{\overline{x} \cdot \overline{y}} \cdot \overline{xy}} \\
+&= (\overline{\overline{\overline{x} \cdot \overline{y}}}) + (\overline{\overline{x \cdot y}}) \text{ (DeMorgan)} \\
+&= (\overline{x} \cdot \overline{y}) + (x \cdot y) \text{ (Dobbel invertering)} \\
+&= xy + \overline{x}\overline{y}
+\end{aligned}
+$$
+
+Hvilket er definisjonen av XNOR-porten:
+
+$$
+xy + \overline{x}\overline{y} = x \odot y
+$$
 
 \section{Praktisk arbeid}
 innledning
