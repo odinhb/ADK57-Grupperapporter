@@ -117,17 +117,21 @@ Den boolske funksjonen for NAND-porten er gitt i \cref{eq:nand}.
 
 \subsection{NOT}
 
-\begin{equation}
-\label{eq:not}
-F = \overline{x}
-\end{equation}
-
-Den boolske funksjonen for NOT er gitt i \cref{eq:not}. NOT konstrueres av NAND-porter ved å sende $x$ inn i begge inngangene i NAND-porten, som illustrert i \cref{fig:not-av-nand}. Dette gir utrykket i \cref{eq:not-av-nand}, som er ekvivalent med \cref{eq:not}. Sannhetstabellen for NOT er gitt i \cref{tab:truth-theory-NOT}.
+Sannhetstabellen for NOT er gitt i \cref{tab:truth-theory-NOT}. NOT konstrueres av NAND-porter ved å sende $x$ inn i begge inngangene i NAND-porten, som illustrert i \cref{fig:not-av-nand}. Dette gir utrykket i \cref{eq:not-av-nand}. Utrykket kan forenkles slik:
 
 \begin{equation}
 \label{eq:not-av-nand}
 F = \overline{x \cdot x}
 \end{equation}
+
+$$
+\begin{aligned}
+F &= \overline{x \cdot x} \\
+&= \overline{x} \text{ (Idempotens)} \\
+\end{aligned}
+$$
+
+Hvilket er definisjonen av NOT-porten.
 
 \begin{table}[h]
 	\centering % sentrer
@@ -157,7 +161,11 @@ F = \overline{\overline{xy} \cdot \overline{xy}}
 AND konstrueres av NAND-porter som illustrert i \cref{fig:and-av-nand}. Dette gir det algebraiske utrykket i \cref{eq:and-av-nand}. Utrykket kan forenkles slik:
 
 $$
-F = \overline{\overline{xy} \cdot \overline{xy}} = \overline{\overline{xy}} = xy
+\begin{aligned}
+F &= \overline{\overline{xy} \cdot \overline{xy}} \\
+&= \overline{\overline{xy}} \text{ (Idempotens)} \\
+&= xy \text{ (Dobbel invertering)}
+\end{aligned}
 $$
 
 Hvilket er definisjonen av AND-porten.
