@@ -206,6 +206,7 @@ F &= \overline{\overline{\overline{xy} \cdot x} \cdot \overline{\overline{xy} \c
 &= \overline{xy}(x + y) \text{ (Faktorisering)} \\
 &= (\overline{x} + \overline{y})(x + y) \text{ (DeMorgan)} \\
 &= \overline{x}x + \overline{y}x + \overline{x}y + \overline{y}y \text{ (Distribusjon)} \\
+&= 0 + \overline{y}x + \overline{x}y + 0 \\
 &= x\overline{y} + \overline{x}y
 \end{aligned}
 $$
@@ -356,10 +357,14 @@ innhold
 		\hline
 		SW6 & SW5 & SW4 & LED7 \\
 		\hline
-		AV & AV & AV & AV \\
+		AV & AV & AV & PÅ \\
+		AV & AV & PÅ & PÅ \\
 		AV & PÅ & AV & PÅ \\
+		AV & PÅ & PÅ & PÅ \\
 		PÅ & AV & AV & PÅ \\
-		PÅ & PÅ & PÅ & PÅ \\
+		PÅ & AV & PÅ & PÅ \\
+		PÅ & PÅ & AV & PÅ \\
+		PÅ & PÅ & PÅ & AV \\
 		\hline
 	\end{tabular}
 \end{table}
