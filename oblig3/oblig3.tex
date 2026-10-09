@@ -7,6 +7,7 @@
             left=3cm,
             right=3cm,
             marginparwidth=1.75cm]{geometry}
+\usepackage{float}
 \usepackage{amsmath}
 \usepackage[norsk]{cleveref}
 \usepackage[shortlabels]{enumitem}
@@ -57,7 +58,28 @@ Sammendrag
 Innledning
 
 \subsection{Utstyrsliste}
-innhold
+
+\begin{table}[h]
+	\centering % sentrer
+	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
+	\setlength{\tabcolsep}{3pt} % gjør tabellen mindre bred hvis det trengs
+
+	\caption{Utstyrsliste}
+	\label{tab:utstyr}
+
+	\noindent
+	\begin{tabular}{l|c|c} % center center center
+		\hline
+		Utstyr & Type & Fabrikat \\
+		\hline
+		Treningsbrett & ETS-7000 & K\&H Products \\[3pt]
+		\parbox[c]{2.2cm}{
+		IC med \\ 4 2-inngangs \\ NAND
+		} & MB74LS00 & Fujitsu \\[16pt]
+		Ledninger & - & - \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \section{Teoretisk del}
 innledning
@@ -73,7 +95,7 @@ Symbolene $x$, $y$ og $z$ brukes som opp til 3 innganger for alle de forskjellig
 	\label{tab:truth-theory-2-input}
 
 	\noindent
-	\begin{tabular}{c|c|c|c|c|c|c|c|c} % center center center
+	\begin{tabular}{c|c|c|c|c|c|c}
 		\hline
 		$x$ & $y$ & NAND & OR & AND & XOR & XNOR \\
 		\hline
@@ -92,21 +114,48 @@ Symbolene $x$, $y$ og $z$ brukes som opp til 3 innganger for alle de forskjellig
 F = \overline{xy}
 \end{equation}
 
+
 Den boolske funksjonen for NAND-porten er gitt i \cref{eq:nand}.
 
 \subsection{NOT}
 
-\begin{equation}
-\label{eq:not}
-F = \overline{x}
-\end{equation}
+Sannhetstabellen for NOT er gitt i \cref{tab:truth-theory-NOT}. NOT konstrueres av NAND-porter ved å sende $x$ inn i begge inngangene i NAND-porten, som illustrert i \cref{fig:not-av-nand}. Dette gir utrykket i \cref{eq:not-av-nand}. Utrykket kan forenkles slik:
 
-Den boolske funksjonen for NOT er gitt i \cref{eq:not}. NOT konstrueres av NAND-porter ved å sende $x$ inn i begge inngangene i NAND-porten, som illustrert i \cref{fig:not-av-nand}. Dette gir utrykket i \cref{eq:not-av-nand}, som er ekvivalent med \cref{eq:not}. Sannhetstabellen for NOT er gitt i \cref{tab:truth-theory-NOT}.
 
 \begin{equation}
 \label{eq:not-av-nand}
 F = \overline{x \cdot x}
 \end{equation}
+
+
+$$
+\begin{aligned}
+F &= \overline{x \cdot x} \\
+&= \overline{x} \text{ (Idempotens)} \\
+\end{aligned}
+$$
+
+
+
+Hvilket er definisjonen av NOT-porten.
+
+\begin{figure}[H]
+\setlength{\belowcaptionskip}{18pt}
+\caption{NOT port realisert med NAND port}
+\label{fig:not-av-nand}
+\centering
+\begin{circuitikz}
+      \node[american nand port] (N) at (0,0) {};
+      \draw (N.in 1) -- ++(-0.5,0) coordinate (A);
+      \draw (N.in 2) -- ++(-0.5,0) coordinate (B);
+      \draw (A) -- (B);
+      \coordinate (C) at ($(A)!0.5!(B)$);
+      \draw (C) -- ++(-0.8,0) node [left] {$x$};
+      \coordinate (C) circle (1.5pt);
+      \draw (N.out) -- ++(1,0) node[right] {$F$};
+\end{circuitikz}
+\end{figure}
+
 
 \begin{table}[h]
 	\centering % sentrer
@@ -133,10 +182,47 @@ F = \overline{x \cdot x}
 F = \overline{\overline{xy} \cdot \overline{xy}}
 \end{equation}
 
+\begin{figure}[H]
+\setlength{\belowcaptionskip}{18pt}
+\caption{AND-port realisert med NAND-porter}
+\label{fig:and-av-nand}
+\centering
+
+\begin{circuitikz}
+\node[american nand port] (N1) at (0,0) {};
+\node[american nand port] (N2) at (2.2,0) {};
+
+%inngang x og y
+\draw (N1.in 1) -- ++(-0.6,0) node[left] {$x$};
+\draw (N1.in 2) -- ++(-0.6,0) node[left] {$y$};
+
+%koble sammen inngangene på den andre NAND-porten
+\draw (N2.in 1) -- ++(-0.4,0) coordinate (A);
+\draw (N2.in 2) -- ++(-0.4,0) coordinate (B);
+\draw (A) -- (B);
+\coordinate (C) at ($(A) !0.5! (B)$);
+
+%første nand-utgang blir til begge inngangene 
+\draw (N1.out) -- (C);
+
+%utgangen F
+\draw (N2.out) -- ++(0.6,0) node[right] {$F$};
+
+\end{circuitikz}
+\end{figure}
+
+
+
+
+
 AND konstrueres av NAND-porter som illustrert i \cref{fig:and-av-nand}. Dette gir det algebraiske utrykket i \cref{eq:and-av-nand}. Utrykket kan forenkles slik:
 
 $$
-F = \overline{\overline{xy} \cdot \overline{xy}} = \overline{\overline{xy}} = xy
+\begin{aligned}
+F &= \overline{\overline{xy} \cdot \overline{xy}} \\
+&= \overline{\overline{xy}} \text{ (Idempotens)} \\
+&= xy \text{ (Dobbel invertering)}
+\end{aligned}
 $$
 
 Hvilket er definisjonen av AND-porten.
@@ -160,6 +246,43 @@ $$
 
 Hvilket er definisjonen av OR-porten.
 
+\begin{figure}[H]
+\setlength{\belowcaptionskip}{18pt}
+\caption{OR-port, 3 NAND-porter}
+\label{fig:or-av-nand}
+\centering
+
+\begin{circuitikz}
+\node[nand port] (N1) at (0,1) {};
+\node[nand port] (N2) at (0, -1) {};
+\node[nand port] (N3) at (2.2,0) {};
+
+% x kobles til begge inngangene på øverste NAND
+\draw (N1.in 1) -- ++(-0.4,0) coordinate (A);
+\draw (N1.in 2) -- ++(-0.4,0) coordinate (B);
+\draw (A) -- (B);
+\coordinate (C) at ($(A) !0.5! (B)$);
+\draw (C) -- ++(-0.6,0) node[left] {$x$};
+
+% y kobles til begge inngangene på nederste NAND
+\draw (N2.in 1) -- ++(-0.4,0) coordinate (D);
+\draw (N2.in 2) -- ++(-0.4,0) coordinate (E);
+\draw (D) -- (E);
+\coordinate (G) at ($(D) !0.5! (E)$);
+\draw (G) -- ++ (-0.6,0) node[left] {$y$};
+
+% utgangene kobles til tredje NAND-port
+\draw (N1.out) -- ++(0.3,0) |- (N3.in 1);
+\draw (N2.out) -- ++(0.3,0) |- (N3.in 2);
+
+% utgangen F
+\draw (N3.out) -- ++(0.6,0) node[right] {$F$};
+
+\end{circuitikz}
+\end{figure}
+
+
+
 \subsection{XOR}
 
 \begin{equation}
@@ -177,6 +300,7 @@ F &= \overline{\overline{\overline{xy} \cdot x} \cdot \overline{\overline{xy} \c
 &= \overline{xy}(x + y) \text{ (Faktorisering)} \\
 &= (\overline{x} + \overline{y})(x + y) \text{ (DeMorgan)} \\
 &= \overline{x}x + \overline{y}x + \overline{x}y + \overline{y}y \text{ (Distribusjon)} \\
+&= 0 + \overline{y}x + \overline{x}y + 0 \\
 &= x\overline{y} + \overline{x}y
 \end{aligned}
 $$
@@ -186,6 +310,53 @@ Hvilket er definisjonen av XOR-porten:
 $$
 x\overline{y} + \overline{x}y = x \oplus y
 $$
+
+\begin{figure}[H]
+\setlength{\belowcaptionskip}{18pt}
+\caption{XOR-port realisert med fire NAND-porter}
+\label{ig:xor-av-nand}
+\centering
+
+\begin{circuitikz}
+%De fire NAND-portene
+\node[nand port] (N1) at (0,0) {};
+\node[nand port] (N2) at (2.2,1) {};
+\node[nand port] (N3) at (2.2, -1) {};
+\node[nand port] (N4) at (4.4, 0) {};
+
+% x og y til første port 
+\draw (N1.in 1) -- ++(-0.6,0) coordinate (X)
+      node[left] {$x$};
+\draw (N1.in 2) -- ++(-0.6,0) coordinate (Y)
+      node[left] {$y$};
+
+% x går også til øverste port
+\draw (X) -- ++(0.2,0) coordinate (XP);
+\draw (XP) |- (0,1.6) -| (N2.in 1);
+\fill (XP) circle (1.5pt);
+
+% y går også til nederste NAND
+\draw (Y) -- ++ (0.2,0) coordinate (YP);
+\draw (YP) |- (0, -1.6) -| (N3.in 2);
+\fill (YP) circle (1.5pt);
+
+% første NAND kobles til begge midterste NAND
+\draw (N1.out) -- ++(0.3,0) coordinate (A);
+\draw (A) |- (N2.in 2);
+\draw (A) |- (N3.in 1);
+\fill (A) circle (1.5pt);
+
+% første ports utgang deles til de to midterste
+\draw (N2.out) -- ++(0.3,0) |- (N4.in 1);
+\draw (N3.out) -- ++(0.3,0) |- (N4.in 2);
+
+% utgang F
+\draw (N4.out) -- ++(0.6,0) node[right] {$F$};
+
+\end{circuitikz}
+\end{figure}    
+
+
 
 \subsection{3-inngangs NAND}
 Sannhetstabellen for en 3-inngangs NAND-port er gitt i \cref{tab:truth-theory-triple-NAND}.
@@ -231,6 +402,43 @@ $$
 
 Hvilket er definisjonen av NAND for 3 innganger.
 
+\begin{figure}[H]
+\setlength{\belowcaptionskip}{18pt}
+\caption{NAND - 3 porter}
+\label{fig:3nand-av-nand}
+\centering
+
+\begin{circuitikz} [scale=0.8, transform shape]
+\node[nand port] (N1) at (0,0) {};
+\node[nand port] (N2) at (2.2,0) {};
+\node[nand port, anchor=in 1] (N3) at ($(N2.out)+(0.8,0)$) {};
+
+%inngang x og y
+\draw (N1.in 1) -- ++(-0.6,0) node[left] {$x$};
+\draw (N1.in 2) -- ++(-0.6,0) node[left] {$y$};
+
+%koble sammen inngangene på den andre NAND-porten
+\draw (N2.in 1) -- ++(-0.4,0) coordinate (A);
+\draw (N2.in 2) -- ++(-0.4,0) coordinate (B);
+\draw (A) -- (B);
+\coordinate (C) at ($(A) !0.5! (B)$);
+
+%første nand-utgang blir til begge inngangene 
+\draw (N1.out) -- (C);
+
+% Utgang fra andre NAND til tredje NAND-port
+\draw (N2.out) -- (N3.in 1);
+\draw ($(N1.in 2)+(-0.6,-1)$) node[left] {$z$} -| ($(N3.in 2)+(-0.4,0)$) -- (N3.in 2);
+
+% utgang F
+\draw (N3.out) -- ++(0.8,0) node[right] {$F$};
+
+\end{circuitikz}
+\end{figure}
+
+
+
+
 \subsection{XNOR}
 
 \begin{equation}
@@ -256,20 +464,149 @@ $$
 xy + \overline{x}\overline{y} = x \odot y
 $$
 
+\begin{figure}[H]
+\setlength{\belowcaptionskip}{18pt}
+\caption{XNOR-port realisert med 5 NAND-porter}
+\label{fig:xnor-av-nand}
+\centering
+
+\begin{circuitikz} [scale=0.65, transform shape]
+%De fire NAND-portene
+\node[nand port] (N1) at (0,0) {};
+\node[nand port] (N2) at (2.2,1) {};
+\node[nand port] (N3) at (2.2, -1) {};
+\node[nand port] (N4) at (4.4, 0) {};
+\node[nand port] (N5) at (7.0,0) {};
+
+% x og y til første port 
+\draw (N1.in 1) -- ++(-0.6,0) coordinate (X)
+      node[left] {$x$};
+\draw (N1.in 2) -- ++(-0.6,0) coordinate (Y)
+      node[left] {$y$};
+
+% x går også til øverste port
+\draw (X) -- ++(0.2,0) coordinate (XP);
+\draw (XP) |- (0,1.6) -| (N2.in 1);
+\fill (XP) circle (1.5pt);
+
+% y går også til nederste NAND
+\draw (Y) -- ++ (0.2,0) coordinate (YP);
+\draw (YP) |- (0, -1.6) -| (N3.in 2);
+\fill (YP) circle (1.5pt);
+
+% første NAND kobles til begge midterste NAND
+\draw (N1.out) -- ++(0.3,0) coordinate (A);
+\draw (A) |- (N2.in 2);
+\draw (A) |- (N3.in 1);
+\fill (A) circle (1.5pt);
+
+% første NAND-ports utgang deles til de to midterste NAND portene
+\draw (N2.out) -- ++(0.3,0) |- (N4.in 1);
+\draw (N3.out) -- ++(0.3,0) |- (N4.in 2);
+
+%Fjerde NAND port kobles til siste NAND
+\draw (N5.in 1) -- ++(-0.4,0) coordinate (B);
+\draw (N5.in 2) -- ++(-0.4,0) coordinate (C);
+\draw (B) -- (C);
+\coordinate (D) at ($(B)!0.5!(C)$);
+\draw (N4.out) -- (D);
+
+% Utgang F ut av femte NAND
+\draw (N5.out) -- ++(0.6,0) node[right] {$F$};
+
+\end{circuitikz}
+\end{figure}    
+
+
+
 \section{Praktisk arbeid}
-innledning
+I denne delen ble IC'en med NAND-porter montert på et treningsbrett og koblet på forskjellige måter for å realisere andre logiske porter. På treningsbrettet representerte SW6, SW5 og SW4 henholdsvis $x$, $y$ og $z$ for innganger. LED7 representerte utgangen $F$.
 
-\subsection{Første ting}
+\subsection{NAND}
+Før oppkobling av de forskjellige portene, ble det gjort en funksjonstesting av IC'en for å verifisere at den fungerte på riktig måte. Denne ble montert på treningsbrettet og koblet til \qty{5}{\volt} på bein 14, $V_{CC}$, og jord på bein 7, $GND$ som vist på figur \cref{label}. Koblet så bryterne SW6 og SW5 som henholdsvis $x$ og $y$ på inngangene på IC'en og koblet LED7 til utgangene. Testet alle de 4 innebygde NAND portene i IC'en.
+
+\subsection{NOT}
+Etter funksjonstesting av IC'en, ble det koblet opp en NOT-port ved hjelp av NAND på treningsbrettet. Denne ble koblet slik at SW6 ble koblet på begge inngangene på en NAND på IC'en, og videre utgangen til LED7 på brettet. Se \cref{label}
+
+\subsection{AND}
+For å få realisert en AND-port med NAND ble det koblet som på \cref{label}. Koblet $x$ og $y$ på inngangene på en NAND, og deretter ble utgangen fra denne koblet på begge inngangene til en annen NAND for å invertere utgangen $F$.
+
+\subsection{OR}
+For å realisere en OR-port med NAND ble det koblet som på \cref{label}. Først ble $x$ koblet på begge inngangene på en NAND, deretter ble $y$ koblet på begge inngangene til en annen NAND. Så ble utgangene fra disse to portene koblet på hver sin inngang på en tredje NAND. Utgang $F$ fra denne porten ble så koblet til LED7.
+
+\subsection{XOR}
 innhold
 
-\subsection{Andre ting}
-innhold
-
-\subsection{Tredje ting}
+\subsection{3-inngangs NAND}
 innhold
 
 \section{Resultater \& Diskusjon}
 innhold
+
+\begin{table}[h]
+	\centering % sentrer
+	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
+	\setlength{\tabcolsep}{3pt} % gjør tabellen mindre bred hvis det trengs
+
+	\caption{Observasjoner av NOT-kretsen}
+	\label{tab:not-results}
+
+	\noindent
+	\begin{tabular}{c|c} % center center center
+		\hline
+		SW6 & LED7 \\
+		\hline
+		AV & PÅ \\
+		PÅ & AV \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering % sentrer
+	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
+	\setlength{\tabcolsep}{3pt} % gjør tabellen mindre bred hvis det trengs
+
+	\caption{Observasjoner av kretsene med 2 innganger}
+	\label{tab:2-input-results}
+
+	\noindent
+	\begin{tabular}{c|c|c|c|c}
+		\hline
+		SW6 & SW5 & LED7-AND & LED7-OR & LED7-XOR \\
+		\hline
+		AV & AV & AV & AV & AV \\
+		AV & PÅ & AV & PÅ & PÅ \\
+		PÅ & AV & AV & PÅ & PÅ \\
+		PÅ & PÅ & PÅ & PÅ & AV \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering % sentrer
+	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
+	\setlength{\tabcolsep}{3pt} % gjør tabellen mindre bred hvis det trengs
+
+	\caption{Observasjoner av NAND-krets med 3 innganger}
+	\label{tab:3-input-nand-results}
+
+	\noindent
+	\begin{tabular}{c|c|c|c}
+		\hline
+		SW6 & SW5 & SW4 & LED7 \\
+		\hline
+		AV & AV & AV & PÅ \\
+		AV & AV & PÅ & PÅ \\
+		AV & PÅ & AV & PÅ \\
+		AV & PÅ & PÅ & PÅ \\
+		PÅ & AV & AV & PÅ \\
+		PÅ & AV & PÅ & PÅ \\
+		PÅ & PÅ & AV & PÅ \\
+		PÅ & PÅ & PÅ & AV \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \subsection{Realisering av XNOR ved hjelp av 74F00}
 XNOR-porten kan ikke realiseres med en enkelt 74F00-IC, fordi XNOR-porten krever 5 NAND-porter for å realisere. 74F00 inneholder kun 4 NAND-porter. Den kan realiseres med to 74F00-ICer, eller ved hjelp av en 74F00 og en lignende IC med minst 2 NOT-porter. Dette er fordi 2 av NAND-portene kan erstattes med NOT-porter. (kanskje vi skal ha tegning av dette også?)
