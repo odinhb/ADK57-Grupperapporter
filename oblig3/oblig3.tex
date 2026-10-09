@@ -287,21 +287,24 @@ xy + \overline{x}\overline{y} = x \odot y
 $$
 
 \section{Praktisk arbeid}
-I denne delen ble IC'en med NAND-porter montert på et treningsbrett og koblet på forskjellige måter for å realisere andre logiske porter.
+I denne delen ble IC'en med NAND-porter montert på et treningsbrett og koblet på forskjellige måter for å realisere andre logiske porter. På treningsbrettet representerte SW6, SW5 og SW4 henholdsvis $x$, $y$ og $z$ for innganger. LED7 representerte utgangen $F$.
 
 \subsection{NAND}
-Før oppkobling av de forskjellige portene, ble det gjort en funksjonstesting av IC'en for å verifisere at den fungerte på riktig måte. Denne ble montert på treningsbrettet og koblet til 5$V$ på bein 14, $V_{CC}$, og jord på bein 7, $GND$ som vist på figur \cref{label}. Koblet så bryterne SW6 og SW5 som henholdsvis $x$ og $y$ på inngangene på IC'en og koblet LED7 til utgangene. Testet alle de 4 innebygde NAND portene i IC'en.
+Før oppkobling av de forskjellige portene, ble det gjort en funksjonstesting av IC'en for å verifisere at den fungerte på riktig måte. Denne ble montert på treningsbrettet og koblet til \qty{5}{\volt} på bein 14, $V_{CC}$, og jord på bein 7, $GND$ som vist på figur \cref{label}. Koblet så bryterne SW6 og SW5 som henholdsvis $x$ og $y$ på inngangene på IC'en og koblet LED7 til utgangene. Testet alle de 4 innebygde NAND portene i IC'en.
 
 \subsection{NOT}
-Etter funksjonstesting av IC'en, ble det koblet opp en NOT-port ved hjelp an NAND på treningsbrettet. Denne ble koblet slik at SW6 ble koblet på begge inngangene på en NAND på IC'en, og videre LED7 på utgangen.
+Etter funksjonstesting av IC'en, ble det koblet opp en NOT-port ved hjelp av NAND på treningsbrettet. Denne ble koblet slik at SW6 ble koblet på begge inngangene på en NAND på IC'en, og videre utgangen til LED7 på brettet. Se \cref{label}
 
 \subsection{AND}
-Videre
+For å få realisert en AND-port med NAND ble det koblet som på \cref{label}. Koblet $x$ og $y$ på inngangene på en NAND, og deretter ble utgangen fra denne koblet på begge inngangene til en annen NAND for å invertere utgangen $F$.
 
 \subsection{OR}
-innhold
+For å realisere en OR-port med NAND ble det koblet som på \cref{label}. Først ble $x$ koblet på begge inngangene på en NAND, deretter ble $y$ koblet på begge inngangene til en annen NAND. Så ble utgangene fra disse to portene koblet på hver sin inngang på en tredje NAND. Utgang $F$ fra denne porten ble så koblet til LED7.
 
 \subsection{XOR}
+innhold
+
+\subsection{3-inngangs NAND}
 innhold
 
 \section{Resultater \& Diskusjon}
