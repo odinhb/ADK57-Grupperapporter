@@ -118,6 +118,23 @@ Den boolske funksjonen for NAND-porten er gitt i \cref{eq:nand}.
 
 \subsection{NOT}
 
+\begin{figure}[h]
+\setlength{\belowcaptionskip}{18pt}
+\caption{NOT port realisert med NAND port}
+\label{fig:not-av-nand}
+\centering
+\begin{circuitikz}
+      \node[american nand port] (N) at (0,0) {};
+      \draw (N.in 1) -- ++(-0.5,0) coordinate (A);
+      \draw (N.in 2) -- ++(-0.5,0) coordinate (B);
+      \draw (A) -- (B);
+      \coordinate (C) at ($(A)!0.5!(B)$);
+      \draw (C) -- ++(-0.8,0) node [left] {$x$};
+      \coordinate (C) circle (1.5pt);
+      \draw (N.out) -- ++(1,0) node[right] {$F$};
+\end{circuitikz}
+\end{figure}
+
 Sannhetstabellen for NOT er gitt i \cref{tab:truth-theory-NOT}. NOT konstrueres av NAND-porter ved å sende $x$ inn i begge inngangene i NAND-porten, som illustrert i \cref{fig:not-av-nand}. Dette gir utrykket i \cref{eq:not-av-nand}. Utrykket kan forenkles slik:
 
 \begin{equation}
@@ -154,6 +171,36 @@ Hvilket er definisjonen av NOT-porten.
 \end{table}
 
 \subsection{AND}
+
+\begin{figure}[h]
+\setlength{\belowcaptionskip}{18pt}
+\caption{AND-port realisert med NAND-porter}
+\label{fig:and-av-nand}
+\centering
+
+\begin{circuitikz}
+\node[american nand port] (N1) at (0,0) {};
+\node[american nand port] (N2) at (2.2,0) {};
+
+%inngang x og y
+\draw (N1.in 1) -- ++(-0.6,0) node[left] {$x$};
+\draw (N1.in 2) -- ++(-0.6,0) node[left] {$y$};
+
+%koble sammen inngangene på den andre NAND-porten
+\draw (N2.in 1) -- ++(-0.4,0) coordinate (A);
+\draw (N2.in 2) -- ++(-0.4,0) coordinate (B);
+\draw (A) -- (B);
+\coordinate (C) at ($(A) !0.5! (B)$);
+
+%første nand-utgang blir til begge inngangene
+\draw (N1.out) -- (C);
+
+%utgangen F
+\draw (N2.out) -- ++(0.6,0) node[right] {$F$};
+
+\end{circuitikz}
+\end{figure}
+
 \begin{equation}
 \label{eq:and-av-nand}
 F = \overline{\overline{xy} \cdot \overline{xy}}
@@ -172,6 +219,41 @@ $$
 Hvilket er definisjonen av AND-porten.
 
 \subsection{OR}
+
+\begin{figure}[h]
+\setlength{\belowcaptionskip}{18pt}
+\caption{OR-port, 3 NAND-porter}
+\label{fig:or-av-nand}
+\centering
+
+\begin{circuitikz}
+\node[nand port] (N1) at (0,1) {};
+\node[nand port] (N2) at (0, -1) {};
+\node[nand port] (N3) at (2.2,0) {};
+
+% x kobles til begge inngangene på øverste NAND
+\draw (N1.in 1) -- ++(-0.4,0) coordinate (A);
+\draw (N1.in 2) -- ++(-0.4,0) coordinate (B);
+\draw (A) -- (B);
+\coordinate (C) at ($(A) !0.5! (B)$);
+\draw (C) -- ++(-0.6,0) node[left] {$x$};
+
+% y kobles til begge inngangene på nederste NAND
+\draw (N2.in 1) -- ++(-0.4,0) coordinate (D);
+\draw (N2.in 2) -- ++(-0.4,0) coordinate (E);
+\draw (D) -- (E);
+\coordinate (G) at ($(D) !0.5! (E)$);
+\draw (G) -- ++ (-0.6,0) node[left] {$y$};
+
+% utgangene kobles til tredje NAND-port
+\draw (N1.out) -- ++(0.3,0) |- (N3.in 1);
+\draw (N2.out) -- ++(0.3,0) |- (N3.in 2);
+
+% utgangen F
+\draw (N3.out) -- ++(0.6,0) node[right] {$F$};
+
+\end{circuitikz}
+\end{figure}
 
 \begin{equation}
 \label{eq:or-av-nand}
@@ -192,10 +274,71 @@ Hvilket er definisjonen av OR-porten.
 
 \subsection{XOR}
 
+\begin{figure}[h]
+\setlength{\belowcaptionskip}{18pt}
+\caption{XOR-port realisert med fire NAND-porter}
+\label{fig:xor-av-nand}
+\centering
+
+\begin{circuitikz}
+%De fire NAND-portene
+\node[nand port] (N1) at (0,0) {};
+\node[nand port] (N2) at (2.2,1) {};
+\node[nand port] (N3) at (2.2, -1) {};
+\node[nand port] (N4) at (4.4, 0) {};
+
+% x og y til første port
+\draw (N1.in 1) -- ++(-0.6,0) coordinate (X)
+      node[left] {$x$};
+\draw (N1.in 2) -- ++(-0.6,0) coordinate (Y)
+      node[left] {$y$};
+
+% x går også til øverste port
+\draw (X) -- ++(0.2,0) coordinate (XP);
+\draw (XP) |- (0,1.6) -| (N2.in 1);
+\fill (XP) circle (1.5pt);
+
+% y går også til nederste NAND
+\draw (Y) -- ++ (0.2,0) coordinate (YP);
+\draw (YP) |- (0, -1.6) -| (N3.in 2);
+\fill (YP) circle (1.5pt);
+
+% første NAND kobles til begge midterste NAND
+\draw (N1.out) -- ++(0.3,0) coordinate (A);
+\draw (A) |- (N2.in 2);
+\draw (A) |- (N3.in 1);
+\fill (A) circle (1.5pt);
+
+% første ports utgang deles til de to midterste
+\draw (N2.out) -- ++(0.3,0) |- (N4.in 1);
+\draw (N3.out) -- ++(0.3,0) |- (N4.in 2);
+
+% utgang F
+\draw (N4.out) -- ++(0.6,0) node[right] {$F$};
+
+\end{circuitikz}
+\end{figure}
+
 \begin{equation}
 \label{eq:xor-av-nand}
 F = \overline{\overline{\overline{xy} \cdot x} \cdot \overline{\overline{xy} \cdot y} }
 \end{equation}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
 
 XOR konstrueres av NAND-porter som illustrert i \cref{fig:xor-av-nand}. Dette gir det algebraiske utrykket i \cref{eq:xor-av-nand}. Utrykket kan forenkles slik:
 
@@ -219,6 +362,41 @@ x\overline{y} + \overline{x}y = x \oplus y
 $$
 
 \subsection{3-inngangs NAND}
+
+\begin{figure}[h]
+\setlength{\belowcaptionskip}{18pt}
+\caption{NAND - 3 porter}
+\label{fig:3nand-av-nand}
+\centering
+
+\begin{circuitikz} [scale=0.8, transform shape]
+\node[nand port] (N1) at (0,0) {};
+\node[nand port] (N2) at (2.2,0) {};
+\node[nand port, anchor=in 1] (N3) at ($(N2.out)+(0.8,0)$) {};
+
+%inngang x og y
+\draw (N1.in 1) -- ++(-0.6,0) node[left] {$x$};
+\draw (N1.in 2) -- ++(-0.6,0) node[left] {$y$};
+
+%koble sammen inngangene på den andre NAND-porten
+\draw (N2.in 1) -- ++(-0.4,0) coordinate (A);
+\draw (N2.in 2) -- ++(-0.4,0) coordinate (B);
+\draw (A) -- (B);
+\coordinate (C) at ($(A) !0.5! (B)$);
+
+%første nand-utgang blir til begge inngangene
+\draw (N1.out) -- (C);
+
+% Utgang fra andre NAND til tredje NAND-port
+\draw (N2.out) -- (N3.in 1);
+\draw ($(N1.in 2)+(-0.6,-1)$) node[left] {$z$} -| ($(N3.in 2)+(-0.4,0)$) -- (N3.in 2);
+
+% utgang F
+\draw (N3.out) -- ++(0.8,0) node[right] {$F$};
+
+\end{circuitikz}
+\end{figure}
+
 Sannhetstabellen for en 3-inngangs NAND-port er gitt i \cref{tab:truth-theory-triple-NAND}.
 
 \begin{table}[h]
@@ -263,6 +441,59 @@ $$
 Hvilket er definisjonen av NAND for 3 innganger.
 
 \subsection{XNOR}
+
+\begin{figure}[h]
+\setlength{\belowcaptionskip}{18pt}
+\caption{XNOR-port realisert med 5 NAND-porter}
+\label{fig:xnor-av-nand}
+\centering
+
+\begin{circuitikz} [scale=0.65, transform shape]
+%De fire NAND-portene
+\node[nand port] (N1) at (0,0) {};
+\node[nand port] (N2) at (2.2,1) {};
+\node[nand port] (N3) at (2.2, -1) {};
+\node[nand port] (N4) at (4.4, 0) {};
+\node[nand port] (N5) at (7.0,0) {};
+
+% x og y til første port
+\draw (N1.in 1) -- ++(-0.6,0) coordinate (X)
+      node[left] {$x$};
+\draw (N1.in 2) -- ++(-0.6,0) coordinate (Y)
+      node[left] {$y$};
+
+% x går også til øverste port
+\draw (X) -- ++(0.2,0) coordinate (XP);
+\draw (XP) |- (0,1.6) -| (N2.in 1);
+\fill (XP) circle (1.5pt);
+
+% y går også til nederste NAND
+\draw (Y) -- ++ (0.2,0) coordinate (YP);
+\draw (YP) |- (0, -1.6) -| (N3.in 2);
+\fill (YP) circle (1.5pt);
+
+% første NAND kobles til begge midterste NAND
+\draw (N1.out) -- ++(0.3,0) coordinate (A);
+\draw (A) |- (N2.in 2);
+\draw (A) |- (N3.in 1);
+\fill (A) circle (1.5pt);
+
+% første NAND-ports utgang deles til de to midterste NAND portene
+\draw (N2.out) -- ++(0.3,0) |- (N4.in 1);
+\draw (N3.out) -- ++(0.3,0) |- (N4.in 2);
+
+%Fjerde NAND port kobles til siste NAND
+\draw (N5.in 1) -- ++(-0.4,0) coordinate (B);
+\draw (N5.in 2) -- ++(-0.4,0) coordinate (C);
+\draw (B) -- (C);
+\coordinate (D) at ($(B)!0.5!(C)$);
+\draw (N4.out) -- (D);
+
+% Utgang F ut av femte NAND
+\draw (N5.out) -- ++(0.6,0) node[right] {$F$};
+
+\end{circuitikz}
+\end{figure}
 
 \begin{equation}
 \label{eq:xnor-av-nand}
