@@ -444,53 +444,57 @@ Hvilket er definisjonen av NAND for 3 innganger.
 
 \begin{figure}[h]
 \setlength{\belowcaptionskip}{18pt}
-\caption{XNOR-port realisert med 5 NAND-porter}
+\caption{XNOR-port realisert med NAND-porter}
 \label{fig:xnor-av-nand}
 \centering
 
-\begin{circuitikz} [scale=0.65, transform shape]
-%De fire NAND-portene
-\node[nand port] (N1) at (0,0) {};
-\node[nand port] (N2) at (2.2,1) {};
-\node[nand port] (N3) at (2.2, -1) {};
-\node[nand port] (N4) at (4.4, 0) {};
-\node[nand port] (N5) at (7.0,0) {};
+\begin{circuitikz}[scale=0.65, transform shape]
 
-% x og y til første port
-\draw (N1.in 1) -- ++(-0.6,0) coordinate (X)
-      node[left] {$x$};
-\draw (N1.in 2) -- ++(-0.6,0) coordinate (Y)
-      node[left] {$y$};
+% Tre NAND-porter over hverandre
+\node[nand port] (N1) at (0, 2) {};
+\node[nand port] (N2) at (0, 0) {};
+\node[nand port] (N3) at (0,-2) {};
 
-% x går også til øverste port
-\draw (X) -- ++(0.2,0) coordinate (XP);
-\draw (XP) |- (0,1.6) -| (N2.in 1);
+% Fjerde og femte NAND
+\node[nand port] (N4) at (2.8, 1) {};
+\node[nand port] (N5) at (5,-1) {};
+
+% x deles til begge inngangene på N1
+\draw (N1.in 1) -- ++(-0.4,0) coordinate (XTOP);
+\draw (N1.in 2) -- ++(-0.4,0) coordinate (XBOT);
+\draw (XTOP) -- (XBOT) coordinate[midway] (XA);
+
+\draw (XA) -- ++(-0.6,0) coordinate (XP)
+           -- ++(-0.6,0) node[left] {$x$};
+\fill (XA) circle (1.5pt);
+
+% y deles til begge inngangene på N2
+\draw (N2.in 1) -- ++(-0.4,0) coordinate (YTOP);
+\draw (N2.in 2) -- ++(-0.4,0) coordinate (YBOT);
+\draw (YTOP) -- (YBOT) coordinate[midway] (YA);
+
+\draw (YA) -- ++(-0.9,0) coordinate (YP)
+           -- ++(-0.3,0) node[left] {$y$};
+\fill (YA) circle (1.5pt);
+
+% x og y går også til hver sin inngang på N3
+\draw (XP) |- (N3.in 1);
+\draw (YP) |- (N3.in 2);
 \fill (XP) circle (1.5pt);
-
-% y går også til nederste NAND
-\draw (Y) -- ++ (0.2,0) coordinate (YP);
-\draw (YP) |- (0, -1.6) -| (N3.in 2);
 \fill (YP) circle (1.5pt);
 
-% første NAND kobles til begge midterste NAND
-\draw (N1.out) -- ++(0.3,0) coordinate (A);
-\draw (A) |- (N2.in 2);
-\draw (A) |- (N3.in 1);
-\fill (A) circle (1.5pt);
+% De to øverste NAND-portene til fjerde NAND
+\draw (N1.out) -- ++(0.4,0) |- (N4.in 1);
+\draw (N2.out) -- ++(0.4,0) |- (N4.in 2);
 
-% første NAND-ports utgang deles til de to midterste NAND portene
-\draw (N2.out) -- ++(0.3,0) |- (N4.in 1);
-\draw (N3.out) -- ++(0.3,0) |- (N4.in 2);
+% Fjerde NAND til øverste inngang på femte NAND
+\draw (N4.out) -- ++(0.4,0) |- (N5.in 1);
 
-%Fjerde NAND port kobles til siste NAND
-\draw (N5.in 1) -- ++(-0.4,0) coordinate (B);
-\draw (N5.in 2) -- ++(-0.4,0) coordinate (C);
-\draw (B) -- (C);
-\coordinate (D) at ($(B)!0.5!(C)$);
-\draw (N4.out) -- (D);
+% Nederste NAND til nederste inngang på femte NAND
+\draw (N3.out) -- ++(0.4,0) |- (N5.in 2);
 
-% Utgang F ut av femte NAND
-\draw (N5.out) -- ++(0.6,0) node[right] {$F$};
+% Utgang F
+\draw (N5.out) -- ++(0.7,0) node[right] {$F$};
 
 \end{circuitikz}
 \end{figure}
