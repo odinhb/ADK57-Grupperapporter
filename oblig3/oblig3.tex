@@ -538,10 +538,7 @@ xy + \overline{x}\overline{y} = x \odot y
 $$
 
 \section{Praktisk arbeid}
-I denne delen ble IC'en med NAND-porter montert på et treningsbrett og koblet på forskjellige måter for å realisere andre logiske porter. På treningsbrettet representerer posisjonene av bryterne SW6, SW5 og SW4 henholdsvis $x$, $y$ og $z$ for innganger. Tilstanden til LED7 representerer utgangen $F$.
-
-\subsection{NAND}
-Før oppkobling av de forskjellige portene, ble det gjort en funksjonstest av IC'en for å verifisere at den fungerte på riktig måte. Denne ble montert på treningsbrettet og koblet til \qty{5}{\volt} på bein 14, $V_{CC}$, og jord på bein 7, $GND$ som vist på \cref{fig:7400_intern}. Koblet så bryterne SW6 og SW5 som henholdsvis $x$ og $y$ på inngangene på IC'en og koblet LED7 til utgangene. Alle de 4 innebygde NAND portene i IC'en ble testet.
+I denne delen ble IC-en med NAND-porter montert på et treningsbrett og koblet på forskjellige måter for å realisere de logiske portene. På treningsbrettet ble SW6, SW5 og SW4 hendholdsvis valgt til å representere inngang $x$, $y$ og $z$. LED7 ble valgt til å representere utgangen $F$.
 
 \begin{figure}[h]
 	\begin{circuitikz}[scale=0.8, transform shape]
@@ -621,25 +618,29 @@ Før oppkobling av de forskjellige portene, ble det gjort en funksjonstest av IC
 		\draw (G4.output) -- ++(0,-0.3) |- (3.25, -0.1);
 		
 	\end{circuitikz}
-	\caption{7400 intern}
+	\caption{Intern kretstegning av 7400-ICen}
 	\label{fig:7400_intern}
 \end{figure}
 
+For å prakisk muliggjøre oppkobling ble databladet til MB74LS00 søkt opp og funnet på nettet. Databladet for akkurat MB74LS00 kunne ikke oppdrives. Det ble i stedet brukt et datablad for DM74LS00, gitt i \cite{datablad}. Denne IC-en er lik nok til at koblingsskjemaet i databladet kan brukes likt. \Cref{fig:7400_intern} er en gjengivelse av koblingsskjemaet som ble brukt fra databladet.
+
+\subsection{NAND}
+Før oppkobling av de forskjellige portene ble det gjort en funksjonstest av IC-en for å verifisere at den fungerte på riktig måte. Denne ble montert på treningsbrettet og koblet ved hjelp av \cref{fig:7400_intern}. IC-en ble koblet til \qty{5}{\volt} på bein 14, $V_{CC}$, og jord på bein 7, $GND$. Koblet så bryterne SW6 og SW5 som henholdsvis $x$ og $y$ på inngangene på IC-en og koblet LED7 til utgangene. Alle de 4 NAND portene i IC-en ble på denne måten testet for å utelukke feil.
 
 \subsection{NOT}
-Etter funksjonstesting av IC'en, ble det koblet opp en NOT-port ved hjelp av NAND på treningsbrettet. Denne ble koblet slik at SW6 ($x$) ble koblet på begge inngangene på en NAND på IC'en, og videre fra utgangen $F$ til LED7 på brettet. Illustrert på \cref{fig:not-av-nand}. Funskjonen ble testet ved å endre på bryterne på brettet.
+Etter funksjonstesting av IC-en, ble det koblet opp en NOT-port ved hjelp av \cref{fig:not-av-nand} og \cref{fig:7400_intern}. Denne ble koblet slik at SW6 ($x$) ble koblet på begge inngangene til $G1$, og videre fra utgang $3$ til LED7 på brettet. Funskjonen ble testet ved å stille på bryterne på brettet.
 
 \subsection{AND}
-For å få realisert en AND-port med NAND ble det koblet som på \cref{fig:and-av-nand}. Koblet SW6 ($x$) og SW5 ($y$) på inngangene på én NAND, og deretter ble utgangen fra denne koblet på begge inngangene til en annen NAND for å invertere utgangen $F$. Utgangen ble koblet til LED7, og funksjonen testet med bryterne på brettet.
+For å realisere en AND-port ble det koblet etter \cref{fig:and-av-nand} og \cref{fig:7400_intern}. Koblet SW6 ($x$) og SW5 ($y$) på inngangene på $G1$, og deretter ble utgangen fra denne koblet på begge inngangene til $G2$ for å invertere utgangen. Utgang $6$ ble deretter koblet til LED7, og funksjonen testet med bryterne på brettet.
 
 \subsection{OR}
-For å realisere en OR-port med NAND ble det koblet som på \cref{fig:or-av-nand}. Først ble SW6 ($x$) koblet på begge inngangene på én NAND, og SW5 ($y$) koblet på begge inngangene til en annen NAND. Deretter ble utgangene fra disse to portene koblet på hver sin inngang på en tredje NAND. Utgang $F$ fra denne porten ble så koblet til LED7, og funksjonen testet med bryterne på brettet.
+For å realisere en OR-port ble det koblet etter \cref{fig:or-av-nand} og \cref{fig:7400_intern}. Først ble SW6 ($x$) koblet på begge inngangene til $G1$, og SW5 ($y$) koblet på begge inngangene til $G2$. Deretter ble utgangene fra disse to portene koblet på hver sin inngang til $G3$. Utgang $8$ fra denne porten ble så koblet til LED7, og funksjonen testet med bryterne på brettet.
 
 \subsection{XOR}
-Denne realiseringen ble gjort ved å bruke 4 NAND-porter. Koblingen på brettet ble utført som vist på \cref{fig:xor-av-nand} for å teste funksjonen av XOR-porten ved å endre posisjoner på bryterne.
+Denne realiseringen ble gjort ved å bruke 4 NAND-porter. Koblingen på brettet ble utført etter \cref{fig:xor-av-nand} og og \cref{fig:7400_intern}. Funksjonen av XOR-porten ble testet ved å stille på bryterne.
 
 \subsection{3-inngangs NAND}
-I realiseringen av denne porten ble også SW4 ($z$) på treningsbrettet benyttet som en tredje inngang. Den 3-ports NAND-porten ble koblet opp som illustreringen viser på \cref{fig:3nand-av-nand}. Deretter ble den funksjonstestet med bryterne.
+I realiseringen av denne porten ble også SW4 ($z$) på treningsbrettet benyttet som en tredje inngang. Den 3-ports NAND-porten ble koblet opp etter \cref{fig:3nand-av-nand} og \cref{fig:7400_intern}. Deretter ble den funksjonstestet med bryterne.
 
 \section{Resultater \& Diskusjon}
 I denne seksjonen presenteres observasjonene av de oppkoblede kretsene. Observasjonene av NOT-porten presenteres i \cref{tab:not-results}, observasjonene av den NAND-porten med 3 innganger presenteres i \cref{tab:3-input-nand-results} og observasjonene av de andre portene presenteres i \cref{tab:2-input-results}.
@@ -773,5 +774,10 @@ Samme erstatning kan benyttes på AND, OR og 3-inngangs NAND.
 
 \section{Konklusjon}
 Denne rapporten viser hvordan ulike logiske porter kan realiseres ved hjelp av NAND-porter, både i teori og praksis.
+
+\begin{thebibliography}{9}
+\bibitem{datablad}
+https://www.alldatasheet.com/datasheet-pdf/download/51021/FAIRCHILD/74LS00.html
+\end{thebibliography}
 
 \end{document}
