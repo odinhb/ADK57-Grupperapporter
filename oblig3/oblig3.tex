@@ -695,7 +695,58 @@ innhold
 \end{table}
 
 \subsection{Realisering av XNOR ved hjelp av 74F00}
-XNOR-porten kan ikke realiseres med en enkelt 74F00-IC, fordi XNOR-porten krever 5 NAND-porter for å realisere. 74F00 inneholder kun 4 NAND-porter. Den kan realiseres med to 74F00-ICer, eller ved hjelp av en 74F00 og en lignende IC med minst 2 NOT-porter. Dette er fordi 2 av NAND-portene kan erstattes med NOT-porter. (kanskje vi skal ha tegning av dette også?)
+
+\begin{figure}[h]
+\setlength{\belowcaptionskip}{18pt}
+\caption{XNOR-port realisert med NAND-porter}
+\label{fig:xnor-av-nand-og-not}
+\centering
+
+\begin{circuitikz}[scale=0.65, transform shape]
+
+% Tre NAND-porter over hverandre
+\node[not port] (N1) at (0, 2) {};
+\node[not port] (N2) at (0, 0) {};
+\node[nand port] (N3) at (0,-2) {};
+
+% Fjerde og femte NAND
+\node[nand port] (N4) at (2.8, 1) {};
+\node[nand port] (N5) at (5,-1) {};
+
+% x går inn til N1
+\draw (N1.in) -- (XA);
+
+\draw (XA) -- ++(-0.6,0) coordinate (XP)
+           -- ++(-0.6,0) node[left] {$x$};
+% y går inn til N2
+\draw (N2.in) -- (YA);
+
+\draw (YA) -- ++(-0.9,0) coordinate (YP)
+           -- ++(-0.3,0) node[left] {$y$};
+
+% x og y går også til hver sin inngang på N3
+\draw (XP) |- (N3.in 1);
+\draw (YP) |- (N3.in 2);
+\fill (XP) circle (1.5pt);
+\fill (YP) circle (1.5pt);
+
+% De to NOT-portene til fjerde NAND
+\draw (N1.out) -- ++(0.4,0) |- (N4.in 1);
+\draw (N2.out) -- ++(0.4,0) |- (N4.in 2);
+
+% Fjerde NAND til øverste inngang på femte NAND
+\draw (N4.out) -- ++(0.4,0) |- (N5.in 1);
+
+% Nederste NAND til nederste inngang på femte NAND
+\draw (N3.out) -- ++(0.4,0) |- (N5.in 2);
+
+% Utgang F
+\draw (N5.out) -- ++(0.7,0) node[right] {$F$};
+
+\end{circuitikz}
+\end{figure}
+
+XNOR-porten kan ikke realiseres med en enkelt 74F00-IC, fordi XNOR-porten krever 5 NAND-porter for å realisere. 74F00 inneholder kun 4 NAND-porter. Den kan realiseres med to 74F00-ICer, eller ved hjelp av en 74F00 og en lignende IC med minst 2 NOT-porter. Dette er fordi 2 av NAND-portene kan erstattes med NOT-porter, som illustrert i \cref{fig:xnor-av-nand-og-not}.
 
 \section{Konklusjon}
 innhold
