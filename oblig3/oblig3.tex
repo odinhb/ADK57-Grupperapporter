@@ -48,16 +48,16 @@
 \maketitle % Setter sammen \title og \author og \date
 
 \begin{abstract}
-Denne rapporten viser realisering av forskjellige logiske porter ved hjelp av NAND-porter. Rapporten gjennomgår det teoretiske grunnlaget for realiseringen før portene kobles på et treningsbrett og observeres i praksis. Deretter presenteres resultatene av observasjonene før rapporten oppsummeres.
+Denne rapporten viser realisering av forskjellige logiske porter utelukkende ved hjelp av NAND-porter. Rapporten gjennomgår det teoretiske grunnlaget for realiseringen før portene kobles på et treningsbrett og observeres i praksis. Deretter presenteres resultatene av observasjonene før rapporten konkluderes.
 \end{abstract}
 
 % Innholdsfortegnelse automatisk generert:
 %\tableofcontents
 
 \section{Innledning}
-Her presenteres utstyrslista for rapporten.
 
 \subsection{Utstyrsliste}
+Utstyrslista for rapporten er presentert i \cref{tab:utstyr}.
 
 \begin{table}[h]
 	\centering % sentrer
@@ -397,8 +397,6 @@ $$
 \end{circuitikz}
 \end{figure}
 
-Sannhetstabellen for en 3-inngangs NAND-port er gitt i \cref{tab:truth-theory-triple-NAND}.
-
 \begin{table}[h]
 	\centering % sentrer
 	\setlength{\belowcaptionskip}{6pt} % margin mellom caption og tabellen
@@ -423,6 +421,23 @@ Sannhetstabellen for en 3-inngangs NAND-port er gitt i \cref{tab:truth-theory-tr
 		\hline
 	\end{tabular}
 \end{table}
+
+Sannhetstabellen for en 3-inngangs NAND-port er gitt i \cref{tab:truth-theory-triple-NAND}.
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
 
 \begin{equation}
 \label{eq:3nand-av-nand}
@@ -528,7 +543,7 @@ I denne delen ble IC'en med NAND-porter montert på et treningsbrett og koblet p
 \subsection{NAND}
 Før oppkobling av de forskjellige portene, ble det gjort en funksjonstest av IC'en for å verifisere at den fungerte på riktig måte. Denne ble montert på treningsbrettet og koblet til \qty{5}{\volt} på bein 14, $V_{CC}$, og jord på bein 7, $GND$ som vist på \cref{fig:7400_intern}. Koblet så bryterne SW6 og SW5 som henholdsvis $x$ og $y$ på inngangene på IC'en og koblet LED7 til utgangene. Alle de 4 innebygde NAND portene i IC'en ble testet.
 
-\begin{figure}
+\begin{figure}[h]
 	\begin{circuitikz}[scale=0.8, transform shape]
 		
 		% 7400 IC skall
@@ -698,7 +713,7 @@ I tabellene representerer SW6, SW5 og SW4 henholdsvis $x$, $y$ og $z$. Tilstande
 	\end{tabular}
 \end{table}
 
-Observasjonene stemmer overens med de teoretiske sannhetstabellene.
+Observasjonene stemmer med de teoretiske sannhetstabellene.
 
 \subsection{Realisering av XNOR ved hjelp av 74F00}
 
@@ -753,6 +768,8 @@ Observasjonene stemmer overens med de teoretiske sannhetstabellene.
 \end{figure}
 
 XNOR-porten kan ikke realiseres med en enkelt 74F00-IC, fordi XNOR-porten krever 5 NAND-porter for å realisere. 74F00 inneholder kun 4 NAND-porter. Den kan realiseres med to 74F00-ICer, eller ved hjelp av en 74F00 og en lignende IC med minst 2 NOT-porter. Dette er fordi 2 av NAND-portene kan erstattes med NOT-porter, som illustrert i \cref{fig:xnor-av-nand-og-not}.
+
+Samme erstatning kan benyttes på AND, OR og 3-inngangs NAND.
 
 \section{Konklusjon}
 Denne rapporten viser hvordan ulike logiske porter kan realiseres ved hjelp av NAND-porter, både i teori og praksis.
