@@ -97,11 +97,11 @@ Symbolene $x$, $y$ og $z$ brukes som opp til 3 innganger for alle de forskjellig
 	\noindent
 	\begin{tabular}{c|c|c|c|c|c|c}
 		\hline
-		$x$ & $y$ & NAND & OR & AND & XOR & XNOR \\
+		$x$ & $y$ & NAND & AND & OR & XOR & XNOR \\
 		\hline
 		0 & 0 & 1 & 0 & 0 & 0 & 1 \\
-		0 & 1 & 1 & 1 & 0 & 1 & 0 \\
-		1 & 0 & 1 & 1 & 0 & 1 & 0 \\
+		0 & 1 & 1 & 0 & 1 & 1 & 0 \\
+		1 & 0 & 1 & 0 & 1 & 1 & 0 \\
 		1 & 1 & 0 & 1 & 1 & 0 & 1 \\
 		\hline
 	\end{tabular}
@@ -410,7 +410,7 @@ Sannhetstabellen for en 3-inngangs NAND-port er gitt i \cref{tab:truth-theory-tr
 	\noindent
 	\begin{tabular}{c|c|c|c} % center center center
 		\hline
-		$x$ & $y$ & $z$ & Utgangsverdi \\
+		$x$ & $y$ & $z$ & F \\
 		\hline
 		0 & 0 & 0 & 1 \\
 		0 & 0 & 1 & 1 \\
@@ -659,7 +659,7 @@ innhold
 	\noindent
 	\begin{tabular}{c|c|c|c|c}
 		\hline
-		SW6 & SW5 & LED7-AND & LED7-OR & LED7-XOR \\
+		SW6 & SW5 & AND & OR & XOR \\
 		\hline
 		AV & AV & AV & AV & AV \\
 		AV & PÅ & AV & PÅ & PÅ \\
@@ -698,7 +698,7 @@ innhold
 
 \begin{figure}[h]
 \setlength{\belowcaptionskip}{18pt}
-\caption{XNOR-port realisert med NAND-porter}
+\caption{XNOR-port realisert med NAND-porter og NOT-porter}
 \label{fig:xnor-av-nand-og-not}
 \centering
 
